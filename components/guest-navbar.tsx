@@ -9,7 +9,6 @@ import { GuestEnquiryPopup } from "@/components/guest-enquiry-popup";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuContent,
@@ -42,6 +41,18 @@ const services = [
     description: "Managed infrastructure and cloud operations.",
   },
 ];
+
+const navLinkBase =
+  "relative pb-1 text-sm font-semibold transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-orange-500 after:transition-transform after:duration-300 after:content-[''] hover:after:scale-x-100 hover:text-orange-500";
+
+const navTriggerBase =
+  "relative pb-1 text-sm font-semibold transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-orange-500 after:transition-transform after:duration-300 after:content-[''] hover:after:scale-x-100 hover:text-orange-500 hover:!bg-transparent focus:!bg-transparent data-open:!bg-transparent data-popup-open:!bg-transparent";
+
+const ctaPrimaryBase =
+  "inline-flex items-center rounded-full border border-orange-300/70 bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.22)] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:from-orange-500 hover:to-orange-500 hover:shadow-[0_16px_36px_rgba(249,115,22,0.28)]";
+
+const ctaSecondaryBase =
+  "inline-flex items-center gap-2 rounded-full border border-blue-300/70 bg-gradient-to-r from-blue-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(59,130,246,0.22)] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:from-blue-500 hover:to-blue-500 hover:shadow-[0_16px_36px_rgba(59,130,246,0.28)]";
 
 export function GuestNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -83,7 +94,7 @@ export function GuestNavbar() {
           />
         </Link>
 
-        <nav className="flex items-center gap-3">
+        <nav className="flex items-center gap-6">
           <button
             type="button"
             className={[
@@ -106,70 +117,59 @@ export function GuestNavbar() {
 
           <div className="hidden items-center gap-4 md:flex">
             <NavigationMenu viewport={false}>
-              <NavigationMenuList className="gap-2">
+              <NavigationMenuList className="gap-5">
                 <NavigationMenuItem>
-                  <NavigationMenuLink
+                  <Link
                     href="/"
                     className={[
-                      "text-sm font-semibold transition-colors",
-                      scrolled
-                        ? "text-slate-700 hover:text-slate-950"
-                        : "text-white hover:text-black/80",
+                      navLinkBase,
+                      scrolled ? "text-slate-700" : "text-white",
                     ].join(" ")}
                   >
                     Home
-                  </NavigationMenuLink>
+                  </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink
+                  <Link
                     href="/about"
                     className={[
-                      "text-sm font-semibold transition-colors",
-                      scrolled
-                        ? "text-slate-700 hover:text-slate-950"
-                        : "text-white hover:text-black/80",
+                      navLinkBase,
+                      scrolled ? "text-slate-700" : "text-white",
                     ].join(" ")}
                   >
                     About us
-                  </NavigationMenuLink>
+                  </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink
+                  <Link
                     href="/career"
                     className={[
-                      "text-sm font-semibold transition-colors",
-                      scrolled
-                        ? "text-slate-700 hover:text-slate-950"
-                        : "text-white hover:text-black/80",
+                      navLinkBase,
+                      scrolled ? "text-slate-700" : "text-white",
                     ].join(" ")}
                   >
                     Careers
-                  </NavigationMenuLink>
+                  </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
+                <NavigationMenuItem className="ml-1">
                   <NavigationMenuTrigger
                     className={[
-                      "text-sm font-semibold transition-colors",
-                      scrolled
-                        ? "text-slate-700 hover:text-slate-950"
-                        : "text-white hover:text-black/80",
+                      navTriggerBase,
+                      scrolled ? "text-slate-700" : "text-white",
                     ].join(" ")}
                   >
                     Services
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="rounded-[14px] border border-slate-200 bg-white text-slate-950 shadow-xl shadow-slate-950/10 md:min-w-[320px]">
-                    <div className="grid gap-2 p-4">
+                  <NavigationMenuContent className="overflow-hidden rounded-[14px] border border-slate-200 bg-white p-0 text-slate-950 shadow-xl shadow-slate-950/10 md:min-w-[260px] md:max-w-[280px]">
+                    <div className="grid gap-0">
                       {services.map((service) => (
                         <Link
                           key={service.title}
                           href={service.href}
-                          className="block rounded-xl p-3 transition hover:bg-slate-100"
+                          className="group block w-full px-4 py-3 text-black transition-colors duration-200 hover:bg-orange-500 hover:text-white"
                         >
-                          <p className="text-sm font-semibold">
+                          <p className="text-sm font-semibold text-current transition-colors">
                             {service.title}
-                          </p>
-                          <p className="mt-1 text-sm text-slate-600">
-                            {service.description}
                           </p>
                         </Link>
                       ))}
@@ -177,17 +177,17 @@ export function GuestNavbar() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 
-                <NavigationMenuItem>
+                <NavigationMenuItem className="ml-2">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center rounded-full bg-violet-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-violet-500/20 transition hover:bg-violet-400"
+                    className={ctaPrimaryBase}
                   >
                     Get in Touch
                   </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
+                <NavigationMenuItem className="ml-2">
                   <GuestEnquiryPopup
-                    triggerClassName="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-sm shadow-cyan-500/20 transition hover:bg-white"
+                    triggerClassName={ctaSecondaryBase}
                     triggerLabel="Enquiry Us"
                   />
                 </NavigationMenuItem>
@@ -206,14 +206,14 @@ export function GuestNavbar() {
             <div className="grid gap-2">
               <Link
                 href="/"
-                className="rounded-xl px-3 py-2 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+                className="rounded-xl px-3 py-2 text-base font-medium text-slate-700 transition  "
                 onClick={() => setMobileOpen(false)}
               >
                 Home
               </Link>
               <Link
                 href="/about"
-                className="rounded-xl px-3 py-2 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+                className="rounded-xl px-3 py-2 text-base font-medium text-slate-700 transition "
                 onClick={() => setMobileOpen(false)}
               >
                 About us
@@ -244,13 +244,13 @@ export function GuestNavbar() {
               </Link>
               <Link
                 href="/contact"
-                className="rounded-xl px-3 py-2 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+                className={ctaPrimaryBase + " justify-center"}
                 onClick={() => setMobileOpen(false)}
               >
                 Contact us
               </Link>
               <GuestEnquiryPopup
-                triggerClassName="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-950 px-3 py-3 text-base font-semibold text-white transition hover:bg-cyan-700"
+                triggerClassName={ctaSecondaryBase + " w-full justify-center"}
                 triggerLabel="Enquiry Us"
               />
             </div>

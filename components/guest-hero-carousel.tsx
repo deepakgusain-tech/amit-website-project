@@ -164,7 +164,7 @@ export function GuestHeroSection() {
                 </div>
               </div>
 
-              <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 {trustTags.map((tag) => (
                   <div
                     key={tag}

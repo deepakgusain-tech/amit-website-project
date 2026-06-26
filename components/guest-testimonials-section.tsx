@@ -1,18 +1,25 @@
-import Image, { type StaticImageData } from "next/image"
-import { Quote } from "lucide-react"
+"use client";
 
-import outsourcingImage from "../images/outsourcing.jpg"
-import analyticsImage from "../images/analatics.jpg"
-import technologyImage from "../images/technology.jpg"
+import Image, { type StaticImageData } from "next/image";
+import { Quote } from "lucide-react";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
+
+import outsourcingImage from "../images/outsourcing.jpg";
+import analyticsImage from "../images/analatics.jpg";
+import technologyImage from "../images/technology.jpg";
 
 type Testimonial = {
-  quote: string
-  name: string
-  title: string
-  company: string
-  image: StaticImageData
-  label: string
-}
+  quote: string;
+  name: string;
+  title: string;
+  company: string;
+  image: StaticImageData;
+  label: string;
+};
 
 const testimonials: Testimonial[] = [
   {
@@ -22,7 +29,7 @@ const testimonials: Testimonial[] = [
     title: "Operations Director",
     company: "Northstar Logistics",
     image: outsourcingImage,
-    label: "Operational delivery",
+    label: "Operational Delivery",
   },
   {
     quote:
@@ -31,7 +38,7 @@ const testimonials: Testimonial[] = [
     title: "VP, Business Operations",
     company: "Vertex Analytics",
     image: analyticsImage,
-    label: "Analytics & reporting",
+    label: "Analytics & Reporting",
   },
   {
     quote:
@@ -40,67 +47,118 @@ const testimonials: Testimonial[] = [
     title: "Program Lead",
     company: "Summit Recovery Services",
     image: technologyImage,
-    label: "Support services",
+    label: "Support Services",
   },
-]
+  {
+    quote:
+      "Their project management approach ensured every milestone was delivered on time. Communication remained transparent throughout the engagement.",
+    name: "Sophia Wilson",
+    title: "Project Manager",
+    company: "BrightEdge Technologies",
+    image: outsourcingImage,
+    label: "Project Management",
+  },
+  {
+    quote:
+      "The team quickly understood our business requirements and delivered scalable solutions that significantly improved our operational efficiency.",
+    name: "James Anderson",
+    title: "CTO",
+    company: "InnovateX Solutions",
+    image: analyticsImage,
+    label: "Technology Solutions",
+  },
+];
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <article className="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.06)] transition-transform duration-300 hover:-translate-y-1">
+    <article className="group h-full overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={testimonial.image}
           alt={testimonial.label}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-          sizes="(max-width: 1024px) 100vw, 33vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-slate-950/10 to-transparent" />
-        <div className="absolute left-4 top-4 inline-flex items-center rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur">
+
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-950/20 to-transparent" />
+
+        <div className="absolute left-4 top-4 rounded-full border border-white/20 bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
           {testimonial.label}
         </div>
       </div>
 
       <div className="p-6">
-        <Quote className="size-5 text-slate-300" />
-        <p className="mt-4 text-base leading-7 text-slate-700">
+        <Quote className="h-6 w-6 text-slate-300" />
+
+        <p className="mt-4 text-[15px] leading-7 text-slate-700">
           {testimonial.quote}
         </p>
 
         <div className="mt-6 border-t border-slate-200 pt-4">
-          <p className="text-sm font-semibold text-slate-950">{testimonial.name}</p>
+          <h4 className="font-semibold text-slate-900">
+            {testimonial.name}
+          </h4>
+
           <p className="text-sm text-slate-600">
             {testimonial.title}, {testimonial.company}
           </p>
         </div>
       </div>
     </article>
-  )
+  );
 }
 
 export function GuestTestimonialsSection() {
   return (
-    <section className="bg-[#f8fafc] py-16 text-slate-900 sm:py-20">
+    <section className="bg-[#f8fafc] py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.34em] text-slate-500">
             Testimonials
           </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance text-slate-950 sm:text-4xl lg:text-5xl">
+
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
             What clients say about working with us.
           </h2>
+
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-            A few concise reflections on transition quality, reporting clarity, and
-            the consistency of our operational support.
+            A few concise reflections on transition quality, reporting clarity,
+            and the consistency of our operational support.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {testimonials.map((testimonial) => (
-            <TestimonialCard key={testimonial.name} testimonial={testimonial} />
-          ))}
+        <div className="mt-12">
+          <Swiper
+            modules={[Autoplay]}
+            loop={true}
+            spaceBetween={24}
+            speed={1200}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              640: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
+          >
+            {testimonials.map((testimonial) => (
+              <SwiperSlide key={testimonial.name} className="pb-4">
+                <TestimonialCard testimonial={testimonial} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
-  )
+  );
 }

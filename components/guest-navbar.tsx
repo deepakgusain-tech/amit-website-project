@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Menu, X } from "lucide-react"
-import logo from "../images/AS-Services-Logo.jpg"
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import logo from "../images/AS-Services-Logo.jpg";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -12,7 +12,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuContent,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
 
 const services = [
   {
@@ -40,22 +40,22 @@ const services = [
     href: "/services/managed",
     description: "Managed infrastructure and cloud operations.",
   },
-]
+];
 
 export function GuestNavbar() {
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 24)
-    }
+      setScrolled(window.scrollY > 24);
+    };
 
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
 
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header
@@ -96,7 +96,11 @@ export function GuestNavbar() {
             aria-controls="guest-navbar-menu"
             onClick={() => setMobileOpen((open) => !open)}
           >
-            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            {mobileOpen ? (
+              <X className="size-5" />
+            ) : (
+              <Menu className="size-5" />
+            )}
           </button>
 
           <div className="hidden items-center gap-4 md:flex">
@@ -107,7 +111,9 @@ export function GuestNavbar() {
                     href="/"
                     className={[
                       "text-sm font-semibold transition-colors",
-                      scrolled ? "text-slate-700 hover:text-slate-950" : "text-white hover:text-black/80",
+                      scrolled
+                        ? "text-slate-700 hover:text-slate-950"
+                        : "text-white hover:text-black/80",
                     ].join(" ")}
                   >
                     Home
@@ -118,17 +124,34 @@ export function GuestNavbar() {
                     href="/about"
                     className={[
                       "text-sm font-semibold transition-colors",
-                      scrolled ? "text-slate-700 hover:text-slate-950" : "text-white hover:text-black/80",
+                      scrolled
+                        ? "text-slate-700 hover:text-slate-950"
+                        : "text-white hover:text-black/80",
                     ].join(" ")}
                   >
                     About us
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
+                  <NavigationMenuLink
+                    href="/careers"
+                    className={[
+                      "text-sm font-semibold transition-colors",
+                      scrolled
+                        ? "text-slate-700 hover:text-slate-950"
+                        : "text-white hover:text-black/80",
+                    ].join(" ")}
+                  >
+                    Careers
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
                   <NavigationMenuTrigger
                     className={[
                       "text-sm font-semibold transition-colors",
-                      scrolled ? "text-slate-700 hover:text-slate-950" : "text-white hover:text-black/80",
+                      scrolled
+                        ? "text-slate-700 hover:text-slate-950"
+                        : "text-white hover:text-black/80",
                     ].join(" ")}
                   >
                     Services
@@ -141,7 +164,9 @@ export function GuestNavbar() {
                           href={service.href}
                           className="block rounded-xl p-3 transition hover:bg-slate-100"
                         >
-                          <p className="text-sm font-semibold">{service.title}</p>
+                          <p className="text-sm font-semibold">
+                            {service.title}
+                          </p>
                           <p className="mt-1 text-sm text-slate-600">
                             {service.description}
                           </p>
@@ -165,7 +190,10 @@ export function GuestNavbar() {
       </div>
 
       {mobileOpen ? (
-        <div id="guest-navbar-menu" className="border-t border-slate-200 bg-white md:hidden">
+        <div
+          id="guest-navbar-menu"
+          className="border-t border-slate-200 bg-white md:hidden"
+        >
           <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
             <div className="grid gap-2">
               <Link
@@ -200,6 +228,13 @@ export function GuestNavbar() {
                 </div>
               </div>
               <Link
+                href="/careers"
+                className="rounded-xl px-3 py-2 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+                onClick={() => setMobileOpen(false)}
+              >
+                Careers
+              </Link>
+              <Link
                 href="/contact"
                 className="rounded-xl px-3 py-2 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
                 onClick={() => setMobileOpen(false)}
@@ -211,5 +246,5 @@ export function GuestNavbar() {
         </div>
       ) : null}
     </header>
-  )
+  );
 }

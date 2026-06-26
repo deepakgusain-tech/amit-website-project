@@ -104,11 +104,11 @@ export function GuestHeroSection() {
                 Global delivery from India
               </p>
 
-              <h1 className="mt-5 max-w-2xl text-4xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[4.15rem]">
+              <h1 className="mt-5 max-w-2xl text-4xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-4xl lg:text-[3.15rem]">
                 Global Business Support Services Delivered from India
               </h1>
 
-              <p className="mt-5 max-w-2xl text-base leading-7 text-white/78 sm:text-lg">
+              <p className="mt-5 max-w-2xl text-base leading-7 text-white/78 sm:text-xl">
                 Helping organizations scale through offshore back-office operations,
                 recovery support services, reporting, analytics, IT Services and
                 operational excellence.

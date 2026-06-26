@@ -1,7 +1,7 @@
-import Link from "next/link"
-import { ArrowRight, CheckCircle2 } from "lucide-react"
+import Link from "next/link";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
 const highlights = [
   "Founded in 2024",
@@ -12,14 +12,9 @@ const highlights = [
   "Specialized Training & Development team",
   "Trained agents available as factory model",
   "Focus on quality and scalability",
-]
+];
 
-const pillars = [
-  "Transition",
-  "Operations",
-  "Training",
-  "Scalability",
-]
+const pillars = ["Transition", "Operations", "Training", "Scalability"];
 
 export function GuestOperationalExcellenceSection() {
   return (
@@ -28,18 +23,72 @@ export function GuestOperationalExcellenceSection() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <div className=" mt-5 grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-start lg:gap-16 xl:gap-20">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.34em] text-slate-500">
-              Building Operational Excellence
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance text-slate-950 sm:text-4xl lg:text-5xl">
-              A focused operating model built for scale, quality, and steady delivery.
+            <div className="inline-block">
+              <h2 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                About AS Services
+              </h2>
+
+              <div className="relative mt-4 h-[5px] w-44 overflow-hidden rounded-full bg-slate-200">
+                <div className="absolute inset-0 animated-gradient-line" />
+                <div className="absolute inset-y-0 shine-effect" />
+              </div>
+
+              <style>{`
+                .animated-gradient-line {
+                  background: linear-gradient(
+                    90deg,
+                    #06b6d4 0%,
+                    #3b82f6 25%,
+                    #8b5cf6 50%,
+                    #3b82f6 75%,
+                    #06b6d4 100%
+                  );
+                  background-size: 300% 100%;
+                  animation: gradientMove 3s linear infinite;
+                  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.45));
+                }
+
+                .shine-effect {
+                  left: -35%;
+                  width: 35%;
+                  background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.95),
+                    transparent
+                  );
+                  animation: shineMove 2s ease-in-out infinite;
+                }
+
+                @keyframes gradientMove {
+                  0% {
+                    background-position: 0% 50%;
+                  }
+                  100% {
+                    background-position: 300% 50%;
+                  }
+                }
+
+                @keyframes shineMove {
+                  0% {
+                    transform: translateX(-100%);
+                  }
+                  100% {
+                    transform: translateX(450%);
+                  }
+                }
+              `}</style>
+            </div>
+            <h2 className="mt-8 text-2xl font-semibold tracking-tight text-balance text-slate-950 sm:text-3xl lg:text-4xl">
+              A focused operating model built for scale, quality, and steady
+              delivery.
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
-              We combine back-office operations, IT consulting, and support services
-              into a lean delivery model designed to help global clients move faster
-              without sacrificing quality.
+              We combine back-office operations, IT consulting, and support
+              services into a lean delivery model designed to help global
+              clients move faster without sacrificing quality.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-2">
@@ -79,7 +128,9 @@ export function GuestOperationalExcellenceSection() {
                       className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3"
                     >
                       <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-emerald-500" />
-                      <span className="text-sm leading-6 text-slate-700">{item}</span>
+                      <span className="text-sm leading-6 text-slate-700">
+                        {item}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -108,5 +159,5 @@ export function GuestOperationalExcellenceSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

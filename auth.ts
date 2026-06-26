@@ -1,9 +1,10 @@
 import NextAuth from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/db/prisma-helper";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const authOptions: NextAuthOptions = {
     providers: [
         Credentials({
             name: "credentials",
@@ -53,4 +54,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     secret: process.env.AUTH_SECRET,
-});
+};
+
+export default NextAuth(authOptions);

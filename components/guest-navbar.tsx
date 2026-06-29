@@ -3,15 +3,16 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ChevronDown, Menu, X } from "lucide-react";
 import logo from "../images/AS-Services-Logo.jpg";
 import { GuestEnquiryPopup } from "@/components/guest-enquiry-popup";
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuContent,
 } from "@/components/ui/navigation-menu";
 
 const services = [
@@ -56,7 +57,11 @@ const ctaSecondaryBase =
 
 export function GuestNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const isTransparentHeader = isHomePage && !scrolled;
 
   useEffect(() => {
     const onScroll = () => {
@@ -72,10 +77,10 @@ export function GuestNavbar() {
   return (
     <header
       className={[
-        "fixed inset-x-0 top-0 z-50 border-b-blue-500 transition-all duration-300",
-        scrolled
-          ? "border-slate-200 bg-white text-slate-900 shadow-sm shadow-slate-900/5 backdrop-blur"
-          : "border-transparent bg-transparent text-white",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        isTransparentHeader
+          ? "border-transparent bg-transparent text-white"
+          : "border-slate-200/80 bg-white/92 text-slate-900 shadow-sm shadow-slate-900/5 backdrop-blur-xl",
       ].join(" ")}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
@@ -99,20 +104,22 @@ export function GuestNavbar() {
             type="button"
             className={[
               "inline-flex h-8 w-8 items-center justify-center rounded-xl border transition md:hidden",
-              scrolled
-                ? "border-slate-200 text-slate-700 hover:bg-slate-100"
-                : "border-white/20 text-white hover:bg-white/10",
+              isTransparentHeader
+                ? "border-white/20 text-white hover:bg-white/10"
+                : "border-slate-200 text-slate-700 hover:bg-slate-100",
             ].join(" ")}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="guest-navbar-menu"
-            onClick={() => setMobileOpen((open) => !open)}
+            onClick={() => {
+              setMobileOpen((open) => {
+                const next = !open;
+                if (!next) setMobileServicesOpen(false);
+                return next;
+              });
+            }}
           >
-            {mobileOpen ? (
-              <X className="size-5" />
-            ) : (
-              <Menu className="size-5" />
-            )}
+            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
 
           <div className="hidden items-center gap-4 md:flex">
@@ -123,7 +130,7 @@ export function GuestNavbar() {
                     href="/"
                     className={[
                       navLinkBase,
-                      scrolled ? "text-slate-700" : "text-white",
+                      isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
                     Home
@@ -134,7 +141,7 @@ export function GuestNavbar() {
                     href="/about"
                     className={[
                       navLinkBase,
-                      scrolled ? "text-slate-700" : "text-white",
+                      isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
                     About us
@@ -145,7 +152,7 @@ export function GuestNavbar() {
                     href="/career"
                     className={[
                       navLinkBase,
-                      scrolled ? "text-slate-700" : "text-white",
+                      isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
                     Careers
@@ -155,7 +162,7 @@ export function GuestNavbar() {
                   <NavigationMenuTrigger
                     className={[
                       navTriggerBase,
-                      scrolled ? "text-slate-700" : "text-white",
+                      isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
                     Services
@@ -176,12 +183,9 @@ export function GuestNavbar() {
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-                
+
                 <NavigationMenuItem className="ml-2">
-                  <Link
-                    href="/contact"
-                    className={ctaPrimaryBase}
-                  >
+                  <Link href="/contact" className={ctaPrimaryBase}>
                     Get in Touch
                   </Link>
                 </NavigationMenuItem>
@@ -200,52 +204,99 @@ export function GuestNavbar() {
       {mobileOpen ? (
         <div
           id="guest-navbar-menu"
-          className="border-t border-slate-200 bg-white md:hidden"
+          className={[
+            "border-t md:hidden",
+            isTransparentHeader
+              ? "border-white/15 bg-slate-950/90 text-white backdrop-blur-xl"
+              : "border-slate-200 bg-white text-slate-900",
+          ].join(" ")}
         >
           <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
-            <div className="grid gap-2">
+            <div className="grid gap-3">
               <Link
                 href="/"
-                className="rounded-xl px-3 py-2 text-base font-medium text-slate-700 transition  "
-                onClick={() => setMobileOpen(false)}
+                className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setMobileServicesOpen(false);
+                }}
               >
                 Home
               </Link>
               <Link
                 href="/about"
-                className="rounded-xl px-3 py-2 text-base font-medium text-slate-700 transition "
-                onClick={() => setMobileOpen(false)}
+                className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setMobileServicesOpen(false);
+                }}
               >
                 About us
               </Link>
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-2">
-                <p className="px-3 py-2 text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-                  Services
-                </p>
-                <div className="grid gap-1">
-                  {services.map((service) => (
-                    <Link
-                      key={service.title}
-                      href={service.href}
-                      className="rounded-xl px-3 py-2 text-base text-slate-700 transition hover:bg-white hover:text-slate-950"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {service.title}
-                    </Link>
-                  ))}
+              <div className="overflow-hidden rounded-2xl">
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between rounded-2xl px-1 py-2 text-left transition hover:bg-slate-50"
+                  aria-expanded={mobileServicesOpen}
+                  aria-controls="mobile-services-panel"
+                  onClick={() => setMobileServicesOpen((open) => !open)}
+                >
+                  <span className="text-sm font-medium text-slate-700">
+                    Services
+                  </span>
+                  <ChevronDown
+                    className={[
+                      "size-4 shrink-0 text-slate-400 transition-transform duration-200",
+                      mobileServicesOpen ? "rotate-180" : "rotate-0",
+                    ].join(" ")}
+                  />
+                </button>
+
+                <div
+                  id="mobile-services-panel"
+                  className={[
+                    "grid overflow-hidden transition-all duration-300 ease-out",
+                    mobileServicesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                  ].join(" ")}
+                >
+                  <div className="min-h-0">
+                    <div className="grid gap-1 pb-1 pl-3 pr-1">
+                      {services.map((service) => (
+                        <Link
+                          key={service.title}
+                          href={service.href}
+                          className="group rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-950"
+                          onClick={() => {
+                            setMobileOpen(false);
+                            setMobileServicesOpen(false);
+                          }}
+                        >
+                          <span className="block text-[15px] leading-6">
+                            {service.title}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
               <Link
                 href="/career"
-                className="rounded-xl px-3 py-2 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
-                onClick={() => setMobileOpen(false)}
+                className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setMobileServicesOpen(false);
+                }}
               >
                 Careers
               </Link>
               <Link
                 href="/contact"
                 className={ctaPrimaryBase + " justify-center"}
-                onClick={() => setMobileOpen(false)}
+                onClick={() => {
+                  setMobileOpen(false);
+                  setMobileServicesOpen(false);
+                }}
               >
                 Contact us
               </Link>

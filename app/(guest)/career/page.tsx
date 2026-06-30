@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import {
   ArrowRight,
   BadgeCheck,
@@ -9,13 +10,13 @@ import {
   GraduationCap,
   MapPin,
   Send,
-  Sparkles,
   UsersRound,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import herobanner2 from "@/images/herobanner2.jpg"
 
 
 export const metadata: Metadata = {
@@ -81,7 +82,18 @@ export default function CareerPage() {
   return (
     <div className="bg-white text-slate-900">
       <section className="relative isolate overflow-hidden bg-black/90 pt-32 text-white sm:pt-36">
-        <div className="absolute inset-0 " />
+        <div className="absolute inset-0">
+          <Image
+            src={herobanner2}
+            alt=""
+            fill
+            priority
+            aria-hidden="true"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-slate-950/78" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.7),transparent_32%),linear-gradient(90deg,rgba(2,6,23,0.8)_0%,rgba(2,6,23,0.8)_44%,rgba(2,6,23,0.80)_100%)]" />
+        </div>
       
         <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
           <div className="max-w-3xl">

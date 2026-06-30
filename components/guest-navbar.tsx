@@ -4,50 +4,40 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import logo from "../images/AS-Services-Logo.jpg";
 import { GuestEnquiryPopup } from "@/components/guest-enquiry-popup";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
-const services = [
+const serviceDropdownItems = [
   {
-    title: "Support Services",
-    href: "/service#technical-support",
-    description: "Help desk, incident response and technical support.",
+    href: "/services/back-office-operations",
+    label: "Back Office Operations",
+    description: "Reliable process support for day-to-day operations.",
   },
   {
-    title: "Data Analytics & Dashboards",
-    href: "/service#analytics",
-    description: "Business intelligence and dashboard reporting.",
+    href: "/services/reporting-analytics",
+    label: "Reporting & Analytics",
+    description: "Dashboards and reporting that improve visibility.",
   },
   {
-    title: "IT Consulting Services",
-    href: "/service#consulting",
-    description: "Strategy, planning, and technical advisory.",
+    href: "/services/technical-support",
+    label: "Technical Support",
+    description: "Responsive support to keep systems and users moving.",
   },
   {
-    title: "Technical Support Services",
-    href: "/service#technical-support",
-    description: "Ongoing system maintenance and support.",
-  },
-  {
-    title: "IT Managed Services",
-    href: "/service#managed-services",
-    description: "Managed infrastructure and cloud operations.",
+    href: "/services/recovery-support-services",
+    label: "Recovery Support Services",
+    description: "Recovery-focused workflows for continuity and resilience.",
   },
 ];
 
 const navLinkBase =
   "relative pb-1 text-sm font-semibold transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-orange-500 after:transition-transform after:duration-300 after:content-[''] hover:after:scale-x-100 hover:text-orange-500";
-
-const navTriggerBase =
-  "relative pb-1 text-sm font-semibold transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-orange-500 after:transition-transform after:duration-300 after:content-[''] hover:after:scale-x-100 hover:text-orange-500 hover:!bg-transparent focus:!bg-transparent data-open:!bg-transparent data-popup-open:!bg-transparent";
 
 const ctaPrimaryBase =
   "inline-flex items-center rounded-full border border-orange-300/70 bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.22)] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:from-orange-500 hover:to-orange-500 hover:shadow-[0_16px_36px_rgba(249,115,22,0.28)]";
@@ -55,9 +45,11 @@ const ctaPrimaryBase =
 const ctaSecondaryBase =
   "inline-flex items-center gap-2 rounded-full border border-blue-300/70 bg-gradient-to-r from-blue-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(59,130,246,0.22)] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:from-blue-500 hover:to-blue-500 hover:shadow-[0_16px_36px_rgba(59,130,246,0.28)]";
 
+const dropdownLinkBase =
+  "block rounded-2xl border border-slate-200/80 bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-200 hover:shadow-[0_14px_35px_rgba(15,23,42,0.08)]";
+
 export function GuestNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
@@ -114,7 +106,6 @@ export function GuestNavbar() {
             onClick={() => {
               setMobileOpen((open) => {
                 const next = !open;
-                if (!next) setMobileServicesOpen(false);
                 return next;
               });
             }}
@@ -159,29 +150,51 @@ export function GuestNavbar() {
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem className="ml-1">
-                  <NavigationMenuTrigger
-                    className={[
-                      navTriggerBase,
-                      isTransparentHeader ? "text-white" : "text-slate-700",
-                    ].join(" ")}
-                  >
-                    Services
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent className="overflow-hidden rounded-[14px] border border-slate-200 bg-white p-0 text-slate-950 shadow-xl shadow-slate-950/10 md:min-w-[260px] md:max-w-[280px]">
-                    <div className="grid gap-0">
-                      {services.map((service) => (
-                        <Link
-                          key={service.title}
-                          href={service.href}
-                          className="group block w-full px-4 py-3 text-black transition-colors duration-200 hover:bg-orange-500 hover:text-white"
-                        >
-                          <p className="text-sm font-semibold text-current transition-colors">
-                            {service.title}
+                  <div className="group/services relative">
+                    <Link
+                      href="/services"
+                      className={[
+                        navLinkBase,
+                        "flex items-center gap-2",
+                        isTransparentHeader ? "text-white" : "text-slate-700",
+                      ].join(" ")}
+                    >
+                      Services
+                      <span className="text-[0.7rem] font-normal opacity-70 transition group-hover/services:rotate-180">
+                        ▼
+                      </span>
+                    </Link>
+
+                    <div className="invisible absolute left-1/2 top-full z-50 mt-4 w-[34rem] -translate-x-1/2 translate-y-2 rounded-[1.5rem] border border-slate-200 bg-white p-4 opacity-0 shadow-[0_24px_70px_rgba(15,23,42,0.14)] transition-all duration-200 group-hover/services:visible group-hover/services:translate-y-0 group-hover/services:opacity-100 group-focus-within/services:visible group-focus-within/services:translate-y-0 group-focus-within/services:opacity-100">
+                      <div className="mb-3 flex items-center justify-between border-b border-slate-100 pb-3">
+                        <div>
+                          <p className="text-sm font-semibold text-slate-950">
+                            Explore services
                           </p>
+                         
+                        </div>
+                        <Link
+                          href="/services"
+                          className="rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800"
+                        >
+                          View all
                         </Link>
-                      ))}
+                      </div>
+
+                      <div className="grid gap-3 md:grid-cols-2">
+                        {serviceDropdownItems.map((item) => (
+                          <Link key={item.href} href={item.href} className={dropdownLinkBase}>
+                            <p className="text-sm font-semibold text-slate-950">
+                              {item.label}
+                            </p>
+                            <p className="mt-1 text-xs leading-5 text-slate-500">
+                              {item.description}
+                            </p>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </NavigationMenuContent>
+                  </div>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem className="ml-2">
@@ -215,90 +228,48 @@ export function GuestNavbar() {
             <div className="grid gap-3">
               <Link
                 href="/"
-                className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
-                onClick={() => {
-                  setMobileOpen(false);
-                  setMobileServicesOpen(false);
-                }}
-              >
-                Home
+              className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+              onClick={() => {
+                setMobileOpen(false);
+              }}
+            >
+              Home
               </Link>
               <Link
                 href="/about"
+              className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+              onClick={() => {
+                setMobileOpen(false);
+              }}
+            >
+              About us
+              </Link>
+              <Link
+                href="/services"
                 className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
                 onClick={() => {
                   setMobileOpen(false);
-                  setMobileServicesOpen(false);
                 }}
               >
-                About us
+                Services
               </Link>
-              <div className="overflow-hidden rounded-2xl">
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-between rounded-2xl px-1 py-2 text-left transition hover:bg-slate-50"
-                  aria-expanded={mobileServicesOpen}
-                  aria-controls="mobile-services-panel"
-                  onClick={() => setMobileServicesOpen((open) => !open)}
-                >
-                  <span className="text-sm font-medium text-slate-700">
-                    Services
-                  </span>
-                  <ChevronDown
-                    className={[
-                      "size-4 shrink-0 text-slate-400 transition-transform duration-200",
-                      mobileServicesOpen ? "rotate-180" : "rotate-0",
-                    ].join(" ")}
-                  />
-                </button>
-
-                <div
-                  id="mobile-services-panel"
-                  className={[
-                    "grid overflow-hidden transition-all duration-300 ease-out",
-                    mobileServicesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-                  ].join(" ")}
-                >
-                  <div className="min-h-0">
-                    <div className="grid gap-1 pb-1 pl-3 pr-1">
-                      {services.map((service) => (
-                        <Link
-                          key={service.title}
-                          href={service.href}
-                          className="group rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-950"
-                          onClick={() => {
-                            setMobileOpen(false);
-                            setMobileServicesOpen(false);
-                          }}
-                        >
-                          <span className="block text-[15px] leading-6">
-                            {service.title}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
               <Link
                 href="/career"
-                className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
-                onClick={() => {
-                  setMobileOpen(false);
-                  setMobileServicesOpen(false);
-                }}
-              >
-                Careers
+              className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+              onClick={() => {
+                setMobileOpen(false);
+              }}
+            >
+              Careers
               </Link>
               <Link
                 href="/contact"
-                className={ctaPrimaryBase + " justify-center"}
-                onClick={() => {
-                  setMobileOpen(false);
-                  setMobileServicesOpen(false);
-                }}
-              >
-                Contact us
+              className={ctaPrimaryBase + " justify-center"}
+              onClick={() => {
+                setMobileOpen(false);
+              }}
+            >
+              Contact us
               </Link>
               <GuestEnquiryPopup
                 triggerClassName={ctaSecondaryBase + " w-full justify-center"}

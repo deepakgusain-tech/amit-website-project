@@ -1,12 +1,37 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
 const heroVideoSrc = new URL("../images/hero1.mp4", import.meta.url).toString()
+
+const heroSlides = [
+  {
+    src: new URL("../images/hero1.jpg", import.meta.url).toString(),
+    alt: "Team collaboration and operational support",
+    title: "Operational consistency",
+    description:
+      "Structured back-office support that helps teams stay organized and move faster.",
+  },
+  {
+    src: new URL("../images/hero2.jpg", import.meta.url).toString(),
+    alt: "Business support and analytics",
+    title: "Reporting with clarity",
+    description:
+      "Simple, practical reporting that turns daily activity into useful decision-making insight.",
+  },
+  {
+    src: new URL("../images/hero3.jpg", import.meta.url).toString(),
+    alt: "Recovery and support services",
+    title: "Reliable recovery support",
+    description:
+      "Responsive service coverage designed to keep operations steady when things change.",
+  },
+]
 
 const trustMetrics = [
   { label: "Team Members", value: 100, suffix: "+" },
@@ -66,6 +91,7 @@ function AnimatedCounter({
 
 export function GuestHeroSection() {
   const [metricsVisible, setMetricsVisible] = React.useState(false)
+  const [activeSlide, setActiveSlide] = React.useState(0)
   const metricsRef = React.useRef<HTMLDivElement | null>(null)
 
   React.useEffect(() => {
@@ -79,6 +105,14 @@ export function GuestHeroSection() {
 
     observer.observe(node)
     return () => observer.disconnect()
+  }, [])
+
+  React.useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length)
+    }, 4500)
+
+    return () => window.clearInterval(timer)
   }, [])
 
   return (
@@ -178,29 +212,64 @@ export function GuestHeroSection() {
             </div>
 
             <div className="relative hidden lg:block">
-              <div className="absolute" />
-              <div className="relative rounded-[2.25rem] border border-white/12 bg-slate-950/35 p-6 shadow-[0_24px_80px_rgba(2,6,23,0.35)] backdrop-blur-md">
-                <div className="rounded-[1.6rem] border border-white/10 bg-white/6 p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/55">
-                    Trusted delivery
-                  </p>
-                  <p className="mt-3 max-w-sm text-2xl font-semibold leading-tight text-white">
-                    A focused operations partner built for scale, consistency, and speed.
-                  </p>
-                  <div className="mt-6 grid gap-3">
-                    {[
-                      "Back-office operations",
-                      "Reporting and analytics",
-                      "Recovery and support services",
-                    ].map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white/78"
-                      >
-                        {item}
+              <div className="absolute -left-8 top-8 h-20 w-28 rounded-full bg-cyan-400/15 blur-3xl" />
+              <div className="absolute -right-10 bottom-8 h-20 w-36 rounded-full bg-orange-500/10 blur-3xl" />
+
+              <div className="relative overflow-hidden rounded-[2.25rem] border border-white/12 bg-slate-950/40 shadow-[0_24px_80px_rgba(2,6,23,0.35)] backdrop-blur-md">
+                <div className="relative aspect-[4/4.35] min-h-[26rem]">
+                  {heroSlides.map((slide, index) => (
+                    <div
+                      key={slide.title}
+                      className={[
+                        "absolute inset-0 transition-all duration-700",
+                        index === activeSlide
+                          ? "translate-x-0 opacity-100"
+                          : index < activeSlide
+                            ? "-translate-x-full opacity-0"
+                            : "translate-x-full opacity-0",
+                      ].join(" ")}
+                    >
+                      <Image
+                        src={slide.src}
+                        alt={slide.alt}
+                        fill
+                        priority={index === 0}
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent" />
+
+                      <div className="absolute inset-x-0 bottom-0 p-6">
+                        <div className="rounded-[1.4rem] border border-white/12 bg-black/35 p-5 backdrop-blur-md">
+                          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/55">
+                            Featured service view
+                          </p>
+                          <h2 className="mt-3 text-2xl font-semibold leading-tight text-white">
+                            {slide.title}
+                          </h2>
+                          <p className="mt-3 text-sm leading-6 text-white/78">
+                            {slide.description}
+                          </p>
+                        </div>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="absolute inset-x-0 bottom-5 flex justify-center gap-2 px-4">
+                  {heroSlides.map((slide, index) => (
+                    <button
+                      key={slide.title}
+                      type="button"
+                      aria-label={`Show slide ${index + 1}: ${slide.title}`}
+                      className={[
+                        "h-2.5 rounded-full transition-all duration-300",
+                        index === activeSlide
+                          ? "w-8 bg-white"
+                          : "w-2.5 bg-white/45 hover:bg-white/70",
+                      ].join(" ")}
+                      onClick={() => setActiveSlide(index)}
+                    />
+                  ))}
                 </div>
               </div>
             </div>

@@ -4,9 +4,10 @@ import Image, { type StaticImageData } from "next/image";
 import { Quote } from "lucide-react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 import "swiper/css";
+import "swiper/css/pagination";
 
 import outsourcingImage from "../images/outsourcing.jpg";
 import analyticsImage from "../images/analatics.jpg";
@@ -124,15 +125,19 @@ export function GuestTestimonialsSection() {
 
         <div className="mt-12">
           <Swiper
-            modules={[Autoplay]}
+            modules={[Autoplay, Pagination]}
             loop={true}
             spaceBetween={24}
             speed={1200}
+            pagination={{
+              clickable: true,
+            }}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
+            className="[&_.swiper-wrapper]:pb-2 [&_.swiper-pagination]:relative [&_.swiper-pagination]:mt-12 [&_.swiper-pagination]:flex [&_.swiper-pagination]:items-center [&_.swiper-pagination]:justify-center [&_.swiper-pagination]:gap-2 [&_.swiper-pagination-bullet]:h-2.5 [&_.swiper-pagination-bullet]:w-2.5 [&_.swiper-pagination-bullet]:rounded-full [&_.swiper-pagination-bullet]:bg-slate-400 [&_.swiper-pagination-bullet]:opacity-30 [&_.swiper-pagination-bullet]:transition-all [&_.swiper-pagination-bullet]:duration-300 [&_.swiper-pagination-bullet]:shadow-sm [&_.swiper-pagination-bullet-active]:w-9 [&_.swiper-pagination-bullet-active]:bg-orange-500 [&_.swiper-pagination-bullet-active]:opacity-100 [&_.swiper-pagination-bullet-active]:shadow-[0_0_0_4px_rgba(249,115,22,0.12)]"
             breakpoints={{
               0: {
                 slidesPerView: 1,

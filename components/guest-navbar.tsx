@@ -15,22 +15,22 @@ import {
 
 const serviceDropdownItems = [
   {
-    href: "/service/back-office-operations",
+    href: "/services/back-office-operations",
     label: "Back Office Operations",
     description: "Reliable process support for day-to-day operations.",
   },
   {
-    href: "/service/reporting-analytics",
+    href: "/services/reporting-analytics",
     label: "Reporting & Analytics",
     description: "Dashboards and reporting that improve visibility.",
   },
   {
-    href: "/service/technical-support",
+    href: "/services/technical-support",
     label: "Technical Support",
     description: "Responsive support to keep systems and users moving.",
   },
   {
-    href: "/service/recovery-support-services",
+    href: "/services/recovery-support-services",
     label: "Recovery Support Services",
     description: "Recovery-focused workflows for continuity and resilience.",
   },
@@ -152,7 +152,7 @@ export function GuestNavbar() {
                 <NavigationMenuItem className="ml-1">
                   <div className="group/services relative">
                     <Link
-                      href="/service"
+                      href="/services"
                       className={[
                         navLinkBase,
                         "flex items-center gap-2",
@@ -174,7 +174,7 @@ export function GuestNavbar() {
                          
                         </div>
                         <Link
-                          href="/service"
+                          href="/services"
                           className="rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800"
                         >
                           View all

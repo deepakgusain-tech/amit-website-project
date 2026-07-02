@@ -12,11 +12,15 @@ type ActionResponse = {
 };
 
 export async function getBanner(): Promise<Banner[]> {
-  const banners = await prisma.banner.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  try {
+    const banners = await prisma.banner.findMany({
+      orderBy: { createdAt: "desc" },
+    });
 
-  return banners;
+    return banners;
+  } catch (error) {
+    return [];
+  }
 }
 
 export async function createBanner(data: z.infer<typeof bannerSchema>): Promise<ActionResponse> {

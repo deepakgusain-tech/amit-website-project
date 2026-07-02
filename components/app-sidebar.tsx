@@ -2,9 +2,7 @@
 
 import * as React from "react"
 
-import { NavDocuments } from "@/components/nav-documents"
 import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
@@ -15,39 +13,53 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, UsersIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon, Settings } from "lucide-react"
+import {
+  BarChart3,
+  BriefcaseBusiness,
+  Command,
+  LayoutDashboardIcon,
+  Mail,
+  Settings,
+  UsersIcon,
+} from "lucide-react"
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "Admin",
+    email: "admin@asservices.in",
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
-      icon: (
-        <LayoutDashboardIcon
-        />
-      ),
+      url: "/admin/dashboard",
+      icon: <LayoutDashboardIcon />,
     },
     {
-      title: "User",
+      title: "Leads",
+      url: "/admin/enquiry",
+      icon: <Mail />,
+    },
+    {
+      title: "Career Applications",
+      url: "/admin/career",
+      icon: <BriefcaseBusiness />,
+    },
+    {
+      title: "Users",
       url: "/admin/user",
-      icon: (
-        <UsersIcon
-        />
-      ),
+      icon: <UsersIcon />,
+    },
+    {
+      title: "Content",
+      url: "/admin/banner",
+      icon: <BarChart3 />,
     },
     {
       title: "Configuration",
       url: "/admin/configuration",
-      icon: (
-        <Settings
-        />
-      ),
-    }
+      icon: <Settings />,
+    },
   ],
 }
 
@@ -56,19 +68,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
-            >
-              <a href="#">
-                <CommandIcon className="size-5!" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  className="data-[slot=sidebar-menu-button]:p-1.5!"
+                >
+                  <a href="/admin/dashboard">
+                    <Command className="size-5!" />
+                    <span className="text-base font-semibold">AS Services</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>

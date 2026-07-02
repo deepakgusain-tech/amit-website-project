@@ -20,17 +20,18 @@ function mapUser(u: any): User {
     image: u.image ?? null,
     status: u.status,
     password: u.password,
-    createdAt: u.createdAt.toISOString(),
-    updatedAt: u.updatedAt?.toISOString(),
+    createdAt: u.createdAt ? u.createdAt.toISOString() : "",
+    updatedAt: u.updatedAt ? u.updatedAt.toISOString() : undefined,
   };
 }
 
 export async function getUsers(): Promise<User[]> {
-  const users = await prisma.user.findMany({
-    orderBy: { createdAt: "desc" },
-  });
-
-  return users.map(mapUser);
+  try {
+    const users = await prisma.user.findMany();
+    return users.map(mapUser);
+  } catch (error) {
+    return [];
+  }
 }
 
 export async function createUser(

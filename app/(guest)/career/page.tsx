@@ -92,7 +92,7 @@ export default function CareerPage() {
             className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-slate-950/78" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.7),transparent_32%),linear-gradient(90deg,rgba(2,6,23,0.8)_0%,rgba(2,6,23,0.8)_44%,rgba(2,6,23,0.80)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.18),transparent_32%),linear-gradient(90deg,rgba(2,6,23,0.92)_0%,rgba(2,6,23,0.72)_44%,rgba(2,6,23,0.85)_100%)]" />
         </div>
       
         <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">

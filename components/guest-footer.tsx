@@ -41,15 +41,11 @@ export function GuestFooter() {
   const handleNewsletterSubmit = async (e: any) => {
     e.preventDefault()
 
-    console.log("newsletter", newsletter)
-
     try {
       let response = await createNewsletter({
         email: newsletter,
         status: Status.ACTIVE,
       })
-
-      console.log("response", response)
 
       toast.success("Success", {
         description: response?.message,

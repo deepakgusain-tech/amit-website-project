@@ -7,8 +7,6 @@ import ServiceTable from "./service-table";
 const ServicePage = async () => {
   const services = await getServices();
 
-  console.log("services", services);
-
   return (
     <div className="mt-2">
       <ServiceTable

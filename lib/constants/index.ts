@@ -54,8 +54,19 @@ export const serviceDefaultValues = {
   image: "",
   status: Status.ACTIVE,
   categoryId: "",
-  serviceBenefits: { title: "",  description: "", items: [""] },
+  serviceBenefits: { title: "", description: "", items: [""] },
   capabilities: { title: "", description: "", items: [""] },
   deliveryProcess: { title: "", description: "", items: [""] },
   outcomeFocuses: { title: "", description: "", items: [""] },
 };
+
+export const testimonialDefaultValues = {
+  name: "",
+  designation: "",
+  company: "",
+  tag: "",
+  content: "",
+  image: "",
+  status: Status.ACTIVE,
+};
+

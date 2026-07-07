@@ -5,10 +5,12 @@ import { GuestServicesSection } from "@/components/guest-services-section"
 import { GuestTestimonialsSection } from "@/components/guest-testimonials-section"
 import { GuestWhyClientsChooseUsSection } from "@/components/guest-why-clients-choose-us-section"
 import { getServices } from "@/lib/actions/service-action"
-import { Service } from "@/lib/types"
+import { Service, Testimonial } from "@/lib/types"
+import { getTestimonials } from "@/lib/actions/testimonial-action"
 
 export default async function GuestPage() {
   const services = await getServices();
+  const testimonials = await getTestimonials();
 
   return (
     <>
@@ -17,7 +19,7 @@ export default async function GuestPage() {
       <GuestServicesSection services={services as Service[]} />
       <GuestWhyClientsChooseUsSection />
       <GuestGlobalDeliveryModelSection />
-      <GuestTestimonialsSection />
+      <GuestTestimonialsSection testimonials={testimonials as Testimonial[]} />
     </>
   )
 }

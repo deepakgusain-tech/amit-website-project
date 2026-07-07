@@ -56,9 +56,6 @@ const ServiceCategoryForm = ({ data, update = false }: UserFormProps) => {
                 res = await createServiceCategory(values);
             }
 
-            console.log("res", res);
-
-
             if (!res?.success) {
                 toast.error("Error", {
                     description: res?.message,

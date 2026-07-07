@@ -131,3 +131,16 @@ export const newsletterSchema = z.object({
   email: z.string().trim().min(1, "Email is required"),
   status: z.enum(Object.values(Status)),
 });
+
+export const testimonialSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().min(1, "Name is required"),
+  designation: z.string().min(1, "Designation is required"),
+  company: z.string().min(1, "Company is required"),
+  tag: z.string().min(1, "Tag is required"),
+  content: z.string().min(1, "Content is required"),
+  image: z.union([z.instanceof(File), z.string().nullable()]),
+  status: z.enum(Object.values(Status)),
+  createdAt: z.date().nullable().optional(),
+  updatedAt: z.date().nullable().optional(),
+});

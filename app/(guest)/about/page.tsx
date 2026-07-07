@@ -63,7 +63,6 @@ function ServiceCard({
 export default async function AboutPage() {
 
   const services = await getServices();
-  console.log("services", services);
 
   return (
     <div className="relative overflow-hidden bg-[#eef3f8] text-slate-900">

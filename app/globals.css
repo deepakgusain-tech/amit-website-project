@@ -305,3 +305,27 @@ html {
     transform: none;
   }
 }
+
+.enquiry-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 38px 38px;
+  animation: enquiryGridMove 16s linear infinite;
+}
+
+@keyframes enquiryGridMove {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 38px 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enquiry-grid {
+    animation: none;
+  }
+}

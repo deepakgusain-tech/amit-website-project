@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 
 import { createEnquiry } from "@/lib/actions/enquiry-action"
+import EnquiryForm from "./enquiry/enquiry-form"
 
 type EnquiryValues = {
   fullName: string
@@ -251,23 +252,15 @@ export function GuestEnquiryPopup({
               </div>
 
               <div className="grid gap-2">
-                <FieldLabel htmlFor="enquiry-subject">Service Interest</FieldLabel>
-                <select
+                <FieldLabel htmlFor="enquiry-subject">Subject</FieldLabel>
+                <textarea
                   id="enquiry-subject"
                   value={values.subject}
                   onChange={(event) => updateValue("subject", event.target.value)}
-                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
+                  className="min-h-32 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
+                  placeholder="Subject"
                   required
-                >
-                  <option value="" disabled>
-                    Select a service
-                  </option>
-                  {subjectOptions.map((subject) => (
-                    <option key={subject} value={subject}>
-                      {subject}
-                    </option>
-                  ))}
-                </select>
+                />
               </div>
 
               <div className="grid gap-2">
@@ -314,31 +307,6 @@ export function GuestEnquiryPopup({
               </div>
             </form>
           </div>
-
-          <style>{`
-            .enquiry-grid {
-              background-image:
-                linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
-              background-size: 38px 38px;
-              animation: enquiryGridMove 16s linear infinite;
-            }
-
-            @keyframes enquiryGridMove {
-              from {
-                background-position: 0 0;
-              }
-              to {
-                background-position: 38px 38px;
-              }
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-              .enquiry-grid {
-                animation: none;
-              }
-            }
-          `}</style>
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>

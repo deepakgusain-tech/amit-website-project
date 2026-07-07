@@ -139,7 +139,7 @@ const EnquiryForm = () => {
                 <FormItem>
                   <FormLabel>Message</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Enter message" className="min-h-[200px]"  {...field} />
+                    <Textarea placeholder="Enter message" className="min-h-[100px]"  {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -162,7 +162,7 @@ const EnquiryForm = () => {
                 <FormItem>
                   <FormLabel>Subject</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Enter subject" className="min-h-[200px]"  {...field} />
+                    <Textarea placeholder="Enter subject" className="min-h-[100px]"  {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

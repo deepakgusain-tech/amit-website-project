@@ -26,11 +26,36 @@ export const bannerDefaultValues = {
   image: "",
   status: Status.ACTIVE,
 };
+
 export const enquiryDefaultValues = {
   fullName: "",
   email: "",
   companyName: "",
   subject: "",
   message: "",
-  phoneNumber: ""
+  phoneNumber: "",
 }
+
+export const newsletterDefaultValues = {
+  email: "",
+  status: Status.ACTIVE,
+}
+
+export const serviceCategoryDefaultValues = {
+  name: "",
+  description: "",
+  status: Status.ACTIVE,
+};
+
+export const serviceDefaultValues = {
+  title: "",
+  shortDescription: "",
+  description: "",
+  image: "",
+  status: Status.ACTIVE,
+  categoryId: "",
+  serviceBenefits: { title: "",  description: "", items: [""] },
+  capabilities: { title: "", description: "", items: [""] },
+  deliveryProcess: { title: "", description: "", items: [""] },
+  outcomeFocuses: { title: "", description: "", items: [""] },
+};

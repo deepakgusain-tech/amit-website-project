@@ -17,10 +17,13 @@ import {
   BarChart3,
   BriefcaseBusiness,
   Command,
+  Database,
+  Handshake,
   LayoutDashboardIcon,
   Mail,
   Settings,
   UsersIcon,
+  Mails
 } from "lucide-react"
 
 const data = {
@@ -36,6 +39,16 @@ const data = {
       icon: <LayoutDashboardIcon />,
     },
     {
+      title: "Service Category",
+      url: "/admin/service-category",
+      icon: <BriefcaseBusiness />,
+    },
+    {
+      title: "Service",
+      url: "/admin/service",
+      icon: <Database />,
+    },
+    {
       title: "Leads",
       url: "/admin/enquiry",
       icon: <Mail />,
@@ -44,6 +57,11 @@ const data = {
       title: "Career Applications",
       url: "/admin/career",
       icon: <BriefcaseBusiness />,
+    },
+    {
+      title: "Newsletter",
+      url: "/admin/newsletter",
+      icon: <Mails />,
     },
     {
       title: "Users",

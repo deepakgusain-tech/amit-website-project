@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -9,6 +11,10 @@ import {
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6"
 
 import logo from "../images/AS-Services-Logo.jpg"
+import { useState } from "react"
+import { createNewsletter } from "@/lib/actions/newsletter-action"
+import { Status } from "@/lib/generated/prisma/edge"
+import { toast } from "sonner"
 
 const serviceLinks = [
   { label: "Business Process Outsourcing", href: "#services" },
@@ -30,6 +36,35 @@ const socialLinks = [
 ]
 
 export function GuestFooter() {
+  const [newsletter, setNewsletter] = useState("")
+
+  const handleNewsletterSubmit = async (e: any) => {
+    e.preventDefault()
+
+    console.log("newsletter", newsletter)
+
+    try {
+      let response = await createNewsletter({
+        email: newsletter,
+        status: Status.ACTIVE,
+      })
+
+      console.log("response", response)
+
+      toast.success("Success", {
+        description: response?.message,
+      })
+
+      setNewsletter("")
+
+    } catch (error: any) {
+      toast.error("Error", {
+        description: error?.message,
+      })
+    }
+
+  }
+
   return (
     <footer className="bg-black text-slate-100">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
@@ -114,13 +149,15 @@ export function GuestFooter() {
               Get occasional updates on service improvements, analytics insights, and practical
               business tips.
             </p>
-            <form className="mt-5 grid gap-3">
+            <form className="mt-5 grid gap-3" onSubmit={handleNewsletterSubmit}>
               <label className="sr-only" htmlFor="footer-newsletter-email">
                 Email address
               </label>
               <input
                 id="footer-newsletter-email"
                 type="email"
+                value={newsletter}
+                onChange={(e) => setNewsletter(e.target.value)}
                 placeholder="Enter your email"
                 className="h-12 rounded-full border border-blue-500 bg-white/5 px-4 text-sm text-white outline-none transition placeholder:text-slate-400 focus:border-blue-500"
               />

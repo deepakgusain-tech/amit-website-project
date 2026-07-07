@@ -7,34 +7,13 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import logo from "../images/AS-Services-Logo.jpg";
 import { GuestEnquiryPopup } from "@/components/guest-enquiry-popup";
+import { getServices } from "@/lib/actions/service-action"
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 
-const serviceDropdownItems = [
-  {
-    href: "/services/back-office-operations",
-    label: "Back Office Operations",
-    description: "Reliable process support for day-to-day operations.",
-  },
-  {
-    href: "/services/reporting-analytics",
-    label: "Reporting & Analytics",
-    description: "Dashboards and reporting that improve visibility.",
-  },
-  {
-    href: "/services/technical-support",
-    label: "Technical Support",
-    description: "Responsive support to keep systems and users moving.",
-  },
-  {
-    href: "/services/recovery-support-services",
-    label: "Recovery Support Services",
-    description: "Recovery-focused workflows for continuity and resilience.",
-  },
-];
 
 const navLinkBase =
   "relative pb-1 text-sm font-semibold transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-orange-500 after:transition-transform after:duration-300 after:content-[''] hover:after:scale-x-100 hover:text-orange-500";
@@ -54,6 +33,7 @@ export function GuestNavbar() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const isTransparentHeader = isHomePage && !scrolled;
+  const [services, setServices] = useState([])
 
   useEffect(() => {
     const onScroll = () => {
@@ -62,6 +42,11 @@ export function GuestNavbar() {
 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+
+    getServices().then((res: any) => {
+
+      setServices(res)
+    })
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -149,13 +134,13 @@ export function GuestNavbar() {
                     Careers
                   </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem className="ml-1">
-                  <div className="group/services relative">
+                <NavigationMenuItem>
+                  <div className="group/services">
                     <Link
                       href="/services"
                       className={[
                         navLinkBase,
-                        "flex items-center gap-2",
+                        "flex items-center gap-2 mt-1",
                         isTransparentHeader ? "text-white" : "text-slate-700",
                       ].join(" ")}
                     >
@@ -174,7 +159,7 @@ export function GuestNavbar() {
                          
                         </div>
                         <Link
-                          href="/services"
+                          href="/service"
                           className="rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800"
                         >
                           View all
@@ -182,13 +167,16 @@ export function GuestNavbar() {
                       </div>
 
                       <div className="grid gap-3 md:grid-cols-2">
-                        {serviceDropdownItems.map((item) => (
-                          <Link key={item.href} href={item.href} className={dropdownLinkBase}>
+                        {services.slice(0, 4).map((item: any, index: number) => (
+                          <Link 
+                            key={item.id} 
+                            href={ "/service/" + item.id} 
+                            className={dropdownLinkBase}  
+                            onClick={(e) => {
+                              (e.currentTarget as HTMLAnchorElement).blur();
+                            }}>
                             <p className="text-sm font-semibold text-slate-950">
-                              {item.label}
-                            </p>
-                            <p className="mt-1 text-xs leading-5 text-slate-500">
-                              {item.description}
+                              {item.title}
                             </p>
                           </Link>
                         ))}

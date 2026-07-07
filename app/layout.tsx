@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { Toaster } from "@/components/ui/sonner";
+
 
 const jakartaSans = Plus_Jakarta_Sans({
   variable: "--font-body",
@@ -31,13 +33,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const theme = "light";
+
   return (
     <html
       lang="en"
       className={`${jakartaSans.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-          <TooltipProvider>{children}</TooltipProvider>
+        <TooltipProvider>{children}</TooltipProvider>
+        <Toaster theme={theme as "light" | "dark" | "system"}
+          richColors
+          toastOptions={{
+            classNames: {
+              toast:
+                "bg-slate-900 text-white border-slate-800",
+              title: "text-white",
+              description: "text-slate-300",
+              actionButton: "bg-blue-600 text-white",
+              cancelButton: "bg-slate-700 text-white",
+            },
+          }} />
       </body>
     </html>
   );

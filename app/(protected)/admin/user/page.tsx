@@ -7,7 +7,7 @@ import { getUsers } from "@/lib/actions/user-action";
 const UserPage = async () => {
 
   const users = await getUsers();
-
+  
   return (
     <div className="mt-2">
       <UserTable

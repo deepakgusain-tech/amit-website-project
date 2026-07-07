@@ -22,8 +22,6 @@ export const getUserColumns = ({
       cell: ({ row }) => {
         const user = row.original;
 
-        console.log(user)
-
         return user.image ? (
           <img
             src={user.image}

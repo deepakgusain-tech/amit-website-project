@@ -15,8 +15,12 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react"
+import herobanner2 from "@/images/herobanner2.jpg"
+
 
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import { getServices } from "@/lib/actions/service-action"
 
 export const metadata: Metadata = {
   title: "Services | AS Services",
@@ -143,14 +147,27 @@ const colorClasses = {
   violet: "bg-violet-50 text-violet-700 border-violet-200",
 }
 
-export default function ServicePage() {
+export default async function ServicePage() {
+  const services = await getServices();
+  
+
   return (
     <div className="bg-white text-slate-900">
       <section className="relative isolate overflow-hidden bg-[#062B36] pt-32 text-white sm:pt-36">
-        <div className="absolute inset-0 service-grid opacity-35" />
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(6,43,54,0.72),rgba(15,23,42,0.96))]" />
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-white to-transparent" />
+        <div className="absolute inset-0">
+          <Image
+            src={herobanner2}
+            alt=""
+            fill
+            priority
+            aria-hidden="true"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-slate-950/78" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.18),transparent_32%),linear-gradient(90deg,rgba(2,6,23,0.92)_0%,rgba(2,6,23,0.72)_44%,rgba(2,6,23,0.85)_100%)]" />
+        </div>
 
+      
         <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-20 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8">
           <div className="max-w-3xl">
             {/* <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-100 backdrop-blur">
@@ -198,16 +215,16 @@ export default function ServicePage() {
               </div>
 
               <div className="mt-5 grid gap-3">
-                {["Operations", "Analytics", "Support", "Consulting"].map(
-                  (item, index) => (
+                {services.length > 0 && services.map(
+                  (service, index) => (
                     <div
-                      key={item}
+                      key={service.id}
                       className="service-meter rounded-lg border border-white/10 bg-slate-950/35 p-4"
                       style={{ animationDelay: `${index * 180}ms` }}
                     >
                       <div className="flex items-center justify-between text-sm">
-                        <span className="font-semibold text-white">{item}</span>
-                        <span className="text-cyan-200">Active</span>
+                        <span className="font-semibold text-white">{service.title}</span>
+                        <span className="text-cyan-200">{service.status}</span>
                       </div>
                       <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
                         <span className="service-meter-fill block h-full rounded-full bg-cyan-300" />
@@ -238,7 +255,6 @@ export default function ServicePage() {
 
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
             {services.map((service, index) => {
-              const Icon = service.icon
 
               return (
                 <article
@@ -248,24 +264,16 @@ export default function ServicePage() {
                   style={{ animationDelay: `${index * 90}ms` }}
                 >
                   <div className="absolute inset-x-0 top-0 h-1 service-shine" />
-                  <div
-                    className={[
-                      "inline-flex size-12 items-center justify-center rounded-lg border",
-                      colorClasses[service.color as keyof typeof colorClasses],
-                    ].join(" ")}
-                  >
-                    <Icon className="size-5" />
-                  </div>
 
                   <h3 className="mt-5 text-xl font-semibold text-slate-950">
                     {service.title}
                   </h3>
                   <p className="mt-3 text-sm leading-6 text-slate-600">
-                    {service.summary}
+                    {service.shortDescription}
                   </p>
 
                   <div className="mt-6 grid gap-3">
-                    {service.features.map((feature) => (
+                    {service.serviceBenefits?.items.map((feature) => (
                       <div key={feature} className="flex items-center gap-2 text-sm text-slate-700">
                         <CheckCircle2 className="size-4 shrink-0 text-emerald-500" />
                         <span>{feature}</span>

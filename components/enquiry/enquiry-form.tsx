@@ -20,22 +20,17 @@ import { Button } from "../ui/button";
 import { ArrowRight, Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Status } from "@/lib/generated/prisma/enums";
-import { enquiryDefaultValues, } from "@/lib/constants";
+import { enquiryDefaultValues } from "@/lib/constants";
 import { Textarea } from "../ui/textarea";
 import { createEnquiry } from "@/lib/actions/enquiry-action";
 
-type UserFormProps = {
-  data?: Banner;
-  update?: boolean;
-};
 
-const EnquiryForm = ({ data, update = false }: UserFormProps) => {
+const EnquiryForm = () => {
   const router = useRouter();
-  const id = data?.id;
 
   const form = useForm<z.infer<typeof enquirySchema>>({
     resolver: zodResolver(enquirySchema),
-    defaultValues: data || enquiryDefaultValues,
+    defaultValues: enquiryDefaultValues,
   });
 
   const [isPending, startTransition] = React.useTransition();

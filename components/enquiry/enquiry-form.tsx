@@ -129,11 +129,6 @@ const EnquiryForm = () => {
               name="message"
               render={({
                 field,
-              }: {
-                field: ControllerRenderProps<
-                  z.infer<typeof enquirySchema>,
-                  "message"
-                >;
               }) => (
                 <FormItem>
                   <FormLabel>Message</FormLabel>
@@ -152,11 +147,6 @@ const EnquiryForm = () => {
               name="subject"
               render={({
                 field,
-              }: {
-                field: ControllerRenderProps<
-                  z.infer<typeof enquirySchema>,
-                  "subject"
-                >;
               }) => (
                 <FormItem>
                   <FormLabel>Subject</FormLabel>

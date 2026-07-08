@@ -49,7 +49,7 @@ function FieldShell({
   )
 }
 
-export function ContactForm() {
+export function ContactForm({services} : any) {
   const [values, setValues] = React.useState<EnquiryValues>(defaultValues)
   const [status, setStatus] = React.useState<{
     type: "success" | "error"
@@ -89,7 +89,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-[1.75rem] border border-slate-200 bg-white/90 p-6 shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-8"
+      className="mt-4 pt-4 border-t border-gray-200"
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="grid gap-2">
@@ -159,25 +159,20 @@ export function ContactForm() {
       </div>
 
       <div className="mt-5 grid gap-2">
-        <label htmlFor="contact-subject" className="text-sm font-semibold text-slate-800">
-          Service Interest
+        <label htmlFor="contact-message" className="text-sm font-semibold text-slate-800">
+          Subject
         </label>
-        <select
-          id="contact-subject"
-          value={values.subject}
-          onChange={(event) => updateValue("subject", event.target.value)}
-          className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
-          required
-        >
-          <option value="" disabled>
-            Select a service
-          </option>
-          {subjectOptions.map((subject) => (
-            <option key={subject} value={subject}>
-              {subject}
-            </option>
-          ))}
-        </select>
+        <div className="relative">
+          <MessageSquareText className="pointer-events-none absolute left-3 top-3.5 size-4 text-slate-400" />
+          <textarea
+            id="contact-message"
+            value={values.subject}
+            onChange={(event) => updateValue("subject", event.target.value)}
+            className=" w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-10 py-3 text-sm leading-6 outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
+            placeholder="Subject"
+            required
+          />
+        </div>
       </div>
 
       <div className="mt-5 grid gap-2">
@@ -190,7 +185,7 @@ export function ContactForm() {
             id="contact-message"
             value={values.message}
             onChange={(event) => updateValue("message", event.target.value)}
-            className="min-h-36 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-10 py-3 text-sm leading-6 outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
+            className="min-h-20 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-10 py-3 text-sm leading-6 outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
             placeholder="Briefly describe your requirement, timeline, or support need."
             required
           />

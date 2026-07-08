@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowRight, Clock3, Mail, MapPin, Phone, Sparkles } from "lucide-react"
 
 import { ContactForm } from "./contact-form"
+import { getServices } from "@/lib/actions/service-action"
 
 export const metadata: Metadata = {
   title: "Contact | AS Services",
@@ -85,7 +86,9 @@ function ContactCard({
   )
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const services = await getServices()
+
   return (
     <div className="relative overflow-hidden bg-[#eef3f8] text-slate-900">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.12),transparent_28%),radial-gradient(circle_at_80%_0,rgba(249,115,22,0.09),transparent_26%),linear-gradient(180deg,rgba(248,250,252,0.95)_0%,rgba(236,242,248,1)_100%)]" />
@@ -144,29 +147,8 @@ export default function ContactPage() {
                   <Clock3 className="size-4 text-cyan-700" />
                   Quick enquiry
                 </div>
-                <h2 className="mt-4 text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">
-                  Tell us what you&apos;re looking for.
-                </h2>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
-                  Use the form below to share your needs. We&apos;ll respond with a
-                  practical follow-up and recommended next step.
-                </p>
 
-                <div className="mt-6 grid gap-3">
-                  {quickPoints.map((point) => (
-                    <div
-                      key={point}
-                      className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-[0_10px_24px_rgba(15,23,42,0.04)]"
-                    >
-                      <span className="mt-1 size-2.5 rounded-full bg-orange-500" />
-                      <p className="text-sm leading-6 text-slate-700">{point}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <ContactForm />
+                <ContactForm services={services} />
               </div>
             </div>
           </div>

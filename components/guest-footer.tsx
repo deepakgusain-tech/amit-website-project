@@ -1,65 +1,86 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import {
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-} from "lucide-react"
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6"
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaXTwitter,
+} from "react-icons/fa6";
 
-import logo from "../images/AS-Services-Logo.jpg"
-import { useState } from "react"
-import { createNewsletter } from "@/lib/actions/newsletter-action"
-import { Status } from "@/lib/types"
-import { toast } from "sonner"
+import logo from "../images/AS-Services-Logo.jpg";
+import { useState } from "react";
+import { createNewsletter } from "@/lib/actions/newsletter-action";
+import { Status } from "@/lib/types";
+import { toast } from "sonner";
 
 const serviceLinks = [
   { label: "Business Process Outsourcing", href: "#services" },
   { label: "Data Analytics & Dashboards", href: "#services" },
   { label: "Technical Support & Services", href: "#services" },
-]
+];
 
 const aboutLinks = [
   { label: "About us", href: "/about" },
   { label: "Contact us", href: "/contact" },
   { label: "Home", href: "/" },
-]
+];
 
 const socialLinks = [
-  { label: "LinkedIn", href: "https://www.linkedin.com", icon: FaLinkedinIn },
-  { label: "Instagram", href: "https://www.instagram.com", icon: FaInstagram },
-  { label: "Facebook", href: "https://www.facebook.com", icon: FaFacebookF },
-  { label: "X", href: "https://x.com", icon: FaXTwitter },
-]
+  {
+    label: "LinkedIn",
+    key: "linkedinUrl",
+    href: "https://www.linkedin.com",
+    icon: FaLinkedinIn,
+  },
+  {
+    label: "Instagram",
+    key: "instagramUrl",
+    href: "https://www.instagram.com",
+    icon: FaInstagram,
+  },
+  {
+    label: "Facebook",
+    key: "facebookUrl",
+    href: "https://www.facebook.com",
+    icon: FaFacebookF,
+  },
+  { label: "X", key: "youtubeUrl", href: "https://x.com", icon: FaXTwitter },
+];
 
-export function GuestFooter() {
-  const [newsletter, setNewsletter] = useState("")
+export function GuestFooter({
+  settings,
+  services,
+}: {
+  settings: any;
+  services: any;
+}) {
+  const [newsletter, setNewsletter] = useState("");
+
+  console.log("services in footer", services);
 
   const handleNewsletterSubmit = async (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       let response = await createNewsletter({
         email: newsletter,
         status: Status.ACTIVE,
-      })
+      });
 
       toast.success("Success", {
         description: response?.message,
-      })
+      });
 
-      setNewsletter("")
-
+      setNewsletter("");
     } catch (error: any) {
       toast.error("Error", {
         description: error?.message,
-      })
+      });
     }
-
-  }
+  };
 
   return (
     <footer className="bg-black text-slate-100">
@@ -68,33 +89,32 @@ export function GuestFooter() {
           <div className="max-w-sm">
             <Link href="/" className="inline-flex items-center">
               <Image
-                src={logo}
-                alt="AS Services logo"
+                src={settings?.logoPath ?? logo}
+                alt={settings?.siteName ?? "AS Services Logo"}
                 width={180}
                 height={60}
                 className="h-auto w-[120px] object-contain"
               />
             </Link>
             <p className="mt-5 text-sm leading-7 text-slate-300">
-              Intelligent services powered by technology, data, and talent to help your business
-              operate smoothly, scale confidently, and stay responsive.
+              {settings?.description ??
+                "AS Services is a leading provider of business solutions, offering a wide range of services to help businesses streamline their operations and achieve their goals."}
             </p>
-
             <a
-              href="tel:+91-9212174507"
+              href={`tel:${settings?.phone ?? "+91-9212174507"}`}
               className="mt-6 inline-flex text-xl font-medium tracking-tight text-white transition hover:text-cyan-200"
             >
-              +91-9212174507
+              {settings?.phone ?? "+91-9212174507"}
             </a>
 
             <div className="mt-6 flex flex-wrap gap-3">
               {socialLinks.map((social) => {
-                const Icon = social.icon
+                const Icon = social.icon;
 
                 return (
                   <a
                     key={social.label}
-                    href={social.href}
+                    href={settings?.[social.key] || social.href}
                     target="_blank"
                     rel="noreferrer"
                     aria-label={social.label}
@@ -102,7 +122,7 @@ export function GuestFooter() {
                   >
                     <Icon className="size-4" />
                   </a>
-                )
+                );
               })}
             </div>
           </div>
@@ -110,14 +130,14 @@ export function GuestFooter() {
           <div>
             <p className="text-xl font-semibold text-orange-500">Services</p>
             <div className="mt-5 grid gap-4 text-sm text-slate-300">
-              {serviceLinks.map((link) => (
+              {services.filter((service: any) => service.status.toLowerCase() === "active").map((link: any) => (
                 <Link
-                  key={link.label}
+                  key={link.name}
                   href={link.href}
                   className="inline-flex items-center gap-2 transition hover:text-white"
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
-                  {link.label}
+                  {link.name}
                 </Link>
               ))}
             </div>
@@ -142,8 +162,8 @@ export function GuestFooter() {
           <div>
             <p className="text-xl font-semibold text-orange-500">Newsletter</p>
             <p className="mt-5 text-sm leading-7 text-slate-300">
-              Get occasional updates on service improvements, analytics insights, and practical
-              business tips.
+              Get occasional updates on service improvements, analytics
+              insights, and practical business tips.
             </p>
             <form className="mt-5 grid gap-3" onSubmit={handleNewsletterSubmit}>
               <label className="sr-only" htmlFor="footer-newsletter-email">
@@ -170,35 +190,38 @@ export function GuestFooter() {
 
         <div className="mt-12 grid gap-6 border-t border-white/10 pt-6 sm:grid-cols-3">
           <a
-            href="mailto:info@asservices.com"
+            href={`mailto:${settings?.primaryEmail ?? ""}`}
             className="inline-flex items-center gap-3 text-sm text-slate-300 transition hover:text-white"
           >
             <Mail className="size-4 text-cyan-300" />
-            info@asservices.com
+            {settings?.primaryEmail ?? ""}
           </a>
           <a
-            href="tel:+910000000000"
+            href={`tel:${settings?.phone ?? "+91-9212174507"}`}
             className="inline-flex items-center gap-3 text-sm text-slate-300 transition hover:text-white"
           >
             <Phone className="size-4 text-cyan-300" />
-            +91-9212174507
+            {settings?.phone ?? "+91-9212174507"}
           </a>
           <div className="inline-flex items-start gap-3 text-sm text-slate-300">
             <MapPin className="mt-0.5 size-4 text-cyan-300" />
-            <span>Flexible delivery across time zones with responsive support.</span>
+            <span>
+              {settings?.tagline ?? ""}
+            </span>
           </div>
         </div>
 
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-slate-400">© {new Date().getFullYear()} AS Services. All rights reserved.</p>
+          <p className="text-sm text-slate-400">
+            © {new Date().getFullYear()} {settings?.siteName}. All rights reserved.
+          </p>
           <div className="flex flex-wrap gap-4 text-sm">
             {socialLinks.map((social) => {
-              const Icon = social.icon
-
+              const Icon = social.icon;
               return (
                 <a
                   key={social.label}
-                  href={social.href}
+                   href={settings?.[social.key] || social.href}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 text-slate-400 transition hover:text-white"
@@ -206,11 +229,11 @@ export function GuestFooter() {
                   <Icon className="size-4" />
                   <span>{social.label}</span>
                 </a>
-              )
+              );
             })}
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

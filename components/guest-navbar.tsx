@@ -27,7 +27,7 @@ const ctaSecondaryBase =
 const dropdownLinkBase =
   "block rounded-2xl border border-slate-200/80 bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-200 hover:shadow-[0_14px_35px_rgba(15,23,42,0.08)]";
 
-export function GuestNavbar() {
+export function GuestNavbar({ settings }: { settings: any }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -67,7 +67,7 @@ export function GuestNavbar() {
           onClick={() => setMobileOpen(false)}
         >
           <Image
-            src={logo}
+            src={settings?.logoPath || logo}
             alt="AS Services logo"
             width={180}
             height={36}

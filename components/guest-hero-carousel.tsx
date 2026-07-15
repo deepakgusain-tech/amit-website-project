@@ -35,7 +35,7 @@ const heroSlides = [
 
 const trustMetrics = [
   { label: "Team Members", key: "teamMembers", suffix: "+" },
-  { label: "Happy Customers",key: "happyCustomers", suffix: "+" },
+  { label: "Happy Customers", key: "happyCustomers", suffix: "+" },
   { label: "Operational Support", key: "operationalSupport", suffix: "" },
 ];
 
@@ -55,8 +55,7 @@ function AnimatedCounter({
 }) {
   const [displayValue, setDisplayValue] = React.useState(0);
 
-  const numericValue =
-    typeof value === "number" ? value : Number(value);
+  const numericValue = typeof value === "number" ? value : Number(value);
 
   React.useEffect(() => {
     if (!active || Number.isNaN(numericValue)) return;
@@ -228,47 +227,49 @@ export function GuestHeroSection({ settings, banners }: any) {
 
               <div className="relative overflow-hidden rounded-[2.25rem] border border-white/12 bg-slate-950/40 shadow-[0_24px_80px_rgba(2,6,23,0.35)] backdrop-blur-md">
                 <div className="relative aspect-[4/4.35] min-h-[26rem]">
-                  {banners.map((banner : any, index :  number) => (
-                    <div
-                      key={banner.id}
-                      className={[
-                        "absolute inset-0 transition-all duration-700",
-                        index === activeSlide
-                          ? "translate-x-0 opacity-100"
-                          : index < activeSlide
-                            ? "-translate-x-full opacity-0"
-                            : "translate-x-full opacity-0",
-                      ].join(" ")}
-                    >
-                      <Image
-                        src={banner.image}
-                        alt={banner.tagline}
-                        fill
-                        sizes="100vw"
-                        priority={index === 0}
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent" />
+                  {banners
+                    .filter((banner: any) => banner.status.toLowerCase() === "active")
+                    .map((banner: any, index: number) => (
+                      <div
+                        key={banner.id}
+                        className={[
+                          "absolute inset-0 transition-all duration-700",
+                          index === activeSlide
+                            ? "translate-x-0 opacity-100"
+                            : index < activeSlide
+                              ? "-translate-x-full opacity-0"
+                              : "translate-x-full opacity-0",
+                        ].join(" ")}
+                      >
+                        <Image
+                          src={banner.image}
+                          alt={banner.tagline}
+                          fill
+                          sizes="100vw"
+                          priority={index === 0}
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent" />
 
-                      <div className="absolute inset-x-0 bottom-0 p-6">
-                        <div className="rounded-[1.4rem] border border-white/12 bg-black/35 p-5 backdrop-blur-md">
-                          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/55">
-                            Featured service view
-                          </p>
-                          <h2 className="mt-3 text-2xl font-semibold leading-tight text-white">
-                            {banner.tagline}
-                          </h2>
-                          <p className="mt-3 text-sm leading-6 text-white/78">
-                            {banner.description}
-                          </p>
+                        <div className="absolute inset-x-0 bottom-0 p-6">
+                          <div className="rounded-[1.4rem] border border-white/12 bg-black/35 p-5 backdrop-blur-md">
+                            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/55">
+                              Featured service view
+                            </p>
+                            <h2 className="mt-3 text-2xl font-semibold leading-tight text-white">
+                              {banner.tagline}
+                            </h2>
+                            <p className="mt-3 text-sm leading-6 text-white/78">
+                              {banner.description}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
 
                 <div className="absolute inset-x-0 bottom-5 flex justify-center gap-2 px-4">
-                  {banners.map((banner : any, index :  number) => (
+                  {banners.filter((banner: any) => banner.status.toLowerCase() === "active").map((banner: any, index: number) => (
                     <button
                       key={banner.id}
                       type="button"

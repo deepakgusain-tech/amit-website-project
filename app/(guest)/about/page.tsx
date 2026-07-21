@@ -11,6 +11,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { getServices } from "@/lib/actions/service-action"
+import { getSettings } from "@/lib/actions/settings-action"
 
 const strengths = [
   "Structured delivery",
@@ -18,6 +19,24 @@ const strengths = [
   "Scalable support",
   "Quality-focused execution",
 ]
+
+function parseList(value: string | null | undefined, fallback: string[]) {
+  if (!value) return fallback;
+
+  const trimmed = value.trim();
+  if (!trimmed) return fallback;
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    if (Array.isArray(parsed)) {
+      return parsed.map((item) => String(item).trim()).filter(Boolean);
+    }
+  } catch {
+    // fall through
+  }
+
+  return trimmed.split(",").map((item) => item.trim()).filter(Boolean);
+}
 
 export const metadata = {
   title: "About | AS Services",
@@ -63,6 +82,8 @@ function ServiceCard({
 export default async function AboutPage() {
 
   const services = await getServices();
+  const settings = (await getSettings()) as any;
+  const aboutStrengths = parseList(settings?.aboutButtons, strengths);
 
   return (
     <div className="relative overflow-hidden bg-[#eef3f8] text-slate-900">
@@ -74,17 +95,15 @@ export default async function AboutPage() {
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-blue-500 bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-[0_12px_30px_rgba(15,23,42,0.05)] backdrop-blur">
                 <ShieldCheck className="size-4 text-white" />
-                About AS Services
+                {settings?.aboutTagline ?? "About AS Services"}
               </div>
 
               <h1 className="mt-6 text-4xl font-semibold tracking-tight text-balance text-orange-500 sm:text-5xl lg:text-6xl">
-                Focused services that help teams run better.
+                {settings?.aboutTitle ?? "Focused services that help teams run better."}
               </h1>
 
               <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
-                We help organizations strengthen operations, improve reporting,
-                and support critical workflows with a calm, dependable delivery
-                model.
+                {settings?.aboutDescription ?? "We help organizations strengthen operations, improve reporting, and support critical workflows with a calm, dependable delivery model."}
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -108,7 +127,7 @@ export default async function AboutPage() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                {strengths.map((strength) => (
+                {aboutStrengths.map((strength) => (
                   <span
                     key={strength}
                     className="inline-flex items-center rounded-full border border-blue-600 bg-white/90 px-4 py-2 text-sm font-medium text-blue-600 shadow-[0_10px_24px_rgba(15,23,42,0.04)]"

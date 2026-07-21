@@ -509,10 +509,60 @@ async function seedSettings() {
     create: {
       id: "site-settings",
       siteName: "AS Services",
-      legalName: "AS Services Private Limited",
-      tagline: "Global business support delivered from India",
+      legalName: "Global Business Support Services Delivered from India",
+      tagline: "Global delivery from India",
       description:
-        "AS Services helps organizations scale through back-office operations, analytics, technical support, process management, and recovery support services.",
+        "Helping organizations scale through offshore back-office operations, recovery support services, reporting, analytics, IT Services and operational excellence.",
+      aboutTagline: "About AS Services",
+      aboutTitle:
+        "A focused operating model built for scale, quality, and steady delivery.",
+      aboutDescription:
+        "We combine back-office operations, IT consulting, and support services into a lean delivery model designed to help global clients move faster without sacrificing quality.",
+      aboutButtons: JSON.stringify([
+        "Transition",
+        "Operations",
+        "Training",
+        "Scalability",
+      ]),
+      deliveryModelTitle: "DELIVERY MODEL",
+      deliveryModelItems: JSON.stringify([
+        "Founded in 2024",
+        "Supporting global clients",
+        "Backoffice Operations with IT Consulting & Support",
+        "Specialized Transition team",
+        "Specialized operational support teams",
+        "Specialized Training & Development team",
+        "Trained agents available as factory model",
+        "Focus on quality and scalability",
+      ]),
+      whyClientsTagline: "Why Clients Choose Us",
+      whyClientsTitle: "Built to scale with clarity, control, and confidence.",
+      whyClientsDescription:
+        "Our delivery model gives clients flexible teams, disciplined process, and visibility that makes operations easier to manage.",
+      whyClientsCards: JSON.stringify([
+        {
+          title: "Scalable Teams",
+          summary: "Flexible delivery capacity that grows with your needs.",
+        },
+        {
+          title: "Cost Effective Delivery",
+          summary: "Lean operations with a clear focus on value and efficiency.",
+        },
+        {
+          title: "Structured Processes",
+          summary: "Consistent execution built around repeatable workflows.",
+        },
+        {
+          title: "Management Visibility & Reporting",
+          summary: "Clear reporting and oversight across daily operations.",
+        },
+      ]),
+      globalDeliveryTagline: "OUR GLOBAL DELIVERY MODEL",
+      globalDeliveryTitle:
+        "A simple, visual journey from intake to continuous improvement.",
+      globalDeliveryDescription:
+        "This flowchart maps the exact delivery handoff we use to move from client requirements through transition, training, delivery, governance, and ongoing service improvement.",
+      globalDeliveryImagePath: "/uploads/12b66e57-bc7f-48bb-bbf8-25fd3e07e3ef.jpg",
       primaryEmail: "info@asservices.com",
       primaryPhone: "+91 98765 43210",
       websiteUrl: "https://asservices.com",
@@ -545,10 +595,60 @@ async function seedSettings() {
     },
     update: {
       siteName: "AS Services",
-      legalName: "AS Services Private Limited",
-      tagline: "Global business support delivered from India",
+      legalName: "Global Business Support Services Delivered from India",
+      tagline: "Global delivery from India",
       description:
-        "AS Services helps organizations scale through back-office operations, analytics, technical support, process management, and recovery support services.",
+        "Helping organizations scale through offshore back-office operations, recovery support services, reporting, analytics, IT Services and operational excellence.",
+      aboutTagline: "About AS Services",
+      aboutTitle:
+        "A focused operating model built for scale, quality, and steady delivery.",
+      aboutDescription:
+        "We combine back-office operations, IT consulting, and support services into a lean delivery model designed to help global clients move faster without sacrificing quality.",
+      aboutButtons: JSON.stringify([
+        "Transition",
+        "Operations",
+        "Training",
+        "Scalability",
+      ]),
+      deliveryModelTitle: "DELIVERY MODEL",
+      deliveryModelItems: JSON.stringify([
+        "Founded in 2024",
+        "Supporting global clients",
+        "Backoffice Operations with IT Consulting & Support",
+        "Specialized Transition team",
+        "Specialized operational support teams",
+        "Specialized Training & Development team",
+        "Trained agents available as factory model",
+        "Focus on quality and scalability",
+      ]),
+      whyClientsTagline: "Why Clients Choose Us",
+      whyClientsTitle: "Built to scale with clarity, control, and confidence.",
+      whyClientsDescription:
+        "Our delivery model gives clients flexible teams, disciplined process, and visibility that makes operations easier to manage.",
+      whyClientsCards: JSON.stringify([
+        {
+          title: "Scalable Teams",
+          summary: "Flexible delivery capacity that grows with your needs.",
+        },
+        {
+          title: "Cost Effective Delivery",
+          summary: "Lean operations with a clear focus on value and efficiency.",
+        },
+        {
+          title: "Structured Processes",
+          summary: "Consistent execution built around repeatable workflows.",
+        },
+        {
+          title: "Management Visibility & Reporting",
+          summary: "Clear reporting and oversight across daily operations.",
+        },
+      ]),
+      globalDeliveryTagline: "OUR GLOBAL DELIVERY MODEL",
+      globalDeliveryTitle:
+        "A simple, visual journey from intake to continuous improvement.",
+      globalDeliveryDescription:
+        "This flowchart maps the exact delivery handoff we use to move from client requirements through transition, training, delivery, governance, and ongoing service improvement.",
+      globalDeliveryImagePath: "/uploads/12b66e57-bc7f-48bb-bbf8-25fd3e07e3ef.jpg",
       primaryEmail: "info@asservices.com",
       primaryPhone: "+91 98765 43210",
       websiteUrl: "https://asservices.com",

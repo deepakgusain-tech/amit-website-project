@@ -8008,6 +8008,20 @@ export namespace Prisma {
     teamMembers: string | null
     happyCustomers: string | null
     operationalSupport: string | null
+    aboutTagline: string | null
+    aboutTitle: string | null
+    aboutDescription: string | null
+    aboutButtons: string | null
+    deliveryModelTitle: string | null
+    deliveryModelItems: string | null
+    whyClientsTagline: string | null
+    whyClientsTitle: string | null
+    whyClientsDescription: string | null
+    whyClientsCards: string | null
+    globalDeliveryTagline: string | null
+    globalDeliveryTitle: string | null
+    globalDeliveryDescription: string | null
+    globalDeliveryImagePath: string | null
     showPhone: boolean | null
     showEmail: boolean | null
     smtpHost: string | null
@@ -8052,6 +8066,20 @@ export namespace Prisma {
     teamMembers: string | null
     happyCustomers: string | null
     operationalSupport: string | null
+    aboutTagline: string | null
+    aboutTitle: string | null
+    aboutDescription: string | null
+    aboutButtons: string | null
+    deliveryModelTitle: string | null
+    deliveryModelItems: string | null
+    whyClientsTagline: string | null
+    whyClientsTitle: string | null
+    whyClientsDescription: string | null
+    whyClientsCards: string | null
+    globalDeliveryTagline: string | null
+    globalDeliveryTitle: string | null
+    globalDeliveryDescription: string | null
+    globalDeliveryImagePath: string | null
     showPhone: boolean | null
     showEmail: boolean | null
     smtpHost: string | null
@@ -8096,6 +8124,20 @@ export namespace Prisma {
     teamMembers: number
     happyCustomers: number
     operationalSupport: number
+    aboutTagline: number
+    aboutTitle: number
+    aboutDescription: number
+    aboutButtons: number
+    deliveryModelTitle: number
+    deliveryModelItems: number
+    whyClientsTagline: number
+    whyClientsTitle: number
+    whyClientsDescription: number
+    whyClientsCards: number
+    globalDeliveryTagline: number
+    globalDeliveryTitle: number
+    globalDeliveryDescription: number
+    globalDeliveryImagePath: number
     showPhone: number
     showEmail: number
     smtpHost: number
@@ -8142,6 +8184,20 @@ export namespace Prisma {
     teamMembers?: true
     happyCustomers?: true
     operationalSupport?: true
+    aboutTagline?: true
+    aboutTitle?: true
+    aboutDescription?: true
+    aboutButtons?: true
+    deliveryModelTitle?: true
+    deliveryModelItems?: true
+    whyClientsTagline?: true
+    whyClientsTitle?: true
+    whyClientsDescription?: true
+    whyClientsCards?: true
+    globalDeliveryTagline?: true
+    globalDeliveryTitle?: true
+    globalDeliveryDescription?: true
+    globalDeliveryImagePath?: true
     showPhone?: true
     showEmail?: true
     smtpHost?: true
@@ -8186,6 +8242,20 @@ export namespace Prisma {
     teamMembers?: true
     happyCustomers?: true
     operationalSupport?: true
+    aboutTagline?: true
+    aboutTitle?: true
+    aboutDescription?: true
+    aboutButtons?: true
+    deliveryModelTitle?: true
+    deliveryModelItems?: true
+    whyClientsTagline?: true
+    whyClientsTitle?: true
+    whyClientsDescription?: true
+    whyClientsCards?: true
+    globalDeliveryTagline?: true
+    globalDeliveryTitle?: true
+    globalDeliveryDescription?: true
+    globalDeliveryImagePath?: true
     showPhone?: true
     showEmail?: true
     smtpHost?: true
@@ -8230,6 +8300,20 @@ export namespace Prisma {
     teamMembers?: true
     happyCustomers?: true
     operationalSupport?: true
+    aboutTagline?: true
+    aboutTitle?: true
+    aboutDescription?: true
+    aboutButtons?: true
+    deliveryModelTitle?: true
+    deliveryModelItems?: true
+    whyClientsTagline?: true
+    whyClientsTitle?: true
+    whyClientsDescription?: true
+    whyClientsCards?: true
+    globalDeliveryTagline?: true
+    globalDeliveryTitle?: true
+    globalDeliveryDescription?: true
+    globalDeliveryImagePath?: true
     showPhone?: true
     showEmail?: true
     smtpHost?: true
@@ -8347,6 +8431,20 @@ export namespace Prisma {
     teamMembers: string | null
     happyCustomers: string | null
     operationalSupport: string | null
+    aboutTagline: string | null
+    aboutTitle: string | null
+    aboutDescription: string | null
+    aboutButtons: string | null
+    deliveryModelTitle: string | null
+    deliveryModelItems: string | null
+    whyClientsTagline: string | null
+    whyClientsTitle: string | null
+    whyClientsDescription: string | null
+    whyClientsCards: string | null
+    globalDeliveryTagline: string | null
+    globalDeliveryTitle: string | null
+    globalDeliveryDescription: string | null
+    globalDeliveryImagePath: string | null
     showPhone: boolean
     showEmail: boolean
     smtpHost: string | null
@@ -8408,6 +8506,20 @@ export namespace Prisma {
     teamMembers?: boolean
     happyCustomers?: boolean
     operationalSupport?: boolean
+    aboutTagline?: boolean
+    aboutTitle?: boolean
+    aboutDescription?: boolean
+    aboutButtons?: boolean
+    deliveryModelTitle?: boolean
+    deliveryModelItems?: boolean
+    whyClientsTagline?: boolean
+    whyClientsTitle?: boolean
+    whyClientsDescription?: boolean
+    whyClientsCards?: boolean
+    globalDeliveryTagline?: boolean
+    globalDeliveryTitle?: boolean
+    globalDeliveryDescription?: boolean
+    globalDeliveryImagePath?: boolean
     showPhone?: boolean
     showEmail?: boolean
     smtpHost?: boolean
@@ -8452,6 +8564,20 @@ export namespace Prisma {
     teamMembers?: boolean
     happyCustomers?: boolean
     operationalSupport?: boolean
+    aboutTagline?: boolean
+    aboutTitle?: boolean
+    aboutDescription?: boolean
+    aboutButtons?: boolean
+    deliveryModelTitle?: boolean
+    deliveryModelItems?: boolean
+    whyClientsTagline?: boolean
+    whyClientsTitle?: boolean
+    whyClientsDescription?: boolean
+    whyClientsCards?: boolean
+    globalDeliveryTagline?: boolean
+    globalDeliveryTitle?: boolean
+    globalDeliveryDescription?: boolean
+    globalDeliveryImagePath?: boolean
     showPhone?: boolean
     showEmail?: boolean
     smtpHost?: boolean
@@ -8496,6 +8622,20 @@ export namespace Prisma {
     teamMembers?: boolean
     happyCustomers?: boolean
     operationalSupport?: boolean
+    aboutTagline?: boolean
+    aboutTitle?: boolean
+    aboutDescription?: boolean
+    aboutButtons?: boolean
+    deliveryModelTitle?: boolean
+    deliveryModelItems?: boolean
+    whyClientsTagline?: boolean
+    whyClientsTitle?: boolean
+    whyClientsDescription?: boolean
+    whyClientsCards?: boolean
+    globalDeliveryTagline?: boolean
+    globalDeliveryTitle?: boolean
+    globalDeliveryDescription?: boolean
+    globalDeliveryImagePath?: boolean
     showPhone?: boolean
     showEmail?: boolean
     smtpHost?: boolean
@@ -8540,6 +8680,20 @@ export namespace Prisma {
     teamMembers?: boolean
     happyCustomers?: boolean
     operationalSupport?: boolean
+    aboutTagline?: boolean
+    aboutTitle?: boolean
+    aboutDescription?: boolean
+    aboutButtons?: boolean
+    deliveryModelTitle?: boolean
+    deliveryModelItems?: boolean
+    whyClientsTagline?: boolean
+    whyClientsTitle?: boolean
+    whyClientsDescription?: boolean
+    whyClientsCards?: boolean
+    globalDeliveryTagline?: boolean
+    globalDeliveryTitle?: boolean
+    globalDeliveryDescription?: boolean
+    globalDeliveryImagePath?: boolean
     showPhone?: boolean
     showEmail?: boolean
     smtpHost?: boolean
@@ -8566,7 +8720,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type SiteSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "siteName" | "legalName" | "tagline" | "description" | "primaryEmail" | "primaryPhone" | "websiteUrl" | "timezone" | "officeAddress" | "officeHours" | "logoPath" | "faviconPath" | "mapUrl" | "teamMembers" | "happyCustomers" | "operationalSupport" | "showPhone" | "showEmail" | "smtpHost" | "smtpPort" | "smtpUsername" | "smtpPassword" | "fromName" | "fromEmail" | "replyToEmail" | "supportInbox" | "emailSignature" | "enableNotifications" | "storeDrafts" | "facebookUrl" | "instagramUrl" | "linkedinUrl" | "youtubeUrl" | "whatsappUrl" | "messengerUrl" | "socialBio" | "showSocialIcons" | "openLinksNewTab" | "createdAt" | "updatedAt", ExtArgs["result"]["siteSettings"]>
+  export type SiteSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "siteName" | "legalName" | "tagline" | "description" | "primaryEmail" | "primaryPhone" | "websiteUrl" | "timezone" | "officeAddress" | "officeHours" | "logoPath" | "faviconPath" | "mapUrl" | "teamMembers" | "happyCustomers" | "operationalSupport" | "aboutTagline" | "aboutTitle" | "aboutDescription" | "aboutButtons" | "deliveryModelTitle" | "deliveryModelItems" | "whyClientsTagline" | "whyClientsTitle" | "whyClientsDescription" | "whyClientsCards" | "globalDeliveryTagline" | "globalDeliveryTitle" | "globalDeliveryDescription" | "globalDeliveryImagePath" | "showPhone" | "showEmail" | "smtpHost" | "smtpPort" | "smtpUsername" | "smtpPassword" | "fromName" | "fromEmail" | "replyToEmail" | "supportInbox" | "emailSignature" | "enableNotifications" | "storeDrafts" | "facebookUrl" | "instagramUrl" | "linkedinUrl" | "youtubeUrl" | "whatsappUrl" | "messengerUrl" | "socialBio" | "showSocialIcons" | "openLinksNewTab" | "createdAt" | "updatedAt", ExtArgs["result"]["siteSettings"]>
 
   export type $SiteSettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SiteSettings"
@@ -8589,6 +8743,20 @@ export namespace Prisma {
       teamMembers: string | null
       happyCustomers: string | null
       operationalSupport: string | null
+      aboutTagline: string | null
+      aboutTitle: string | null
+      aboutDescription: string | null
+      aboutButtons: string | null
+      deliveryModelTitle: string | null
+      deliveryModelItems: string | null
+      whyClientsTagline: string | null
+      whyClientsTitle: string | null
+      whyClientsDescription: string | null
+      whyClientsCards: string | null
+      globalDeliveryTagline: string | null
+      globalDeliveryTitle: string | null
+      globalDeliveryDescription: string | null
+      globalDeliveryImagePath: string | null
       showPhone: boolean
       showEmail: boolean
       smtpHost: string | null
@@ -9053,6 +9221,20 @@ export namespace Prisma {
     readonly teamMembers: FieldRef<"SiteSettings", 'String'>
     readonly happyCustomers: FieldRef<"SiteSettings", 'String'>
     readonly operationalSupport: FieldRef<"SiteSettings", 'String'>
+    readonly aboutTagline: FieldRef<"SiteSettings", 'String'>
+    readonly aboutTitle: FieldRef<"SiteSettings", 'String'>
+    readonly aboutDescription: FieldRef<"SiteSettings", 'String'>
+    readonly aboutButtons: FieldRef<"SiteSettings", 'String'>
+    readonly deliveryModelTitle: FieldRef<"SiteSettings", 'String'>
+    readonly deliveryModelItems: FieldRef<"SiteSettings", 'String'>
+    readonly whyClientsTagline: FieldRef<"SiteSettings", 'String'>
+    readonly whyClientsTitle: FieldRef<"SiteSettings", 'String'>
+    readonly whyClientsDescription: FieldRef<"SiteSettings", 'String'>
+    readonly whyClientsCards: FieldRef<"SiteSettings", 'String'>
+    readonly globalDeliveryTagline: FieldRef<"SiteSettings", 'String'>
+    readonly globalDeliveryTitle: FieldRef<"SiteSettings", 'String'>
+    readonly globalDeliveryDescription: FieldRef<"SiteSettings", 'String'>
+    readonly globalDeliveryImagePath: FieldRef<"SiteSettings", 'String'>
     readonly showPhone: FieldRef<"SiteSettings", 'Boolean'>
     readonly showEmail: FieldRef<"SiteSettings", 'Boolean'>
     readonly smtpHost: FieldRef<"SiteSettings", 'String'>
@@ -21751,6 +21933,20 @@ export namespace Prisma {
     teamMembers: 'teamMembers',
     happyCustomers: 'happyCustomers',
     operationalSupport: 'operationalSupport',
+    aboutTagline: 'aboutTagline',
+    aboutTitle: 'aboutTitle',
+    aboutDescription: 'aboutDescription',
+    aboutButtons: 'aboutButtons',
+    deliveryModelTitle: 'deliveryModelTitle',
+    deliveryModelItems: 'deliveryModelItems',
+    whyClientsTagline: 'whyClientsTagline',
+    whyClientsTitle: 'whyClientsTitle',
+    whyClientsDescription: 'whyClientsDescription',
+    whyClientsCards: 'whyClientsCards',
+    globalDeliveryTagline: 'globalDeliveryTagline',
+    globalDeliveryTitle: 'globalDeliveryTitle',
+    globalDeliveryDescription: 'globalDeliveryDescription',
+    globalDeliveryImagePath: 'globalDeliveryImagePath',
     showPhone: 'showPhone',
     showEmail: 'showEmail',
     smtpHost: 'smtpHost',
@@ -22473,6 +22669,20 @@ export namespace Prisma {
     teamMembers?: StringNullableFilter<"SiteSettings"> | string | null
     happyCustomers?: StringNullableFilter<"SiteSettings"> | string | null
     operationalSupport?: StringNullableFilter<"SiteSettings"> | string | null
+    aboutTagline?: StringNullableFilter<"SiteSettings"> | string | null
+    aboutTitle?: StringNullableFilter<"SiteSettings"> | string | null
+    aboutDescription?: StringNullableFilter<"SiteSettings"> | string | null
+    aboutButtons?: StringNullableFilter<"SiteSettings"> | string | null
+    deliveryModelTitle?: StringNullableFilter<"SiteSettings"> | string | null
+    deliveryModelItems?: StringNullableFilter<"SiteSettings"> | string | null
+    whyClientsTagline?: StringNullableFilter<"SiteSettings"> | string | null
+    whyClientsTitle?: StringNullableFilter<"SiteSettings"> | string | null
+    whyClientsDescription?: StringNullableFilter<"SiteSettings"> | string | null
+    whyClientsCards?: StringNullableFilter<"SiteSettings"> | string | null
+    globalDeliveryTagline?: StringNullableFilter<"SiteSettings"> | string | null
+    globalDeliveryTitle?: StringNullableFilter<"SiteSettings"> | string | null
+    globalDeliveryDescription?: StringNullableFilter<"SiteSettings"> | string | null
+    globalDeliveryImagePath?: StringNullableFilter<"SiteSettings"> | string | null
     showPhone?: BoolFilter<"SiteSettings"> | boolean
     showEmail?: BoolFilter<"SiteSettings"> | boolean
     smtpHost?: StringNullableFilter<"SiteSettings"> | string | null
@@ -22517,6 +22727,20 @@ export namespace Prisma {
     teamMembers?: SortOrderInput | SortOrder
     happyCustomers?: SortOrderInput | SortOrder
     operationalSupport?: SortOrderInput | SortOrder
+    aboutTagline?: SortOrderInput | SortOrder
+    aboutTitle?: SortOrderInput | SortOrder
+    aboutDescription?: SortOrderInput | SortOrder
+    aboutButtons?: SortOrderInput | SortOrder
+    deliveryModelTitle?: SortOrderInput | SortOrder
+    deliveryModelItems?: SortOrderInput | SortOrder
+    whyClientsTagline?: SortOrderInput | SortOrder
+    whyClientsTitle?: SortOrderInput | SortOrder
+    whyClientsDescription?: SortOrderInput | SortOrder
+    whyClientsCards?: SortOrderInput | SortOrder
+    globalDeliveryTagline?: SortOrderInput | SortOrder
+    globalDeliveryTitle?: SortOrderInput | SortOrder
+    globalDeliveryDescription?: SortOrderInput | SortOrder
+    globalDeliveryImagePath?: SortOrderInput | SortOrder
     showPhone?: SortOrder
     showEmail?: SortOrder
     smtpHost?: SortOrderInput | SortOrder
@@ -22564,6 +22788,20 @@ export namespace Prisma {
     teamMembers?: StringNullableFilter<"SiteSettings"> | string | null
     happyCustomers?: StringNullableFilter<"SiteSettings"> | string | null
     operationalSupport?: StringNullableFilter<"SiteSettings"> | string | null
+    aboutTagline?: StringNullableFilter<"SiteSettings"> | string | null
+    aboutTitle?: StringNullableFilter<"SiteSettings"> | string | null
+    aboutDescription?: StringNullableFilter<"SiteSettings"> | string | null
+    aboutButtons?: StringNullableFilter<"SiteSettings"> | string | null
+    deliveryModelTitle?: StringNullableFilter<"SiteSettings"> | string | null
+    deliveryModelItems?: StringNullableFilter<"SiteSettings"> | string | null
+    whyClientsTagline?: StringNullableFilter<"SiteSettings"> | string | null
+    whyClientsTitle?: StringNullableFilter<"SiteSettings"> | string | null
+    whyClientsDescription?: StringNullableFilter<"SiteSettings"> | string | null
+    whyClientsCards?: StringNullableFilter<"SiteSettings"> | string | null
+    globalDeliveryTagline?: StringNullableFilter<"SiteSettings"> | string | null
+    globalDeliveryTitle?: StringNullableFilter<"SiteSettings"> | string | null
+    globalDeliveryDescription?: StringNullableFilter<"SiteSettings"> | string | null
+    globalDeliveryImagePath?: StringNullableFilter<"SiteSettings"> | string | null
     showPhone?: BoolFilter<"SiteSettings"> | boolean
     showEmail?: BoolFilter<"SiteSettings"> | boolean
     smtpHost?: StringNullableFilter<"SiteSettings"> | string | null
@@ -22608,6 +22846,20 @@ export namespace Prisma {
     teamMembers?: SortOrderInput | SortOrder
     happyCustomers?: SortOrderInput | SortOrder
     operationalSupport?: SortOrderInput | SortOrder
+    aboutTagline?: SortOrderInput | SortOrder
+    aboutTitle?: SortOrderInput | SortOrder
+    aboutDescription?: SortOrderInput | SortOrder
+    aboutButtons?: SortOrderInput | SortOrder
+    deliveryModelTitle?: SortOrderInput | SortOrder
+    deliveryModelItems?: SortOrderInput | SortOrder
+    whyClientsTagline?: SortOrderInput | SortOrder
+    whyClientsTitle?: SortOrderInput | SortOrder
+    whyClientsDescription?: SortOrderInput | SortOrder
+    whyClientsCards?: SortOrderInput | SortOrder
+    globalDeliveryTagline?: SortOrderInput | SortOrder
+    globalDeliveryTitle?: SortOrderInput | SortOrder
+    globalDeliveryDescription?: SortOrderInput | SortOrder
+    globalDeliveryImagePath?: SortOrderInput | SortOrder
     showPhone?: SortOrder
     showEmail?: SortOrder
     smtpHost?: SortOrderInput | SortOrder
@@ -22658,6 +22910,20 @@ export namespace Prisma {
     teamMembers?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
     happyCustomers?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
     operationalSupport?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    aboutTagline?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    aboutTitle?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    aboutDescription?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    aboutButtons?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    deliveryModelTitle?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    deliveryModelItems?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    whyClientsTagline?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    whyClientsTitle?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    whyClientsDescription?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    whyClientsCards?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    globalDeliveryTagline?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    globalDeliveryTitle?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    globalDeliveryDescription?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    globalDeliveryImagePath?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
     showPhone?: BoolWithAggregatesFilter<"SiteSettings"> | boolean
     showEmail?: BoolWithAggregatesFilter<"SiteSettings"> | boolean
     smtpHost?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
@@ -23905,6 +24171,20 @@ export namespace Prisma {
     teamMembers?: string | null
     happyCustomers?: string | null
     operationalSupport?: string | null
+    aboutTagline?: string | null
+    aboutTitle?: string | null
+    aboutDescription?: string | null
+    aboutButtons?: string | null
+    deliveryModelTitle?: string | null
+    deliveryModelItems?: string | null
+    whyClientsTagline?: string | null
+    whyClientsTitle?: string | null
+    whyClientsDescription?: string | null
+    whyClientsCards?: string | null
+    globalDeliveryTagline?: string | null
+    globalDeliveryTitle?: string | null
+    globalDeliveryDescription?: string | null
+    globalDeliveryImagePath?: string | null
     showPhone?: boolean
     showEmail?: boolean
     smtpHost?: string | null
@@ -23949,6 +24229,20 @@ export namespace Prisma {
     teamMembers?: string | null
     happyCustomers?: string | null
     operationalSupport?: string | null
+    aboutTagline?: string | null
+    aboutTitle?: string | null
+    aboutDescription?: string | null
+    aboutButtons?: string | null
+    deliveryModelTitle?: string | null
+    deliveryModelItems?: string | null
+    whyClientsTagline?: string | null
+    whyClientsTitle?: string | null
+    whyClientsDescription?: string | null
+    whyClientsCards?: string | null
+    globalDeliveryTagline?: string | null
+    globalDeliveryTitle?: string | null
+    globalDeliveryDescription?: string | null
+    globalDeliveryImagePath?: string | null
     showPhone?: boolean
     showEmail?: boolean
     smtpHost?: string | null
@@ -23993,6 +24287,20 @@ export namespace Prisma {
     teamMembers?: NullableStringFieldUpdateOperationsInput | string | null
     happyCustomers?: NullableStringFieldUpdateOperationsInput | string | null
     operationalSupport?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutButtons?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryModelTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryModelItems?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsCards?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showEmail?: BoolFieldUpdateOperationsInput | boolean
     smtpHost?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24037,6 +24345,20 @@ export namespace Prisma {
     teamMembers?: NullableStringFieldUpdateOperationsInput | string | null
     happyCustomers?: NullableStringFieldUpdateOperationsInput | string | null
     operationalSupport?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutButtons?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryModelTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryModelItems?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsCards?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showEmail?: BoolFieldUpdateOperationsInput | boolean
     smtpHost?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24081,6 +24403,20 @@ export namespace Prisma {
     teamMembers?: string | null
     happyCustomers?: string | null
     operationalSupport?: string | null
+    aboutTagline?: string | null
+    aboutTitle?: string | null
+    aboutDescription?: string | null
+    aboutButtons?: string | null
+    deliveryModelTitle?: string | null
+    deliveryModelItems?: string | null
+    whyClientsTagline?: string | null
+    whyClientsTitle?: string | null
+    whyClientsDescription?: string | null
+    whyClientsCards?: string | null
+    globalDeliveryTagline?: string | null
+    globalDeliveryTitle?: string | null
+    globalDeliveryDescription?: string | null
+    globalDeliveryImagePath?: string | null
     showPhone?: boolean
     showEmail?: boolean
     smtpHost?: string | null
@@ -24125,6 +24461,20 @@ export namespace Prisma {
     teamMembers?: NullableStringFieldUpdateOperationsInput | string | null
     happyCustomers?: NullableStringFieldUpdateOperationsInput | string | null
     operationalSupport?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutButtons?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryModelTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryModelItems?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsCards?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showEmail?: BoolFieldUpdateOperationsInput | boolean
     smtpHost?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24169,6 +24519,20 @@ export namespace Prisma {
     teamMembers?: NullableStringFieldUpdateOperationsInput | string | null
     happyCustomers?: NullableStringFieldUpdateOperationsInput | string | null
     operationalSupport?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    aboutButtons?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryModelTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryModelItems?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    whyClientsCards?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryTagline?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    globalDeliveryImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     showPhone?: BoolFieldUpdateOperationsInput | boolean
     showEmail?: BoolFieldUpdateOperationsInput | boolean
     smtpHost?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25479,6 +25843,20 @@ export namespace Prisma {
     teamMembers?: SortOrder
     happyCustomers?: SortOrder
     operationalSupport?: SortOrder
+    aboutTagline?: SortOrder
+    aboutTitle?: SortOrder
+    aboutDescription?: SortOrder
+    aboutButtons?: SortOrder
+    deliveryModelTitle?: SortOrder
+    deliveryModelItems?: SortOrder
+    whyClientsTagline?: SortOrder
+    whyClientsTitle?: SortOrder
+    whyClientsDescription?: SortOrder
+    whyClientsCards?: SortOrder
+    globalDeliveryTagline?: SortOrder
+    globalDeliveryTitle?: SortOrder
+    globalDeliveryDescription?: SortOrder
+    globalDeliveryImagePath?: SortOrder
     showPhone?: SortOrder
     showEmail?: SortOrder
     smtpHost?: SortOrder
@@ -25523,6 +25901,20 @@ export namespace Prisma {
     teamMembers?: SortOrder
     happyCustomers?: SortOrder
     operationalSupport?: SortOrder
+    aboutTagline?: SortOrder
+    aboutTitle?: SortOrder
+    aboutDescription?: SortOrder
+    aboutButtons?: SortOrder
+    deliveryModelTitle?: SortOrder
+    deliveryModelItems?: SortOrder
+    whyClientsTagline?: SortOrder
+    whyClientsTitle?: SortOrder
+    whyClientsDescription?: SortOrder
+    whyClientsCards?: SortOrder
+    globalDeliveryTagline?: SortOrder
+    globalDeliveryTitle?: SortOrder
+    globalDeliveryDescription?: SortOrder
+    globalDeliveryImagePath?: SortOrder
     showPhone?: SortOrder
     showEmail?: SortOrder
     smtpHost?: SortOrder
@@ -25567,6 +25959,20 @@ export namespace Prisma {
     teamMembers?: SortOrder
     happyCustomers?: SortOrder
     operationalSupport?: SortOrder
+    aboutTagline?: SortOrder
+    aboutTitle?: SortOrder
+    aboutDescription?: SortOrder
+    aboutButtons?: SortOrder
+    deliveryModelTitle?: SortOrder
+    deliveryModelItems?: SortOrder
+    whyClientsTagline?: SortOrder
+    whyClientsTitle?: SortOrder
+    whyClientsDescription?: SortOrder
+    whyClientsCards?: SortOrder
+    globalDeliveryTagline?: SortOrder
+    globalDeliveryTitle?: SortOrder
+    globalDeliveryDescription?: SortOrder
+    globalDeliveryImagePath?: SortOrder
     showPhone?: SortOrder
     showEmail?: SortOrder
     smtpHost?: SortOrder

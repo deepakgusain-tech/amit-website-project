@@ -28,8 +28,6 @@ export default async function ConfigurationPage() {
 
   const setting = await getSettings()
 
-  console.log(setting)
-
   return (
     <Card className="border-slate-200/80 bg-white shadow-sm">
       <CardHeader className="border-b border-slate-200/70">

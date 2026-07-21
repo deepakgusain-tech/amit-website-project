@@ -97,9 +97,6 @@ export async function saveGeneralSettings(formData: FormData): Promise<any> {
     mapUrl: getOptionalString(formData, "mapUrl"),
     showPhone: formData.get("showPhone") === "on",
     showEmail: formData.get("showEmail") === "on",
-    teamMembers: getOptionalString(formData, "teamMembers"),
-    happyCustomers: getOptionalString(formData, "happyCustomers"),
-    operationalSupport: getOptionalString(formData, "operationalSupport"),
   }
   const parsed = generalSettingsSchema.parse(payload)
   return upsertSiteSettings(parsed)
@@ -147,10 +144,14 @@ export async function saveHomePageSettings(formData: FormData): Promise<any> {
     legalName: getOptionalString(formData, "legalName"),
     tagline: getOptionalString(formData, "tagline"),
     description: getOptionalString(formData, "description"),
+    teamMembers: getOptionalString(formData, "teamMembers"),
+    happyCustomers: getOptionalString(formData, "happyCustomers"),
+    operationalSupport: getOptionalString(formData, "operationalSupport"),
     aboutTagline: getOptionalString(formData, "aboutTagline"),
     aboutTitle: getOptionalString(formData, "aboutTitle"),
     aboutDescription: getOptionalString(formData, "aboutDescription"),
     aboutButtons: getStringList(formData, "aboutButtons"),
+    heroTrustTags: getStringList(formData, "heroTrustTags"),
     deliveryModelTitle: getOptionalString(formData, "deliveryModelTitle"),
     deliveryModelItems: getStringList(formData, "deliveryModelItems"),
     whyClientsTagline: getOptionalString(formData, "whyClientsTagline"),

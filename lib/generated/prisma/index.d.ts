@@ -8008,6 +8008,7 @@ export namespace Prisma {
     teamMembers: string | null
     happyCustomers: string | null
     operationalSupport: string | null
+    heroTrustTags: string | null
     aboutTagline: string | null
     aboutTitle: string | null
     aboutDescription: string | null
@@ -8066,6 +8067,7 @@ export namespace Prisma {
     teamMembers: string | null
     happyCustomers: string | null
     operationalSupport: string | null
+    heroTrustTags: string | null
     aboutTagline: string | null
     aboutTitle: string | null
     aboutDescription: string | null
@@ -8124,6 +8126,7 @@ export namespace Prisma {
     teamMembers: number
     happyCustomers: number
     operationalSupport: number
+    heroTrustTags: number
     aboutTagline: number
     aboutTitle: number
     aboutDescription: number
@@ -8184,6 +8187,7 @@ export namespace Prisma {
     teamMembers?: true
     happyCustomers?: true
     operationalSupport?: true
+    heroTrustTags?: true
     aboutTagline?: true
     aboutTitle?: true
     aboutDescription?: true
@@ -8242,6 +8246,7 @@ export namespace Prisma {
     teamMembers?: true
     happyCustomers?: true
     operationalSupport?: true
+    heroTrustTags?: true
     aboutTagline?: true
     aboutTitle?: true
     aboutDescription?: true
@@ -8300,6 +8305,7 @@ export namespace Prisma {
     teamMembers?: true
     happyCustomers?: true
     operationalSupport?: true
+    heroTrustTags?: true
     aboutTagline?: true
     aboutTitle?: true
     aboutDescription?: true
@@ -8431,6 +8437,7 @@ export namespace Prisma {
     teamMembers: string | null
     happyCustomers: string | null
     operationalSupport: string | null
+    heroTrustTags: string | null
     aboutTagline: string | null
     aboutTitle: string | null
     aboutDescription: string | null
@@ -8506,6 +8513,7 @@ export namespace Prisma {
     teamMembers?: boolean
     happyCustomers?: boolean
     operationalSupport?: boolean
+    heroTrustTags?: boolean
     aboutTagline?: boolean
     aboutTitle?: boolean
     aboutDescription?: boolean
@@ -8564,6 +8572,7 @@ export namespace Prisma {
     teamMembers?: boolean
     happyCustomers?: boolean
     operationalSupport?: boolean
+    heroTrustTags?: boolean
     aboutTagline?: boolean
     aboutTitle?: boolean
     aboutDescription?: boolean
@@ -8622,6 +8631,7 @@ export namespace Prisma {
     teamMembers?: boolean
     happyCustomers?: boolean
     operationalSupport?: boolean
+    heroTrustTags?: boolean
     aboutTagline?: boolean
     aboutTitle?: boolean
     aboutDescription?: boolean
@@ -8680,6 +8690,7 @@ export namespace Prisma {
     teamMembers?: boolean
     happyCustomers?: boolean
     operationalSupport?: boolean
+    heroTrustTags?: boolean
     aboutTagline?: boolean
     aboutTitle?: boolean
     aboutDescription?: boolean
@@ -8720,7 +8731,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type SiteSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "siteName" | "legalName" | "tagline" | "description" | "primaryEmail" | "primaryPhone" | "websiteUrl" | "timezone" | "officeAddress" | "officeHours" | "logoPath" | "faviconPath" | "mapUrl" | "teamMembers" | "happyCustomers" | "operationalSupport" | "aboutTagline" | "aboutTitle" | "aboutDescription" | "aboutButtons" | "deliveryModelTitle" | "deliveryModelItems" | "whyClientsTagline" | "whyClientsTitle" | "whyClientsDescription" | "whyClientsCards" | "globalDeliveryTagline" | "globalDeliveryTitle" | "globalDeliveryDescription" | "globalDeliveryImagePath" | "showPhone" | "showEmail" | "smtpHost" | "smtpPort" | "smtpUsername" | "smtpPassword" | "fromName" | "fromEmail" | "replyToEmail" | "supportInbox" | "emailSignature" | "enableNotifications" | "storeDrafts" | "facebookUrl" | "instagramUrl" | "linkedinUrl" | "youtubeUrl" | "whatsappUrl" | "messengerUrl" | "socialBio" | "showSocialIcons" | "openLinksNewTab" | "createdAt" | "updatedAt", ExtArgs["result"]["siteSettings"]>
+  export type SiteSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "siteName" | "legalName" | "tagline" | "description" | "primaryEmail" | "primaryPhone" | "websiteUrl" | "timezone" | "officeAddress" | "officeHours" | "logoPath" | "faviconPath" | "mapUrl" | "teamMembers" | "happyCustomers" | "operationalSupport" | "heroTrustTags" | "aboutTagline" | "aboutTitle" | "aboutDescription" | "aboutButtons" | "deliveryModelTitle" | "deliveryModelItems" | "whyClientsTagline" | "whyClientsTitle" | "whyClientsDescription" | "whyClientsCards" | "globalDeliveryTagline" | "globalDeliveryTitle" | "globalDeliveryDescription" | "globalDeliveryImagePath" | "showPhone" | "showEmail" | "smtpHost" | "smtpPort" | "smtpUsername" | "smtpPassword" | "fromName" | "fromEmail" | "replyToEmail" | "supportInbox" | "emailSignature" | "enableNotifications" | "storeDrafts" | "facebookUrl" | "instagramUrl" | "linkedinUrl" | "youtubeUrl" | "whatsappUrl" | "messengerUrl" | "socialBio" | "showSocialIcons" | "openLinksNewTab" | "createdAt" | "updatedAt", ExtArgs["result"]["siteSettings"]>
 
   export type $SiteSettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SiteSettings"
@@ -8743,6 +8754,7 @@ export namespace Prisma {
       teamMembers: string | null
       happyCustomers: string | null
       operationalSupport: string | null
+      heroTrustTags: string | null
       aboutTagline: string | null
       aboutTitle: string | null
       aboutDescription: string | null
@@ -9221,6 +9233,7 @@ export namespace Prisma {
     readonly teamMembers: FieldRef<"SiteSettings", 'String'>
     readonly happyCustomers: FieldRef<"SiteSettings", 'String'>
     readonly operationalSupport: FieldRef<"SiteSettings", 'String'>
+    readonly heroTrustTags: FieldRef<"SiteSettings", 'String'>
     readonly aboutTagline: FieldRef<"SiteSettings", 'String'>
     readonly aboutTitle: FieldRef<"SiteSettings", 'String'>
     readonly aboutDescription: FieldRef<"SiteSettings", 'String'>
@@ -21933,6 +21946,7 @@ export namespace Prisma {
     teamMembers: 'teamMembers',
     happyCustomers: 'happyCustomers',
     operationalSupport: 'operationalSupport',
+    heroTrustTags: 'heroTrustTags',
     aboutTagline: 'aboutTagline',
     aboutTitle: 'aboutTitle',
     aboutDescription: 'aboutDescription',
@@ -22669,6 +22683,7 @@ export namespace Prisma {
     teamMembers?: StringNullableFilter<"SiteSettings"> | string | null
     happyCustomers?: StringNullableFilter<"SiteSettings"> | string | null
     operationalSupport?: StringNullableFilter<"SiteSettings"> | string | null
+    heroTrustTags?: StringNullableFilter<"SiteSettings"> | string | null
     aboutTagline?: StringNullableFilter<"SiteSettings"> | string | null
     aboutTitle?: StringNullableFilter<"SiteSettings"> | string | null
     aboutDescription?: StringNullableFilter<"SiteSettings"> | string | null
@@ -22727,6 +22742,7 @@ export namespace Prisma {
     teamMembers?: SortOrderInput | SortOrder
     happyCustomers?: SortOrderInput | SortOrder
     operationalSupport?: SortOrderInput | SortOrder
+    heroTrustTags?: SortOrderInput | SortOrder
     aboutTagline?: SortOrderInput | SortOrder
     aboutTitle?: SortOrderInput | SortOrder
     aboutDescription?: SortOrderInput | SortOrder
@@ -22788,6 +22804,7 @@ export namespace Prisma {
     teamMembers?: StringNullableFilter<"SiteSettings"> | string | null
     happyCustomers?: StringNullableFilter<"SiteSettings"> | string | null
     operationalSupport?: StringNullableFilter<"SiteSettings"> | string | null
+    heroTrustTags?: StringNullableFilter<"SiteSettings"> | string | null
     aboutTagline?: StringNullableFilter<"SiteSettings"> | string | null
     aboutTitle?: StringNullableFilter<"SiteSettings"> | string | null
     aboutDescription?: StringNullableFilter<"SiteSettings"> | string | null
@@ -22846,6 +22863,7 @@ export namespace Prisma {
     teamMembers?: SortOrderInput | SortOrder
     happyCustomers?: SortOrderInput | SortOrder
     operationalSupport?: SortOrderInput | SortOrder
+    heroTrustTags?: SortOrderInput | SortOrder
     aboutTagline?: SortOrderInput | SortOrder
     aboutTitle?: SortOrderInput | SortOrder
     aboutDescription?: SortOrderInput | SortOrder
@@ -22910,6 +22928,7 @@ export namespace Prisma {
     teamMembers?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
     happyCustomers?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
     operationalSupport?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
+    heroTrustTags?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
     aboutTagline?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
     aboutTitle?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
     aboutDescription?: StringNullableWithAggregatesFilter<"SiteSettings"> | string | null
@@ -24171,6 +24190,7 @@ export namespace Prisma {
     teamMembers?: string | null
     happyCustomers?: string | null
     operationalSupport?: string | null
+    heroTrustTags?: string | null
     aboutTagline?: string | null
     aboutTitle?: string | null
     aboutDescription?: string | null
@@ -24229,6 +24249,7 @@ export namespace Prisma {
     teamMembers?: string | null
     happyCustomers?: string | null
     operationalSupport?: string | null
+    heroTrustTags?: string | null
     aboutTagline?: string | null
     aboutTitle?: string | null
     aboutDescription?: string | null
@@ -24287,6 +24308,7 @@ export namespace Prisma {
     teamMembers?: NullableStringFieldUpdateOperationsInput | string | null
     happyCustomers?: NullableStringFieldUpdateOperationsInput | string | null
     operationalSupport?: NullableStringFieldUpdateOperationsInput | string | null
+    heroTrustTags?: NullableStringFieldUpdateOperationsInput | string | null
     aboutTagline?: NullableStringFieldUpdateOperationsInput | string | null
     aboutTitle?: NullableStringFieldUpdateOperationsInput | string | null
     aboutDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24345,6 +24367,7 @@ export namespace Prisma {
     teamMembers?: NullableStringFieldUpdateOperationsInput | string | null
     happyCustomers?: NullableStringFieldUpdateOperationsInput | string | null
     operationalSupport?: NullableStringFieldUpdateOperationsInput | string | null
+    heroTrustTags?: NullableStringFieldUpdateOperationsInput | string | null
     aboutTagline?: NullableStringFieldUpdateOperationsInput | string | null
     aboutTitle?: NullableStringFieldUpdateOperationsInput | string | null
     aboutDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24403,6 +24426,7 @@ export namespace Prisma {
     teamMembers?: string | null
     happyCustomers?: string | null
     operationalSupport?: string | null
+    heroTrustTags?: string | null
     aboutTagline?: string | null
     aboutTitle?: string | null
     aboutDescription?: string | null
@@ -24461,6 +24485,7 @@ export namespace Prisma {
     teamMembers?: NullableStringFieldUpdateOperationsInput | string | null
     happyCustomers?: NullableStringFieldUpdateOperationsInput | string | null
     operationalSupport?: NullableStringFieldUpdateOperationsInput | string | null
+    heroTrustTags?: NullableStringFieldUpdateOperationsInput | string | null
     aboutTagline?: NullableStringFieldUpdateOperationsInput | string | null
     aboutTitle?: NullableStringFieldUpdateOperationsInput | string | null
     aboutDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24519,6 +24544,7 @@ export namespace Prisma {
     teamMembers?: NullableStringFieldUpdateOperationsInput | string | null
     happyCustomers?: NullableStringFieldUpdateOperationsInput | string | null
     operationalSupport?: NullableStringFieldUpdateOperationsInput | string | null
+    heroTrustTags?: NullableStringFieldUpdateOperationsInput | string | null
     aboutTagline?: NullableStringFieldUpdateOperationsInput | string | null
     aboutTitle?: NullableStringFieldUpdateOperationsInput | string | null
     aboutDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25843,6 +25869,7 @@ export namespace Prisma {
     teamMembers?: SortOrder
     happyCustomers?: SortOrder
     operationalSupport?: SortOrder
+    heroTrustTags?: SortOrder
     aboutTagline?: SortOrder
     aboutTitle?: SortOrder
     aboutDescription?: SortOrder
@@ -25901,6 +25928,7 @@ export namespace Prisma {
     teamMembers?: SortOrder
     happyCustomers?: SortOrder
     operationalSupport?: SortOrder
+    heroTrustTags?: SortOrder
     aboutTagline?: SortOrder
     aboutTitle?: SortOrder
     aboutDescription?: SortOrder
@@ -25959,6 +25987,7 @@ export namespace Prisma {
     teamMembers?: SortOrder
     happyCustomers?: SortOrder
     operationalSupport?: SortOrder
+    heroTrustTags?: SortOrder
     aboutTagline?: SortOrder
     aboutTitle?: SortOrder
     aboutDescription?: SortOrder

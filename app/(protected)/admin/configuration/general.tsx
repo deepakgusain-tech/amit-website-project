@@ -188,21 +188,6 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
               id="websiteUrl"
               defaultValue={configuration?.websiteUrl}
             />
-            <Field
-              label="Team Members"
-              id="teamMembers"
-              defaultValue={configuration?.teamMembers}
-            />
-            <Field
-              label="Happy Customers"
-              id="happyCustomers"
-              defaultValue={configuration?.happyCustomers}
-            />
-            <Field
-              label="Operational Support"
-              id="operationalSupport"
-              defaultValue={configuration?.operationalSupport}
-            />
           </div>
 
           <Field

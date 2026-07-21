@@ -54,9 +54,6 @@ export const generalSettingsSchema = z.object({
   logoPath: nullableOptionalString,
   faviconPath: nullableOptionalString,
   mapUrl: nullableOptionalString,
-  teamMembers: nullableOptionalString,
-  happyCustomers: nullableOptionalString,
-  operationalSupport: nullableOptionalString,
   showPhone: z.boolean().default(true),
   showEmail: z.boolean().default(true),
 });

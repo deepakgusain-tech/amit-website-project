@@ -39,10 +39,23 @@ const trustMetrics = [
   { label: "Operational Support", key: "operationalSupport", suffix: "" },
 ];
 
-const trustTags = [
-  "US Client Delivery Experience",
-  "Process-Driven Operations",
-];
+function parseList(value: string | null | undefined, fallback: string[]) {
+  if (!value) return fallback;
+
+  const trimmed = value.trim();
+  if (!trimmed) return fallback;
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    if (Array.isArray(parsed)) {
+      return parsed.map((item) => String(item).trim()).filter(Boolean);
+    }
+  } catch {
+    // fall through
+  }
+
+  return trimmed.split(",").map((item) => item.trim()).filter(Boolean);
+}
 
 function AnimatedCounter({
   value,
@@ -103,6 +116,10 @@ export function GuestHeroSection({ settings, banners }: any) {
   const heroDescription =
     settings?.description ??
     "Helping organizations scale through offshore back-office operations, recovery support services, reporting, analytics, IT Services and operational excellence.";
+  const trustTags = parseList(settings?.heroTrustTags, [
+    "US Client Delivery Experience",
+    "Process-Driven Operations",
+  ]);
 
   React.useEffect(() => {
     const node = metricsRef.current;

@@ -574,6 +574,10 @@ async function seedSettings() {
       teamMembers: "48",
       happyCustomers: "120",
       operationalSupport: "24/7",
+      heroTrustTags: JSON.stringify([
+        "US Client Delivery Experience",
+        "Process-Driven Operations",
+      ]),
       showPhone: true,
       showEmail: true,
       fromName: "AS Services",
@@ -660,6 +664,10 @@ async function seedSettings() {
       teamMembers: "48",
       happyCustomers: "120",
       operationalSupport: "24/7",
+      heroTrustTags: JSON.stringify([
+        "US Client Delivery Experience",
+        "Process-Driven Operations",
+      ]),
       showPhone: true,
       showEmail: true,
       fromName: "AS Services",

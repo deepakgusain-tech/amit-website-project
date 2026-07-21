@@ -222,7 +222,7 @@ export default async function AboutPage() {
           </div>
 
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {services.map((service : any, index : number) => (
+            {services.map((service: any, index: number) => (
               <ServiceCard
                 key={index}
                 service={service}

@@ -86,6 +86,13 @@ function getPreviewSrc(value: string | null | undefined) {
 export default function Home({ setting }: { setting?: any }) {
   const [pending, startTransition] = useTransition();
   const [configuration, setConfiguration] = useState(setting);
+  const [heroTrustTags, setHeroTrustTags] = useState<string[]>(
+    () =>
+      parseList(configuration?.heroTrustTags, [
+        "US Client Delivery Experience",
+        "Process-Driven Operations",
+      ]),
+  );
   const [aboutButtons, setAboutButtons] = useState<string[]>(
     () =>
       parseList(configuration?.aboutButtons, [
@@ -178,6 +185,12 @@ export default function Home({ setting }: { setting?: any }) {
         }
 
         setConfiguration(res.data);
+        setHeroTrustTags(
+          parseList(res.data?.heroTrustTags, [
+            "US Client Delivery Experience",
+            "Process-Driven Operations",
+          ]),
+        );
         setAboutButtons(
           parseList(res.data?.aboutButtons, [
             "Transition",
@@ -274,14 +287,48 @@ export default function Home({ setting }: { setting?: any }) {
               />
             </div>
 
-            <div className="col-span-2 space-y-2">
-              <div className="flex items-center justify-between">
-                <h2 className="font-semibold">Trust Metrics List</h2>
-                <Button>Add list</Button>
-              </div>
-              <Input />
-              <Input />
-              <Input />
+            <div className="grid gap-4 md:grid-cols-3">
+              <Field
+                label="Team Members"
+                id="teamMembers"
+                defaultValue={configuration?.teamMembers}
+                placeholder="48"
+              />
+              <Field
+                label="Happy Customers"
+                id="happyCustomers"
+                defaultValue={configuration?.happyCustomers}
+                placeholder="120"
+              />
+              <Field
+                label="Operational Support"
+                id="operationalSupport"
+                defaultValue={configuration?.operationalSupport}
+                placeholder="24/7"
+              />
+            </div>
+
+            <ListEditor
+              label="Trust Tags"
+              name="heroTrustTags"
+              items={heroTrustTags}
+              onChange={setHeroTrustTags}
+              placeholder="US Client Delivery Experience"
+            />
+
+            <div className="flex justify-end">
+              <Button
+                type="submit"
+                className="rounded-full px-5"
+                disabled={pending}
+              >
+                {pending ? (
+                  <Loader2 className="mr-2 size-4 animate-spin" />
+                ) : (
+                  <Save className="mr-2 size-4" />
+                )}
+                Save Hero Banner
+              </Button>
             </div>
           </form>
         </CardContent>
@@ -338,15 +385,21 @@ export default function Home({ setting }: { setting?: any }) {
               placeholder="Transition"
             />
 
-            <div className="col-span-2 space-y-2">
-              <div className="flex items-center justify-between">
-                <h2 className="font-semibold">List</h2>
-                <Button>Add list</Button>
-              </div>
-              <Input />
-              <Input />
-              <Input />
+            <div className="flex justify-end">
+              <Button
+                type="submit"
+                className="rounded-full px-5"
+                disabled={pending}
+              >
+                {pending ? (
+                  <Loader2 className="mr-2 size-4 animate-spin" />
+                ) : (
+                  <Save className="mr-2 size-4" />
+                )}
+                Save About Section
+              </Button>
             </div>
+
           </form>
         </CardContent>
       </Card>
@@ -354,7 +407,7 @@ export default function Home({ setting }: { setting?: any }) {
       <Card className="border-slate-200/80 shadow-sm">
         <CardHeader className="border-b border-slate-200/70 py-4">
           <CardTitle className="text-base font-semibold">
-            Global Delivery Model
+            Our Delivery Model
           </CardTitle>
         </CardHeader>
         <CardContent className="p-5">
@@ -373,6 +426,13 @@ export default function Home({ setting }: { setting?: any }) {
             {aboutButtons.map((item, index) => (
               <input key={`${item}-${index}`} type="hidden" name="aboutButtons" value={item} />
             ))}
+            <input type="hidden" name="whyClientsTagline" value={configuration?.whyClientsTagline ?? ""} />
+            <input type="hidden" name="whyClientsTitle" value={configuration?.whyClientsTitle ?? ""} />
+            <input type="hidden" name="whyClientsDescription" value={configuration?.whyClientsDescription ?? ""} />
+            <input type="hidden" name="whyClientsCards" value={configuration?.whyClientsCards ?? ""} />
+            <input type="hidden" name="globalDeliveryTagline" value={configuration?.globalDeliveryTagline ?? ""} />
+            <input type="hidden" name="globalDeliveryTitle" value={configuration?.globalDeliveryTitle ?? ""} />
+            <input type="hidden" name="globalDeliveryDescription" value={configuration?.globalDeliveryDescription ?? ""} />
 
             <div className="grid gap-4 md:grid-cols-2">
               <Field
@@ -390,80 +450,6 @@ export default function Home({ setting }: { setting?: any }) {
               onChange={setDeliveryModelItems}
               placeholder="Founded in 2024"
             />
-
-            <div className="grid gap-4 md:grid-cols-2">
-              <Field
-                label="Model Tagline"
-                id="globalDeliveryTagline"
-                defaultValue={configuration?.globalDeliveryTagline}
-                placeholder="OUR GLOBAL DELIVERY MODEL"
-              />
-              <Field
-                label="Model Title"
-                id="globalDeliveryTitle"
-                defaultValue={configuration?.globalDeliveryTitle}
-                placeholder="A simple, visual journey from intake to continuous improvement."
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="globalDeliveryDescription">Model Content</Label>
-              <Textarea
-                id="globalDeliveryDescription"
-                name="globalDeliveryDescription"
-                className="min-h-[120px] rounded-xl"
-                defaultValue={configuration?.globalDeliveryDescription}
-                placeholder="This flowchart maps the exact delivery handoff..."
-              />
-            </div>
-
-            <div className="space-y-3">
-              <Label htmlFor="globalDeliveryImagePath">Model Image</Label>
-              <Input
-                id="globalDeliveryImagePath"
-                name="globalDeliveryImagePath"
-                type="file"
-                accept="image/*"
-                onChange={(event) => {
-                  const file = event.target.files?.[0];
-
-                  if (!file) {
-                    setGlobalDeliveryImagePreview(
-                      getPreviewSrc(configuration?.globalDeliveryImagePath),
-                    );
-                    return;
-                  }
-
-                  if (!file.type.startsWith("image/")) {
-                    toast.error("Please select an image file");
-                    return;
-                  }
-
-                  const previewUrl = URL.createObjectURL(file);
-                  setGlobalDeliveryImagePreview(previewUrl);
-                }}
-                className="h-10 rounded-xl"
-              />
-
-              {(() => {
-                const src =
-                  globalDeliveryImagePreview ||
-                  getPreviewSrc(configuration?.globalDeliveryImagePath) ||
-                  "/uploads/12b66e57-bc7f-48bb-bbf8-25fd3e07e3ef.jpg";
-
-                return (
-                  <div className="relative h-[220px] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
-                    <Image
-                      src={src}
-                      alt="Global delivery model preview"
-                      fill
-                      className="object-contain object-center p-3"
-                      sizes="(max-width: 768px) 100vw, 600px"
-                    />
-                  </div>
-                );
-              })()}
-            </div>
 
             <div className="flex justify-end">
               <Button
@@ -561,6 +547,112 @@ export default function Home({ setting }: { setting?: any }) {
                   <Save className="mr-2 size-4" />
                 )}
                 Save Why Clients
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+
+      <Card className="border-slate-200/80 shadow-sm">
+        <CardHeader className="border-b border-slate-200/70 py-4">
+          <CardTitle className="text-base font-semibold">
+            Our Global Delivery Model
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-5">
+          <form action={onSubmit} className="space-y-5">
+            <input
+              type="hidden"
+              name="siteName"
+              value={configuration?.siteName ?? "AS Services"}
+            />
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <Field
+                label="Model Tagline"
+                id="globalDeliveryTagline"
+                defaultValue={configuration?.globalDeliveryTagline}
+                placeholder="OUR GLOBAL DELIVERY MODEL"
+              />
+              <Field
+                label="Model Title"
+                id="globalDeliveryTitle"
+                defaultValue={configuration?.globalDeliveryTitle}
+                placeholder="A simple, visual journey from intake to continuous improvement."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="globalDeliveryDescription">Model Content</Label>
+              <Textarea
+                id="globalDeliveryDescription"
+                name="globalDeliveryDescription"
+                className="min-h-[120px] rounded-xl"
+                defaultValue={configuration?.globalDeliveryDescription}
+                placeholder="This flowchart maps the exact delivery handoff..."
+              />
+            </div>
+
+            <div className="space-y-3">
+              <Label htmlFor="globalDeliveryImagePath">Model Image</Label>
+              <Input
+                id="globalDeliveryImagePath"
+                name="globalDeliveryImagePath"
+                type="file"
+                accept="image/*"
+                onChange={(event) => {
+                  const file = event.target.files?.[0];
+
+                  if (!file) {
+                    setGlobalDeliveryImagePreview(
+                      getPreviewSrc(configuration?.globalDeliveryImagePath),
+                    );
+                    return;
+                  }
+
+                  if (!file.type.startsWith("image/")) {
+                    toast.error("Please select an image file");
+                    return;
+                  }
+
+                  const previewUrl = URL.createObjectURL(file);
+                  setGlobalDeliveryImagePreview(previewUrl);
+                }}
+                className="h-10 rounded-xl"
+              />
+
+              {(() => {
+                const src =
+                  globalDeliveryImagePreview ||
+                  getPreviewSrc(configuration?.globalDeliveryImagePath) ||
+                  "/uploads/12b66e57-bc7f-48bb-bbf8-25fd3e07e3ef.jpg";
+
+                return (
+                  <div className="relative h-[220px] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+                    <Image
+                      src={src}
+                      alt="Global delivery model preview"
+                      fill
+                      className="object-contain object-center p-3"
+                      sizes="(max-width: 768px) 100vw, 600px"
+                    />
+                  </div>
+                );
+              })()}
+            </div>
+
+            <div className="flex justify-end">
+              <Button
+                type="submit"
+                className="rounded-full px-5"
+                disabled={pending}
+              >
+                {pending ? (
+                  <Loader2 className="mr-2 size-4 animate-spin" />
+                ) : (
+                  <Save className="mr-2 size-4" />
+                )}
+                Save Global Delivery Model
               </Button>
             </div>
           </form>

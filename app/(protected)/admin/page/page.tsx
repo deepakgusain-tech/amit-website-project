@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building2, Mail, Share2 } from "lucide-react";
 import { getSettings } from "@/lib/actions/settings-action";
 import Home from "./Home";
 import About from "./About";
@@ -26,7 +25,7 @@ export default async function Page() {
 
           <div className="pt-4">
             <TabsContent value="home">
-              <Home />
+              <Home setting={setting} />
             </TabsContent>
             <TabsContent value="about">
               <About />

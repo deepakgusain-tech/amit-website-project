@@ -19,10 +19,10 @@ export default async function GuestPage() {
   return (
     <>
       <GuestHeroSection settings={settings} banners={banners} />
-      <GuestOperationalExcellenceSection />
+      <GuestOperationalExcellenceSection settings={settings} />
       <GuestServicesSection services={services as Service[]} />
-      <GuestWhyClientsChooseUsSection />
-      <GuestGlobalDeliveryModelSection />
+      <GuestWhyClientsChooseUsSection settings={settings} />
+      <GuestGlobalDeliveryModelSection settings={settings} />
       <GuestTestimonialsSection testimonials={testimonials as Testimonial[]} />
     </>
   )

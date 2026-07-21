@@ -125,6 +125,20 @@ model SiteSettings {
   teamMembers        String?
   happyCustomers     String?
   operationalSupport String?
+  aboutTagline       String?
+  aboutTitle         String?
+  aboutDescription   String? @db.Text
+  aboutButtons       String? @db.Text
+  deliveryModelTitle  String?
+  deliveryModelItems  String? @db.Text
+  whyClientsTagline   String?
+  whyClientsTitle     String?
+  whyClientsDescription String? @db.Text
+  whyClientsCards     String? @db.Text
+  globalDeliveryTagline String?
+  globalDeliveryTitle   String?
+  globalDeliveryDescription String? @db.Text
+  globalDeliveryImagePath String?
   showPhone          Boolean @default(true)
   showEmail          Boolean @default(true)
 

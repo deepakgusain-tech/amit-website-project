@@ -2,14 +2,45 @@ import Image from "next/image";
 
 import flowchartImage from "../images/flowchart.png";
 
-export function GuestGlobalDeliveryModelSection() {
+function resolveImageSrc(value: string | null | undefined) {
+  if (!value) return null;
+
+  const normalized = value.trim();
+  if (!normalized) return null;
+
+  if (
+    normalized.startsWith("/") ||
+    normalized.startsWith("blob:") ||
+    normalized.startsWith("http://") ||
+    normalized.startsWith("https://")
+  ) {
+    return normalized;
+  }
+
+  if (normalized.startsWith("uploads/")) {
+    return `/${normalized}`;
+  }
+
+  return null;
+}
+
+export function GuestGlobalDeliveryModelSection({ settings }: { settings?: any }) {
+  const tagline = settings?.globalDeliveryTagline ?? "OUR GLOBAL DELIVERY MODEL";
+  const title =
+    settings?.globalDeliveryTitle ??
+    "A simple, visual journey from intake to continuous improvement.";
+  const description =
+    settings?.globalDeliveryDescription ??
+    "This flowchart maps the exact delivery handoff we use to move from client requirements through transition, training, delivery, governance, and ongoing service improvement.";
+  const imageSrc = resolveImageSrc(settings?.globalDeliveryImagePath) ?? flowchartImage;
+
   return (
     <section className="bg-[#f8fafc] py-16 text-slate-900 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <div className="inline-block">
             <h2 className="mt-4 text-2xl font-semibold tracking-tight text-balance text-orange-500 sm:text-3xl lg:text-4xl">
-              OUR GLOBAL DELIVERY MODEL
+              {tagline}
             </h2>
 
             <div className="relative mt-3 h-1.5 w-56 overflow-hidden rounded-full bg-white">
@@ -33,12 +64,10 @@ export function GuestGlobalDeliveryModelSection() {
             </div>
           </div>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance text-slate-950 sm:text-4xl lg:text-3xl">
-            A simple, visual journey from intake to continuous improvement.
+            {title}
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-            This flowchart maps the exact delivery handoff we use to move from
-            client requirements through transition, training, delivery,
-            governance, and ongoing service improvement.
+            {description}
           </p>
         </div>
 
@@ -46,7 +75,7 @@ export function GuestGlobalDeliveryModelSection() {
           <div className="rounded-[1.5rem] border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-3 shadow-[0_10px_30px_rgba(15,23,42,0.04)] sm:p-4">
             <div className="relative h-[260px] overflow-hidden rounded-[1.2rem] bg-white sm:h-[320px] lg:h-[380px]">
               <Image
-                src={flowchartImage}
+                src={imageSrc}
                 alt="Global delivery model flowchart"
                 fill
                 className="object-cover object-center"

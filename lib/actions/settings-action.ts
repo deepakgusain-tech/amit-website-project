@@ -16,8 +16,6 @@ type ActionResponse = {
 
 const settingsId = "site-settings"
 
-type SiteSettingsInput = Parameters<typeof prisma.siteSettings.upsert>[0]["create"]
-
 function getOptionalString(formData: FormData, key: string): string | undefined {
   const value = formData.get(key)
 
@@ -27,6 +25,15 @@ function getOptionalString(formData: FormData, key: string): string | undefined 
 
   const text = String(value).trim()
   return text === "" ? undefined : text
+}
+
+function getStringList(formData: FormData, key: string): string | undefined {
+  const values = formData
+    .getAll(key)
+    .map((value) => String(value).trim())
+    .filter(Boolean)
+
+  return values.length > 0 ? JSON.stringify(values) : undefined
 }
 
 export async function getSettings() {
@@ -42,9 +49,7 @@ export async function getSettings() {
 }
 
 
-async function upsertSiteSettings(
-  data: Partial<Omit<SiteSettingsInput, "id">>
-) {
+async function upsertSiteSettings(data: Record<string, any>) {
   try {
     await prisma.siteSettings.upsert({
       where: {
@@ -134,4 +139,37 @@ export async function saveSocialSettings(formData: FormData): Promise<any> {
 
   const parsed = socialSettingsSchema.parse(payload)
   return upsertSiteSettings(parsed)
+}
+
+export async function saveHomePageSettings(formData: FormData): Promise<any> {
+  const payload = {
+    siteName: String(formData.get("siteName") ?? "").trim(),
+    legalName: getOptionalString(formData, "legalName"),
+    tagline: getOptionalString(formData, "tagline"),
+    description: getOptionalString(formData, "description"),
+    aboutTagline: getOptionalString(formData, "aboutTagline"),
+    aboutTitle: getOptionalString(formData, "aboutTitle"),
+    aboutDescription: getOptionalString(formData, "aboutDescription"),
+    aboutButtons: getStringList(formData, "aboutButtons"),
+    deliveryModelTitle: getOptionalString(formData, "deliveryModelTitle"),
+    deliveryModelItems: getStringList(formData, "deliveryModelItems"),
+    whyClientsTagline: getOptionalString(formData, "whyClientsTagline"),
+    whyClientsTitle: getOptionalString(formData, "whyClientsTitle"),
+    whyClientsDescription: getOptionalString(formData, "whyClientsDescription"),
+    whyClientsCards: getOptionalString(formData, "whyClientsCards"),
+    globalDeliveryTagline: getOptionalString(formData, "globalDeliveryTagline"),
+    globalDeliveryTitle: getOptionalString(formData, "globalDeliveryTitle"),
+    globalDeliveryDescription: getOptionalString(formData, "globalDeliveryDescription"),
+    globalDeliveryImagePath: getOptionalString(formData, "globalDeliveryImagePath"),
+  }
+
+  if (!payload.siteName) {
+    return {
+      success: false,
+      message: "Site name is required",
+      data: "",
+    }
+  }
+
+  return upsertSiteSettings(payload)
 }

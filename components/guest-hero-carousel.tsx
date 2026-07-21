@@ -97,6 +97,12 @@ export function GuestHeroSection({ settings, banners }: any) {
   const [metricsVisible, setMetricsVisible] = React.useState(false);
   const [activeSlide, setActiveSlide] = React.useState(0);
   const metricsRef = React.useRef<HTMLDivElement | null>(null);
+  const heroTagline = settings?.tagline ?? "Global delivery from India";
+  const heroTitle =
+    settings?.legalName ?? "Global Business Support Services Delivered from India";
+  const heroDescription =
+    settings?.description ??
+    "Helping organizations scale through offshore back-office operations, recovery support services, reporting, analytics, IT Services and operational excellence.";
 
   React.useEffect(() => {
     const node = metricsRef.current;
@@ -139,17 +145,15 @@ export function GuestHeroSection({ settings, banners }: any) {
           <div className="grid w-full items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.32em] text-white/65">
-                Global delivery from India
+                {heroTagline}
               </p>
 
               <h1 className="mt-5 max-w-2xl text-4xl text-orange-500 font-semibold leading-[1.08] tracking-tight text-balance sm:text-4xl lg:text-[3.15rem]">
-                Global Business Support Services Delivered from India
+                {heroTitle}
               </h1>
 
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/78 sm:text-xl">
-                Helping organizations scale through offshore back-office
-                operations, recovery support services, reporting, analytics, IT
-                Services and operational excellence.
+                {heroDescription}
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">

@@ -164,7 +164,7 @@ export default async function CareerPage() {
           </div>
 
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {jobs.length > 0  && jobs.map((job) => (
+            {jobs.length > 0  && jobs.map((job: any) => (
               <article
                 key={job.title}
                 className="rounded-2xl border border-blue-500 bg-slate-50 p-6 shadow-[0_14px_40px_rgba(15,23,42,0.05)]"

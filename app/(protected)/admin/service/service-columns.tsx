@@ -2,7 +2,9 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { EditIcon, Trash } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import type { Service } from "@/lib/types";
 
 type Props = {
   onDelete: (id: string) => void;
@@ -10,18 +12,21 @@ type Props = {
 
 export const getServiceColumns = ({
   onDelete,
-}: Props): ColumnDef<any>[] => [
+}: Props): ColumnDef<Service>[] => [
     {
       accessorKey: "image",
       header: "Image",
       cell: ({ row }) => {
-        const user = row.original;
+        const service = row.original;
+        const imageSrc = resolveImageSrc(service.image);
 
-        return user.image ? (
-          <img
-            src={"/api" + user.image}
-            alt={user.name}
-            className="w-10 h-10 rounded-full object-cover"
+        return imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt={service.title}
+            width={40}
+            height={40}
+            className="h-10 w-10 rounded-full object-cover"
           />
         ) : (
           <span className="text-gray-400 text-sm">No Image</span>
@@ -70,3 +75,32 @@ export const getServiceColumns = ({
       </div>,
     },
   ];
+
+function resolveImageSrc(value?: string | null) {
+  if (!value) return null;
+
+  const normalized = value.trim();
+  if (!normalized) return null;
+
+  if (
+    normalized.startsWith("http://") ||
+    normalized.startsWith("https://") ||
+    normalized.startsWith("blob:")
+  ) {
+    return normalized;
+  }
+
+  if (normalized.startsWith("/api/")) {
+    return normalized;
+  }
+
+  if (normalized.startsWith("/uploads/")) {
+    return `/api${normalized}`;
+  }
+
+  if (normalized.startsWith("uploads/")) {
+    return `/api/${normalized}`;
+  }
+
+  return `/api/uploads/${normalized.replace(/^\/+/, "")}`;
+}

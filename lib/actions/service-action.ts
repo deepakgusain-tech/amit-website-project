@@ -4,24 +4,87 @@ import { prisma } from "../db/prisma-helper";
 import { serviceSchema } from "../validators";
 import { formatError, omitTimestamps } from "../utils";
 import { z } from "zod";
+import { ApplicationStatus } from "../generated/prisma";
+import {
+  sendNewServiceAnnouncement,
+  type ServiceAnnouncementPayload,
+} from "../mail/service-announcement";
 
-function ensureArray(val: any) {
-  if (Array.isArray(val)) return val;
-  if (val == null) return [];
-  if (typeof val === "string") {
-    // attempt to parse JSON arrays
+type SectionRecord = Record<string, unknown> & {
+  items?: unknown;
+};
+
+function ensureArray(value: unknown): string[] {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item).trim()).filter(Boolean);
+  }
+
+  if (value == null) {
+    return [];
+  }
+
+  if (typeof value === "string") {
     try {
-      const parsed = JSON.parse(val);
-      if (Array.isArray(parsed)) return parsed;
-    } catch (e) {
-      // ignore
+      const parsed: unknown = JSON.parse(value);
+      if (Array.isArray(parsed)) {
+        return parsed.map((item) => String(item).trim()).filter(Boolean);
+      }
+    } catch {
+      // ignore invalid JSON and fall back to comma-separated parsing
     }
 
-    if (val === "[Array]") return [];
-    if (val.includes(",")) return val.split(",").map((s) => s.trim()).filter(Boolean);
-    return [val];
+    if (value === "[Array]") {
+      return [];
+    }
+
+    if (value.includes(",")) {
+      return value
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    return [value];
   }
-  return [val];
+
+  return [String(value).trim()].filter(Boolean);
+}
+
+function toSectionRecord(value: unknown): SectionRecord {
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    return value as SectionRecord;
+  }
+
+  return {};
+}
+
+function normalizeServicePayload(data: z.infer<typeof serviceSchema>) {
+  const serviceBenefits = toSectionRecord(data.serviceBenefits);
+  const capabilities = toSectionRecord(data.capabilities);
+  const deliveryProcess = toSectionRecord(data.deliveryProcess);
+  const outcomeFocuses = toSectionRecord(data.outcomeFocuses);
+  const contactSection = toSectionRecord(data.contactSection);
+
+  return {
+    ...data,
+    serviceBenefits: {
+      ...serviceBenefits,
+      items: ensureArray(serviceBenefits.items),
+    },
+    capabilities: {
+      ...capabilities,
+      items: ensureArray(capabilities.items),
+    },
+    deliveryProcess: {
+      ...deliveryProcess,
+      items: ensureArray(deliveryProcess.items),
+    },
+    outcomeFocuses: {
+      ...outcomeFocuses,
+      items: ensureArray(outcomeFocuses.items),
+    },
+    contactSection,
+  } as z.infer<typeof serviceSchema>;
 }
 
 type ActionResponse<T = undefined> = {
@@ -44,7 +107,7 @@ export async function getServices() {
     });
 
     return services.map(omitTimestamps);
-  } catch (error) {
+  } catch {
     return [];
   }
 }
@@ -70,12 +133,10 @@ export async function getServiceById(id: string) {
       };
     }
 
-    const payload: any = omitTimestamps(service);
-    // keep backward compatibility with UI expecting `serviceCategory`
-    if (payload.category) {
-      payload.serviceCategory = payload.category;
-      delete payload.category;
-    }
+    const payload = {
+      ...omitTimestamps(service),
+      serviceCategory: service.category,
+    };
 
     return {
       success: true,
@@ -94,81 +155,97 @@ export async function createService(
   data: z.infer<typeof serviceSchema>,
 ): Promise<ActionResponse> {
   try {
-    // Normalize nested array fields in case client logging or form serialization
-    const normalized = {
-      ...data,
-      serviceBenefits: {
-        ...(data as any).serviceBenefits,
-        items: ensureArray((data as any).serviceBenefits?.items),
-      },
-      capabilities: {
-        ...(data as any).capabilities,
-        items: ensureArray((data as any).capabilities?.items),
-      },
-      deliveryProcess: {
-        ...(data as any).deliveryProcess,
-        items: ensureArray((data as any).deliveryProcess?.items),
-      },
-      outcomeFocuses: {
-        ...(data as any).outcomeFocuses,
-        items: ensureArray((data as any).outcomeFocuses?.items),
-      },
-      contactSection: {
-        ...(data as any).contactSection,
-      },
-    } as z.infer<typeof serviceSchema>;
-
-    const service = serviceSchema.parse(normalized);
+    const parsedService = serviceSchema.parse(normalizeServicePayload(data));
 
     const imageValue =
-      service.image instanceof File
-        ? service.image.name
-        : service.image ?? null;
+      parsedService.image instanceof File
+        ? parsedService.image.name
+        : parsedService.image ?? null;
 
-    await prisma.services.create({
+    const createdService = await prisma.services.create({
       data: {
-        title: service.title,
-        shortDescription: service.shortDescription,
-        description: service.description,
+        title: parsedService.title,
+        shortDescription: parsedService.shortDescription,
+        description: parsedService.description,
         image: imageValue,
-        status: service.status,
-        categoryId: service.categoryId,
+        status: parsedService.status,
+        categoryId: parsedService.categoryId,
         serviceBenefits: {
           create: {
-            title: service.serviceBenefits.title,
-            description: service.serviceBenefits.description,
-            items: service.serviceBenefits.items,
+            title: parsedService.serviceBenefits.title,
+            description: parsedService.serviceBenefits.description,
+            items: parsedService.serviceBenefits.items,
           },
         },
         capabilities: {
           create: {
-            title: service.capabilities.title,
-            description: service.capabilities.description || "",
-            items: service.capabilities.items,
+            title: parsedService.capabilities.title,
+            description: parsedService.capabilities.description || "",
+            items: parsedService.capabilities.items,
           },
         },
         deliveryProcess: {
           create: {
-            title: service.deliveryProcess.title,
-            description: service.deliveryProcess.description || "",
-            items: service.deliveryProcess.items,
+            title: parsedService.deliveryProcess.title,
+            description: parsedService.deliveryProcess.description || "",
+            items: parsedService.deliveryProcess.items,
           },
         },
         outcomeFocuses: {
           create: {
-            title: service.outcomeFocuses.title,
-            description: service.outcomeFocuses.description || "",
-            items: service.outcomeFocuses.items,
+            title: parsedService.outcomeFocuses.title,
+            description: parsedService.outcomeFocuses.description || "",
+            items: parsedService.outcomeFocuses.items,
           },
         },
         contactSection: {
           create: {
-            title: service.contactSection.title,
-            description: service.contactSection.description || "",
+            title: parsedService.contactSection.title,
+            description: parsedService.contactSection.description || "",
           },
         }
       },
+      include: {
+        category: true,
+        serviceBenefits: true,
+        capabilities: true,
+        deliveryProcess: true,
+        outcomeFocuses: true,
+        contactSection: true,
+      },
     });
+
+    try {
+      const settings = await prisma.siteSettings.findFirst({
+        orderBy: { createdAt: "desc" },
+      });
+
+      const recipients = await prisma.careerApplication.findMany({
+        where: {
+          status: {
+            in: [
+              ApplicationStatus.PENDING,
+              ApplicationStatus.REVIEWING,
+              ApplicationStatus.SHORTLISTED,
+              ApplicationStatus.HIRED,
+            ],
+          },
+        },
+        select: {
+          email: true,
+          fullName: true,
+        },
+        distinct: ["email"],
+      });
+
+      await sendNewServiceAnnouncement({
+        settings,
+        service: createdService as ServiceAnnouncementPayload,
+        recipients,
+      });
+    } catch (error) {
+      console.error("Service announcement email failed", error);
+    }
 
     return {
       success: true,
@@ -188,30 +265,7 @@ export async function updateService(
   data: z.infer<typeof serviceSchema>,
 ): Promise<ActionResponse> {
   try {
-    const normalized = {
-      ...data,
-      serviceBenefits: {
-        ...(data as any).serviceBenefits,
-        items: ensureArray((data as any).serviceBenefits?.items),
-      },
-      capabilities: {
-        ...(data as any).capabilities,
-        items: ensureArray((data as any).capabilities?.items),
-      },
-      deliveryProcess: {
-        ...(data as any).deliveryProcess,
-        items: ensureArray((data as any).deliveryProcess?.items),
-      },
-      outcomeFocuses: {
-        ...(data as any).outcomeFocuses,
-        items: ensureArray((data as any).outcomeFocuses?.items),
-      },
-      contactSection: {
-        ...(data as any).contactSection,
-      },
-    } as z.infer<typeof serviceSchema>;
-
-    const service = serviceSchema.parse(normalized);
+    const service = serviceSchema.parse(normalizeServicePayload(data));
 
     const imageValue =
       service.image instanceof File
@@ -247,7 +301,7 @@ export async function updateService(
       data: {
         serviceId: id,
         title: service.capabilities.title,
-         description: service.capabilities.description || "",
+        description: service.capabilities.description || "",
         items: service.capabilities.items,
       },
     });

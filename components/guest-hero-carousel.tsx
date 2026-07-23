@@ -263,18 +263,6 @@ export function GuestHeroSection({
                   ))}
                 </div>
               </div>
-
-              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                {trustTags.map((tag) => (
-                  <div
-                    key={tag}
-                    className="inline-flex items-center gap-2 rounded-full border border-blue-500 bg-white/8 px-4 py-2 text-sm text-white/78 backdrop-blur"
-                  >
-                    <CheckCircle2 className="size-4 text-emerald-300" />
-                    {tag}
-                  </div>
-                ))}
-              </div>
             </div>
 
             <div className="relative hidden lg:block">

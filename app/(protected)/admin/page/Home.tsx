@@ -35,6 +35,11 @@ type CardItem = {
   summary: string;
 };
 
+type MetricItem = {
+  key: string;
+  value: number;
+};
+
 function parseCardList(
   value: string | null | undefined,
   fallback: CardItem[],
@@ -53,6 +58,32 @@ function parseCardList(
           summary: String(item?.summary ?? item?.content ?? "").trim(),
         }))
         .filter((item) => item.title || item.summary);
+    }
+  } catch {
+    // fall through
+  }
+
+  return fallback;
+}
+
+function parseMetricList(
+  value: string | null | undefined,
+  fallback: MetricItem[],
+) {
+  if (!value) return fallback;
+
+  const trimmed = value.trim();
+  if (!trimmed) return fallback;
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    if (Array.isArray(parsed)) {
+      return parsed
+        .map((item) => ({
+          key: String(item?.key ?? item?.title ?? item?.label ?? "").trim(),
+          value: Number(item?.value ?? item?.number ?? 0),
+        }))
+        .filter((item) => item.key && Number.isFinite(item.value));
     }
   } catch {
     // fall through
@@ -83,6 +114,7 @@ function getPreviewSrc(value: string | null | undefined) {
   return null;
 }
 
+<<<<<<< Updated upstream
 export default function Home({ setting }: { setting?: any }) {
   const [pending, startTransition] = useTransition();
   const [configuration, setConfiguration] = useState(setting);
@@ -96,6 +128,44 @@ export default function Home({ setting }: { setting?: any }) {
   const [aboutButtons, setAboutButtons] = useState<string[]>(
     () =>
       parseList(configuration?.aboutButtons, [
+=======
+type HomeSettings = {
+  siteName?: string | null;
+  tagline?: string | null;
+  legalName?: string | null;
+  description?: string | null;
+  heroTrustTags?: string | null;
+  aboutButtons?: string | null;
+  aboutTagline?: string | null;
+  aboutTitle?: string | null;
+  aboutDescription?: string | null;
+  deliveryModelTitle?: string | null;
+  deliveryModelItems?: string | null;
+  whyClientsTagline?: string | null;
+  whyClientsTitle?: string | null;
+  whyClientsDescription?: string | null;
+  whyClientsCards?: string | null;
+  globalDeliveryImagePath?: string | null;
+  globalDeliveryTagline?: string | null;
+  globalDeliveryTitle?: string | null;
+  globalDeliveryDescription?: string | null;
+};
+
+export default function Home({ setting }: { setting?: HomeSettings }) {
+  const [pending, startTransition] = useTransition();
+  const [configuration, setConfiguration] = useState(setting);
+  const [trustMetrics, setTrustMetrics] = useState<MetricItem[]>(
+    () =>
+      parseMetricList(configuration?.heroTrustTags, [
+        { key: "Team Members", value: 48 },
+        { key: "Happy Customers", value: 120 },
+        { key: "Operational Support", value: 24 },
+      ]),
+  );
+  const [aboutButtons, setAboutButtons] = useState<string[]>(
+    () =>
+      parseList(configuration?.aboutButtons, [
+>>>>>>> Stashed changes
         "Transition",
         "Operations",
         "Training",
@@ -184,6 +254,7 @@ export default function Home({ setting }: { setting?: any }) {
           return;
         }
 
+<<<<<<< Updated upstream
         setConfiguration(res.data);
         setHeroTrustTags(
           parseList(res.data?.heroTrustTags, [
@@ -194,6 +265,19 @@ export default function Home({ setting }: { setting?: any }) {
         setAboutButtons(
           parseList(res.data?.aboutButtons, [
             "Transition",
+=======
+        setConfiguration(res.data);
+        setTrustMetrics(
+          parseMetricList(res.data?.heroTrustTags, [
+            { key: "Team Members", value: 48 },
+            { key: "Happy Customers", value: 120 },
+            { key: "Operational Support", value: 24 },
+          ]),
+        );
+        setAboutButtons(
+          parseList(res.data?.aboutButtons, [
+            "Transition",
+>>>>>>> Stashed changes
             "Operations",
             "Training",
             "Scalability",
@@ -287,6 +371,7 @@ export default function Home({ setting }: { setting?: any }) {
               />
             </div>
 
+<<<<<<< Updated upstream
             <div className="grid gap-4 md:grid-cols-3">
               <Field
                 label="Team Members"
@@ -333,6 +418,37 @@ export default function Home({ setting }: { setting?: any }) {
           </form>
         </CardContent>
       </Card>
+=======
+            <MetricEditor
+              label="Trust Metrics"
+              items={trustMetrics}
+              onChange={setTrustMetrics}
+            />
+
+            <input
+              type="hidden"
+              name="trustMetrics"
+              value={JSON.stringify(trustMetrics)}
+            />
+
+            <div className="flex justify-end">
+              <Button
+                type="submit"
+                className="rounded-full px-5"
+                disabled={pending}
+              >
+                {pending ? (
+                  <Loader2 className="mr-2 size-4 animate-spin" />
+                ) : (
+                  <Save className="mr-2 size-4" />
+                )}
+                Save Hero Banner
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+>>>>>>> Stashed changes
 
       <Card className="border-slate-200/80 shadow-sm">
         <CardHeader className="border-b border-slate-200/70 py-4">
@@ -687,6 +803,76 @@ function Field({
   );
 }
 
+function MetricEditor({
+  label,
+  items,
+  onChange,
+}: {
+  label: string;
+  items: MetricItem[];
+  onChange: (items: MetricItem[]) => void;
+}) {
+  const updateItem = (index: number, key: keyof MetricItem, value: string) => {
+    const next = [...items];
+    next[index] = {
+      ...next[index],
+      [key]: key === "value" ? Number(value) || 0 : value,
+    };
+    onChange(next);
+  };
+
+  const addItem = () => {
+    onChange([...items, { key: "", value: 0 }]);
+  };
+
+  const removeItem = (index: number) => {
+    const next = items.filter((_, itemIndex) => itemIndex !== index);
+    onChange(next.length ? next : [{ key: "", value: 0 }]);
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between gap-3">
+        <Label className="text-sm font-semibold">{label}</Label>
+        <Button type="button" variant="outline" className="rounded-full" onClick={addItem}>
+          <Plus className="mr-2 size-4" />
+          Add row
+        </Button>
+      </div>
+
+      <div className="space-y-3">
+        {items.map((item, index) => (
+          <div key={`trust-metric-${index}`} className="grid gap-2 md:grid-cols-[1fr_180px_auto]">
+            <Input
+              value={item.key}
+              placeholder="Metric label"
+              onChange={(event) => updateItem(index, "key", event.target.value)}
+              className="h-10 rounded-xl"
+            />
+            <Input
+              type="number"
+              min="0"
+              value={Number.isFinite(item.value) ? item.value : 0}
+              placeholder="48"
+              onChange={(event) => updateItem(index, "value", event.target.value)}
+              className="h-10 rounded-xl"
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              className="shrink-0 rounded-full px-3 text-slate-500 hover:text-red-600"
+              onClick={() => removeItem(index)}
+              aria-label={`Remove ${label} row ${index + 1}`}
+            >
+              <Trash2 className="size-4" />
+            </Button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ListEditor({
   label,
   name,
@@ -830,3 +1016,8 @@ function CardListEditor({
     </div>
   );
 }
+
+
+
+
+

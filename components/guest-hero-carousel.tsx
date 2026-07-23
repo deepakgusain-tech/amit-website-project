@@ -33,6 +33,7 @@ const heroSlides = [
   },
 ];
 
+<<<<<<< Updated upstream
 const trustMetrics = [
   { label: "Team Members", key: "teamMembers", suffix: "+" },
   { label: "Happy Customers", key: "happyCustomers", suffix: "+" },
@@ -56,6 +57,44 @@ function parseList(value: string | null | undefined, fallback: string[]) {
 
   return trimmed.split(",").map((item) => item.trim()).filter(Boolean);
 }
+=======
+type MetricItem = {
+  key: string;
+  value: number;
+};
+
+const metricFallbacks: MetricItem[] = [
+  { key: "Team Members", value: 48 },
+  { key: "Happy Customers", value: 120 },
+  { key: "Operational Support", value: 24 },
+];
+
+function parseMetricList(
+  value: string | null | undefined,
+  fallback: MetricItem[],
+) {
+  if (!value) return fallback;
+
+  const trimmed = value.trim();
+  if (!trimmed) return fallback;
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    if (Array.isArray(parsed)) {
+      return parsed
+        .map((item) => ({
+          key: String(item?.key ?? item?.title ?? item?.label ?? "").trim(),
+          value: Number(item?.value ?? item?.number ?? 0),
+        }))
+        .filter((item) => item.key && Number.isFinite(item.value));
+    }
+  } catch {
+    // fall through
+  }
+
+  return fallback;
+}
+>>>>>>> Stashed changes
 
 function AnimatedCounter({
   value,
@@ -106,10 +145,32 @@ function AnimatedCounter({
   );
 }
 
-export function GuestHeroSection({ settings, banners }: any) {
+type HeroSettings = {
+  tagline?: string | null;
+  legalName?: string | null;
+  description?: string | null;
+  heroTrustTags?: string | null;
+};
+
+type BannerItem = {
+  id: string;
+  image: string;
+  tagline: string;
+  description: string;
+  status: string;
+};
+
+export function GuestHeroSection({
+  settings,
+  banners,
+}: {
+  settings?: HeroSettings;
+  banners: BannerItem[];
+}) {
   const [metricsVisible, setMetricsVisible] = React.useState(false);
   const [activeSlide, setActiveSlide] = React.useState(0);
   const metricsRef = React.useRef<HTMLDivElement | null>(null);
+<<<<<<< Updated upstream
   const heroTagline = settings?.tagline ?? "Global delivery from India";
   const heroTitle =
     settings?.legalName ?? "Global Business Support Services Delivered from India";
@@ -120,6 +181,19 @@ export function GuestHeroSection({ settings, banners }: any) {
     "US Client Delivery Experience",
     "Process-Driven Operations",
   ]);
+=======
+  const heroTagline = settings?.tagline ?? "Global delivery from India";
+  const heroTitle =
+    settings?.legalName ?? "Global Business Support Services Delivered from India";
+  const heroDescription =
+    settings?.description ??
+    "Helping organizations scale through offshore back-office operations, recovery support services, reporting, analytics, IT Services and operational excellence.";
+  const trustMetrics = parseMetricList(settings?.heroTrustTags, metricFallbacks);
+  const trustTags = [
+    "US Client Delivery Experience",
+    "Process-Driven Operations",
+  ];
+>>>>>>> Stashed changes
 
   React.useEffect(() => {
     const node = metricsRef.current;
@@ -211,18 +285,18 @@ export function GuestHeroSection({ settings, banners }: any) {
                 <div className="grid gap-3 sm:grid-cols-3">
                   {trustMetrics.map((metric) => (
                     <div
-                      key={metric.label}
+                      key={metric.key}
                       className="rounded-2xl border border-blue-500 bg-white/8 px-4 py-4 backdrop-blur"
                     >
                       <div className="text-3xl font-semibold tracking-tight text-white sm:text-[2rem]">
                         <AnimatedCounter
-                          value={settings[metric.key]}
-                          suffix={metric.suffix}
+                          value={metric.value}
+                          suffix=""
                           active={metricsVisible}
                         />
                       </div>
                       <p className="mt-1 text-sm font-medium text-orange-500">
-                        {metric.label}
+                        {metric.key}
                       </p>
                     </div>
                   ))}
@@ -249,8 +323,8 @@ export function GuestHeroSection({ settings, banners }: any) {
               <div className="relative overflow-hidden rounded-[2.25rem] border border-white/12 bg-slate-950/40 shadow-[0_24px_80px_rgba(2,6,23,0.35)] backdrop-blur-md">
                 <div className="relative aspect-[4/4.35] min-h-[26rem]">
                   {banners
-                    .filter((banner: any) => banner.status.toLowerCase() === "active")
-                    .map((banner: any, index: number) => (
+                    .filter((banner: BannerItem) => banner.status.toLowerCase() === "active")
+                    .map((banner: BannerItem, index: number) => (
                       <div
                         key={banner.id}
                         className={[
@@ -290,7 +364,7 @@ export function GuestHeroSection({ settings, banners }: any) {
                 </div>
 
                 <div className="absolute inset-x-0 bottom-5 flex justify-center gap-2 px-4">
-                  {banners.filter((banner: any) => banner.status.toLowerCase() === "active").map((banner: any, index: number) => (
+                  {banners.filter((banner: BannerItem) => banner.status.toLowerCase() === "active").map((banner: BannerItem, index: number) => (
                     <button
                       key={banner.id}
                       type="button"
@@ -313,3 +387,9 @@ export function GuestHeroSection({ settings, banners }: any) {
     </section>
   );
 }
+
+
+
+
+
+

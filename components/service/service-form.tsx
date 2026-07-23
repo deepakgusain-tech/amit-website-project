@@ -2,14 +2,15 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
-import { Control, Path, SubmitHandler, UseFormReturn, useForm } from "react-hook-form";
+import { Path, PathValue, SubmitHandler, UseFormReturn, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { serviceSchema } from "@/lib/validators";
 import { serviceDefaultValues } from "@/lib/constants";
 import { Status } from "@/lib/types";
 import { Button } from "../ui/button";
-import { ArrowRight, Loader, Plus, Trash } from "lucide-react";
+import { ArrowRight, Loader, Trash } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import Image from "next/image";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
@@ -45,14 +46,14 @@ function SectionItemList({
 
     const addItem = () => {
         const currentItems = (form.getValues(name) as string[]) || [];
-        form.setValue(name, [...currentItems, ""] as any);
+        form.setValue(name, [...currentItems, ""] as PathValue<CreateServiceValues, Path<CreateServiceValues>>);
     };
 
     const removeItem = (index: number) => {
         const currentItems = (form.getValues(name) as string[]) || [];
         form.setValue(
             name,
-            currentItems.filter((_, i) => i !== index) as any,
+            currentItems.filter((_, i) => i !== index) as PathValue<CreateServiceValues, Path<CreateServiceValues>>,
         );
     };
 
@@ -260,12 +261,23 @@ const ServiceForm = ({ categories, data, update }: ServiceFormProps) => {
                                                 }
                                             }}
                                         />
+<<<<<<< Updated upstream
                                         {preview && (
                                             <img
                                                 src={preview}
                                                 alt="Preview"
                                                 className="h-10 w-10 border object-cover"
                                             />
+=======
+                                        {preview && (
+                                            <Image
+                                                src={preview}
+                                                alt="Preview"
+                                                width={800}
+                                                height={256}
+                                                className="h-32 w-full rounded-md object-cover"
+                                            />
+>>>>>>> Stashed changes
                                         )}
                                     </div>
                                 </FormControl>
@@ -465,3 +477,10 @@ const ServiceForm = ({ categories, data, update }: ServiceFormProps) => {
 };
 
 export default ServiceForm;
+
+
+
+
+
+
+

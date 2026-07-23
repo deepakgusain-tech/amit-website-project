@@ -13,7 +13,7 @@ import {
 type ActionResponse = {
   success: boolean
   message: string
-  data: any
+  data: unknown
 }
 
 const settingsId = "site-settings"
@@ -171,7 +171,7 @@ export async function saveHomePageSettings(formData: FormData): Promise<ActionRe
     aboutTitle: getOptionalString(formData, "aboutTitle"),
     aboutDescription: getOptionalString(formData, "aboutDescription"),
     aboutButtons: getStringList(formData, "aboutButtons"),
-    heroTrustTags: getStringList(formData, "heroTrustTags"),
+    heroTrustTags: getOptionalString(formData, "trustMetrics"),
     deliveryModelTitle: getOptionalString(formData, "deliveryModelTitle"),
     deliveryModelItems: getStringList(formData, "deliveryModelItems"),
     whyClientsTagline: getOptionalString(formData, "whyClientsTagline"),
@@ -194,3 +194,5 @@ export async function saveHomePageSettings(formData: FormData): Promise<ActionRe
 
   return upsertSiteSettings(payload)
 }
+
+

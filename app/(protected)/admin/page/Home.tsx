@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { saveHomePageSettings } from "@/lib/actions/settings-action";
+import type { SiteSettings } from "@/lib/generated/prisma";
 
 function parseList(value: string | null | undefined, fallback: string[] = []) {
   if (!value) return fallback;
@@ -35,6 +36,17 @@ type CardItem = {
   summary: string;
 };
 
+type MetricItem = {
+  key: string;
+  value: number;
+};
+
+const metricFallbacks: MetricItem[] = [
+  { key: "Team Members", value: 48 },
+  { key: "Happy Customers", value: 120 },
+  { key: "Operational Support", value: 24 },
+];
+
 function parseCardList(
   value: string | null | undefined,
   fallback: CardItem[],
@@ -53,6 +65,32 @@ function parseCardList(
           summary: String(item?.summary ?? item?.content ?? "").trim(),
         }))
         .filter((item) => item.title || item.summary);
+    }
+  } catch {
+    // fall through
+  }
+
+  return fallback;
+}
+
+function parseMetricList(
+  value: string | null | undefined,
+  fallback: MetricItem[],
+) {
+  if (!value) return fallback;
+
+  const trimmed = value.trim();
+  if (!trimmed) return fallback;
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    if (Array.isArray(parsed)) {
+      return parsed
+        .map((item) => ({
+          key: String(item?.key ?? item?.title ?? item?.label ?? "").trim(),
+          value: Number(item?.value ?? item?.number ?? 0),
+        }))
+        .filter((item) => item.key && Number.isFinite(item.value));
     }
   } catch {
     // fall through
@@ -83,15 +121,12 @@ function getPreviewSrc(value: string | null | undefined) {
   return null;
 }
 
-export default function Home({ setting }: { setting?: any }) {
+export default function Home({ setting }: { setting?: SiteSettings }) {
   const [pending, startTransition] = useTransition();
   const [configuration, setConfiguration] = useState(setting);
-  const [heroTrustTags, setHeroTrustTags] = useState<string[]>(
+  const [trustMetrics, setTrustMetrics] = useState<MetricItem[]>(
     () =>
-      parseList(configuration?.heroTrustTags, [
-        "US Client Delivery Experience",
-        "Process-Driven Operations",
-      ]),
+      parseMetricList(configuration?.heroTrustTags, metricFallbacks),
   );
   const [aboutButtons, setAboutButtons] = useState<string[]>(
     () =>
@@ -184,15 +219,12 @@ export default function Home({ setting }: { setting?: any }) {
           return;
         }
 
-        setConfiguration(res.data);
-        setHeroTrustTags(
-          parseList(res.data?.heroTrustTags, [
-            "US Client Delivery Experience",
-            "Process-Driven Operations",
-          ]),
-        );
+        const nextSetting = res.data as SiteSettings | undefined;
+
+        setConfiguration(nextSetting);
+        setTrustMetrics(parseMetricList(nextSetting?.heroTrustTags, metricFallbacks));
         setAboutButtons(
-          parseList(res.data?.aboutButtons, [
+          parseList(nextSetting?.aboutButtons, [
             "Transition",
             "Operations",
             "Training",
@@ -200,7 +232,7 @@ export default function Home({ setting }: { setting?: any }) {
           ]),
         );
         setDeliveryModelItems(
-          parseList(res.data?.deliveryModelItems, [
+          parseList(nextSetting?.deliveryModelItems, [
             "Founded in 2024",
             "Supporting global clients",
             "Backoffice Operations with IT Consulting & Support",
@@ -212,7 +244,7 @@ export default function Home({ setting }: { setting?: any }) {
           ]),
         );
         setWhyCards(
-          parseCardList(res.data?.whyClientsCards, [
+          parseCardList(nextSetting?.whyClientsCards, [
             {
               title: "Scalable Teams",
               summary: "Flexible delivery capacity that grows with your needs.",
@@ -232,7 +264,7 @@ export default function Home({ setting }: { setting?: any }) {
           ]),
         );
         setGlobalDeliveryImagePreview(
-          getPreviewSrc(res.data?.globalDeliveryImagePath),
+          getPreviewSrc(nextSetting?.globalDeliveryImagePath),
         );
 
         toast.success("Homepage content saved successfully");
@@ -263,12 +295,6 @@ export default function Home({ setting }: { setting?: any }) {
 
             <div className="grid gap-4 md:grid-cols-2">
               <Field
-                label="Tagline"
-                id="tagline"
-                defaultValue={configuration?.tagline}
-                placeholder="Global delivery from India"
-              />
-              <Field
                 label="Title"
                 id="legalName"
                 defaultValue={configuration?.legalName}
@@ -276,44 +302,16 @@ export default function Home({ setting }: { setting?: any }) {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="description">Description</Label>
-              <Textarea
-                id="description"
-                name="description"
-                className="min-h-[120px] rounded-xl"
-                defaultValue={configuration?.description}
-                placeholder="Helping organizations scale through offshore back-office operations..."
-              />
-            </div>
+            <MetricEditor
+              label="Trust Metrics"
+              items={trustMetrics}
+              onChange={setTrustMetrics}
+            />
 
-            <div className="grid gap-4 md:grid-cols-3">
-              <Field
-                label="Team Members"
-                id="teamMembers"
-                defaultValue={configuration?.teamMembers}
-                placeholder="48"
-              />
-              <Field
-                label="Happy Customers"
-                id="happyCustomers"
-                defaultValue={configuration?.happyCustomers}
-                placeholder="120"
-              />
-              <Field
-                label="Operational Support"
-                id="operationalSupport"
-                defaultValue={configuration?.operationalSupport}
-                placeholder="24/7"
-              />
-            </div>
-
-            <ListEditor
-              label="Trust Tags"
-              name="heroTrustTags"
-              items={heroTrustTags}
-              onChange={setHeroTrustTags}
-              placeholder="US Client Delivery Experience"
+            <input
+              type="hidden"
+              name="trustMetrics"
+              value={JSON.stringify(trustMetrics)}
             />
 
             <div className="flex justify-end">
@@ -347,9 +345,7 @@ export default function Home({ setting }: { setting?: any }) {
               name="siteName"
               value={configuration?.siteName ?? "AS Services"}
             />
-            <input type="hidden" name="tagline" value={configuration?.tagline ?? ""} />
             <input type="hidden" name="legalName" value={configuration?.legalName ?? ""} />
-            <input type="hidden" name="description" value={configuration?.description ?? ""} />
 
             <div className="grid gap-4 md:grid-cols-2">
               <Field
@@ -372,7 +368,7 @@ export default function Home({ setting }: { setting?: any }) {
                 id="aboutDescription"
                 name="aboutDescription"
                 className="min-h-[120px] rounded-xl"
-                defaultValue={configuration?.aboutDescription}
+                defaultValue={configuration?.aboutDescription ?? ""}
                 placeholder="We combine back-office operations, IT consulting, and support services..."
               />
             </div>
@@ -417,9 +413,7 @@ export default function Home({ setting }: { setting?: any }) {
               name="siteName"
               value={configuration?.siteName ?? "AS Services"}
             />
-            <input type="hidden" name="tagline" value={configuration?.tagline ?? ""} />
             <input type="hidden" name="legalName" value={configuration?.legalName ?? ""} />
-            <input type="hidden" name="description" value={configuration?.description ?? ""} />
             <input type="hidden" name="aboutTagline" value={configuration?.aboutTagline ?? ""} />
             <input type="hidden" name="aboutTitle" value={configuration?.aboutTitle ?? ""} />
             <input type="hidden" name="aboutDescription" value={configuration?.aboutDescription ?? ""} />
@@ -482,9 +476,7 @@ export default function Home({ setting }: { setting?: any }) {
               name="siteName"
               value={configuration?.siteName ?? "AS Services"}
             />
-            <input type="hidden" name="tagline" value={configuration?.tagline ?? ""} />
             <input type="hidden" name="legalName" value={configuration?.legalName ?? ""} />
-            <input type="hidden" name="description" value={configuration?.description ?? ""} />
             <input type="hidden" name="aboutTagline" value={configuration?.aboutTagline ?? ""} />
             <input type="hidden" name="aboutTitle" value={configuration?.aboutTitle ?? ""} />
             <input type="hidden" name="aboutDescription" value={configuration?.aboutDescription ?? ""} />
@@ -517,7 +509,7 @@ export default function Home({ setting }: { setting?: any }) {
                 id="whyClientsDescription"
                 name="whyClientsDescription"
                 className="min-h-[120px] rounded-xl"
-                defaultValue={configuration?.whyClientsDescription}
+                defaultValue={configuration?.whyClientsDescription ?? ""}
                 placeholder="Our delivery model gives clients flexible teams..."
               />
             </div>
@@ -588,7 +580,7 @@ export default function Home({ setting }: { setting?: any }) {
                 id="globalDeliveryDescription"
                 name="globalDeliveryDescription"
                 className="min-h-[120px] rounded-xl"
-                defaultValue={configuration?.globalDeliveryDescription}
+                defaultValue={configuration?.globalDeliveryDescription ?? ""}
                 placeholder="This flowchart maps the exact delivery handoff..."
               />
             </div>
@@ -683,6 +675,76 @@ function Field({
         placeholder={placeholder}
         className="h-10 rounded-xl"
       />
+    </div>
+  );
+}
+
+function MetricEditor({
+  label,
+  items,
+  onChange,
+}: {
+  label: string;
+  items: MetricItem[];
+  onChange: (items: MetricItem[]) => void;
+}) {
+  const updateItem = (index: number, key: keyof MetricItem, value: string) => {
+    const next = [...items];
+    next[index] = {
+      ...next[index],
+      [key]: key === "value" ? Number(value) || 0 : value,
+    };
+    onChange(next);
+  };
+
+  const addItem = () => {
+    onChange([...items, { key: "", value: 0 }]);
+  };
+
+  const removeItem = (index: number) => {
+    const next = items.filter((_, itemIndex) => itemIndex !== index);
+    onChange(next.length ? next : [{ key: "", value: 0 }]);
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between gap-3">
+        <Label className="text-sm font-semibold">{label}</Label>
+        <Button type="button" variant="outline" className="rounded-full" onClick={addItem}>
+          <Plus className="mr-2 size-4" />
+          Add row
+        </Button>
+      </div>
+
+      <div className="space-y-3">
+        {items.map((item, index) => (
+          <div key={`trust-metric-${index}`} className="grid gap-2 md:grid-cols-[1fr_180px_auto]">
+            <Input
+              value={item.key}
+              placeholder="Metric label"
+              onChange={(event) => updateItem(index, "key", event.target.value)}
+              className="h-10 rounded-xl"
+            />
+            <Input
+              type="number"
+              min="0"
+              value={Number.isFinite(item.value) ? item.value : 0}
+              placeholder="48"
+              onChange={(event) => updateItem(index, "value", event.target.value)}
+              className="h-10 rounded-xl"
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              className="shrink-0 rounded-full px-3 text-slate-500 hover:text-red-600"
+              onClick={() => removeItem(index)}
+              aria-label={`Remove ${label} row ${index + 1}`}
+            >
+              <Trash2 className="size-4" />
+            </Button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -830,3 +892,8 @@ function CardListEditor({
     </div>
   );
 }
+
+
+
+
+

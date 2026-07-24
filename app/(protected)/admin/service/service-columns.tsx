@@ -18,7 +18,7 @@ export const getServiceColumns = ({
       header: "Image",
       cell: ({ row }) => {
         const service = row.original;
-        const imageSrc = resolveImageSrc(service.image);
+        const imageSrc = resolveImageSrc(service.image as string);
 
         return imageSrc ? (
           <Image
@@ -68,7 +68,7 @@ export const getServiceColumns = ({
           size="icon"
           variant="destructive"
           className="cursor-pointer"
-          onClick={() => onDelete(row.original.id)}
+          onClick={() => onDelete(row.original.id as string)}
         >
           <Trash size={16} />
         </Button>

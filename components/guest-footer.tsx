@@ -207,12 +207,6 @@ export function GuestFooter({
             <Phone className="size-4 text-cyan-800" />
             {settings?.phone ?? "+91-9212174507"}
           </a>
-          <div className="inline-flex items-start gap-3 text-sm text-slate-800">
-            <MapPin className="mt-0.5 size-4 text-cyan-800" />
-            <span>
-              {settings?.tagline ?? ""}
-            </span>
-          </div>
         </div>
 
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">

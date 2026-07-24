@@ -11,6 +11,12 @@ type SmtpAuth = {
   password: string;
 };
 
+type MailAttachment = {
+  filename: string;
+  contentType: string;
+  content: Buffer;
+};
+
 type SendMailOptions = {
   host: string;
   port: number;
@@ -23,6 +29,7 @@ type SendMailOptions = {
   subject: string;
   text: string;
   html: string;
+  attachments?: MailAttachment[];
 };
 
 type SmtpResponse = {
@@ -74,6 +81,10 @@ function dotStuff(text: string) {
   return text.replace(/(^|\r\n)\./g, "$1..");
 }
 
+function encodeBase64(content: Buffer) {
+  return content.toString("base64").match(/.{1,76}/g)?.join("\r\n") ?? "";
+}
+
 function buildMessage({
   from,
   to,
@@ -81,8 +92,15 @@ function buildMessage({
   subject,
   text,
   html,
-}: Pick<SendMailOptions, "from" | "to" | "replyTo" | "subject" | "text" | "html">) {
-  const boundary = `boundary-${Date.now().toString(16)}-${Math.random()
+  attachments = [],
+}: Pick<
+  SendMailOptions,
+  "from" | "to" | "replyTo" | "subject" | "text" | "html" | "attachments"
+>) {
+  const alternativeBoundary = `alternative-${Date.now().toString(16)}-${Math.random()
+    .toString(16)
+    .slice(2)}`;
+  const mixedBoundary = `mixed-${Date.now().toString(16)}-${Math.random()
     .toString(16)
     .slice(2)}`;
   const headers = [
@@ -91,25 +109,48 @@ function buildMessage({
     replyTo ? `Reply-To: ${formatAddress(replyTo)}` : null,
     `Subject: ${escapeHeaderValue(subject)}`,
     "MIME-Version: 1.0",
-    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    attachments.length > 0
+      ? `Content-Type: multipart/mixed; boundary="${mixedBoundary}"`
+      : `Content-Type: multipart/alternative; boundary="${alternativeBoundary}"`,
   ].filter(Boolean);
 
-  const body = [
-    `--${boundary}`,
+  const alternativeBody = [
+    `--${alternativeBoundary}`,
     "Content-Type: text/plain; charset=UTF-8",
     "Content-Transfer-Encoding: 7bit",
     "",
     text,
     "",
-    `--${boundary}`,
+    `--${alternativeBoundary}`,
     "Content-Type: text/html; charset=UTF-8",
     "Content-Transfer-Encoding: 7bit",
     "",
     html,
     "",
-    `--${boundary}--`,
+    `--${alternativeBoundary}--`,
     "",
   ].join("\r\n");
+
+  const body =
+    attachments.length === 0
+      ? alternativeBody
+      : [
+          `--${mixedBoundary}`,
+          `Content-Type: multipart/alternative; boundary="${alternativeBoundary}"`,
+          "",
+          alternativeBody,
+          ...attachments.flatMap((attachment) => [
+            `--${mixedBoundary}`,
+            `Content-Type: ${attachment.contentType}; name="${escapeHeaderValue(attachment.filename)}"`,
+            "Content-Transfer-Encoding: base64",
+            `Content-Disposition: attachment; filename="${escapeHeaderValue(attachment.filename)}"`,
+            "",
+            encodeBase64(attachment.content),
+            "",
+          ]),
+          `--${mixedBoundary}--`,
+          "",
+        ].join("\r\n");
 
   return `${headers.join("\r\n")}\r\n\r\n${body}`;
 }
@@ -298,6 +339,7 @@ export async function sendMail(options: SendMailOptions) {
       subject: options.subject,
       text: options.text,
       html: options.html,
+      attachments: options.attachments,
     });
 
     session.writeData(`${dotStuff(message)}\r\n.\r\n`);

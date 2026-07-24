@@ -5,6 +5,8 @@ import { applicationSchema } from "../validators";
 import { formatError, omitTimestamps } from "../utils";
 import { Application } from "../types";
 import { z } from "zod";
+import type { Prisma } from "../generated/prisma";
+import { sendJobApplicationEmails } from "../mail/job-application";
 
 type ActionResponse = {
   success: boolean;
@@ -18,7 +20,7 @@ export async function getApplications(): Promise<Application[]> {
     });
 
     return applications;
-  } catch (error) {
+  } catch {
     return [];
   }
 }
@@ -28,7 +30,7 @@ export async function createApplication(data: z.infer<typeof applicationSchema>)
     const application = applicationSchema.parse(data);
 
 
-    await prisma.careerApplication.create({
+    const createdApplication = await prisma.careerApplication.create({
       data: {
         fullName: application.fullName,
         email: application.email,
@@ -42,6 +44,20 @@ export async function createApplication(data: z.infer<typeof applicationSchema>)
         status: application.status,
       },
     });
+
+    try {
+      const settings = await prisma.siteSettings.findFirst({
+        orderBy: { createdAt: "desc" },
+      });
+
+      await sendJobApplicationEmails({
+        settings,
+        application: createdApplication,
+      });
+    } catch (error) {
+      // An SMTP problem must not discard a valid submitted application.
+      console.error("Job application email failed", error);
+    }
 
     return {
       success: true,
@@ -93,14 +109,14 @@ export async function updateApplication(
         ? application.resume.name
         : application.resume ?? null;
 
-    const updateData: any = {
+    const updateData: Prisma.CareerApplicationUncheckedUpdateInput = {
       fullName: application.fullName,
       email: application.email,
       phone: application.phone,
       role: application.role,
       experience: application.experience,
       location: application.location,
-      resume: imageValue as string,
+      resume: imageValue ?? "",
       message: application.message || "",
       jobId: application.jobId,
       status: application.status,

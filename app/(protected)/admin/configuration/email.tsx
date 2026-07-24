@@ -78,6 +78,12 @@ export default function EmailComponent({ setting }: { setting?: any }) {
               type="email"
               defaultValue={configuration?.replyToEmail}
             />
+            <Field
+              label="Application notification inbox"
+              id="supportInbox"
+              type="email"
+              defaultValue={configuration?.supportInbox}
+            />
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">

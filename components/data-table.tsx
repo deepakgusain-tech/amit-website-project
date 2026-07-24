@@ -32,6 +32,7 @@ import {
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
+  IconDownload,
   IconDotsVertical,
   IconGripVertical,
   IconLayoutColumns,
@@ -237,6 +238,89 @@ export function DataTable<T>({ data, columns, title = "", actions }: DataTablePr
     }
   }
 
+  function getExportData() {
+    const exportColumns = table
+      .getVisibleLeafColumns()
+      .filter((column) => typeof column.accessorFn !== "undefined");
+    const rows = table.getPrePaginationRowModel().rows;
+
+    if (rows.length === 0) {
+      toast.error("There are no rows to export");
+      return null;
+    }
+
+    const toExportValue = (value: unknown) => {
+      if (value == null) {
+        return "";
+      }
+
+      if (value instanceof Date) {
+        return value.toISOString();
+      }
+
+      if (typeof value === "object") {
+        return JSON.stringify(value);
+      }
+
+      return String(value);
+    };
+    const headers = exportColumns.map((column) => {
+      const columnHeader = column.columnDef.header;
+      return typeof columnHeader === "string" ? columnHeader : column.id;
+    });
+    const records = rows.map((row) =>
+      exportColumns.map((column) => toExportValue(row.getValue(column.id))),
+    );
+
+    return { headers, records, rowCount: rows.length };
+  }
+
+  function getExportFilename(extension: "csv" | "xlsx") {
+    return `${(title || "table-data")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "") || "table-data"}.${extension}`;
+  }
+
+  function exportCsv() {
+    const exportData = getExportData();
+    if (!exportData) {
+      return;
+    }
+
+    const escapeCsvValue = (value: string) => `"${value.replaceAll('"', '""')}"`;
+    const csv = [exportData.headers, ...exportData.records]
+      .map((record) => record.map(escapeCsvValue).join(","))
+      .join("\r\n");
+    const url = URL.createObjectURL(new Blob([`\uFEFF${csv}`], { type: "text/csv;charset=utf-8" }));
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = getExportFilename("csv");
+    link.click();
+    URL.revokeObjectURL(url);
+    toast.success(`${exportData.rowCount} row${exportData.rowCount === 1 ? "" : "s"} exported as CSV`);
+  }
+
+  async function exportExcel() {
+    const exportData = getExportData();
+    if (!exportData) {
+      return;
+    }
+
+    const XLSX = await import("xlsx");
+    const worksheet = XLSX.utils.aoa_to_sheet([
+      exportData.headers,
+      ...exportData.records,
+    ]);
+    const workbook = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Export");
+    XLSX.writeFile(workbook, getExportFilename("xlsx"), { compression: true });
+    toast.success(`${exportData.rowCount} row${exportData.rowCount === 1 ? "" : "s"} exported as Excel`);
+  }
+
   return (
     <Card className="">
 
@@ -248,6 +332,21 @@ export function DataTable<T>({ data, columns, title = "", actions }: DataTablePr
 
         {/* RIGHT → ACTIONS */}
         <div className="flex gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">
+                <IconDownload />
+                Export
+                <IconChevronDown />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onSelect={exportCsv}>Export CSV</DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => void exportExcel()}>
+                Export Excel (.xlsx)
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           {actions}
         </div>
 

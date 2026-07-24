@@ -18,8 +18,6 @@ export async function GET(
     "uploads",
      fileSegments[0].split("&")[0]
   );
-  
-  console.log("filePath", filePath);
 
   if (!fs.existsSync(filePath)) {
     return new NextResponse("Not found", { status: 404 });

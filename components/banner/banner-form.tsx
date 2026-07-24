@@ -72,8 +72,6 @@ const BannerForm = ({ data, update = false }: UserFormProps) => {
         res = await createBanner(values);
       }
 
-      console.log(res.message)
-
       if (!res?.success) {
         toast.error("Error", {
           description: res?.message,

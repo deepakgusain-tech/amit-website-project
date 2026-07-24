@@ -39,8 +39,6 @@ export function GuestNavbar({ settings }: { settings: any }) {
   const [services, setServices] = useState([])
   const [open, setOpen] = useState(false);
 
-  console.log("settings", settings)
-
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 24);

@@ -47,7 +47,6 @@ export async function createBanner(data: z.infer<typeof bannerSchema>): Promise<
       message: "Banner created successfully",
     };
   } catch (error) {
-    console.log(error)
     return {
       success: false,
       message: formatError(error),

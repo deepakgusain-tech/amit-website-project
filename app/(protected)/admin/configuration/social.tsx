@@ -21,11 +21,22 @@ const socialLinks = [
   { label: "Instagram", name: "instagramUrl", icon: FaInstagram },
   { label: "LinkedIn", name: "linkedinUrl", icon: FaLinkedinIn },
   { label: "YouTube", name: "youtubeUrl", icon: FaYoutube },
-];
+] as const;
 
-export default function SocialComponent({ setting }: { setting?: any }) {
+type SocialSettings = {
+  facebookUrl?: string | null;
+  instagramUrl?: string | null;
+  linkedinUrl?: string | null;
+  youtubeUrl?: string | null;
+  socialBio?: string | null;
+  showSocialIcons?: boolean | null;
+};
+
+export default function SocialComponent({ setting }: { setting?: SocialSettings }) {
   const [pending, startTransition] = useTransition();
-  const [configuration, setConfiguration] = useState(setting);
+  // Settings are not created until the first save, so render an empty form
+  // when getSettings() has no record instead of reading properties from undefined.
+  const [configuration, setConfiguration] = useState(setting ?? {});
 
   return (
     <Card className="border-slate-200/80 shadow-sm">
@@ -38,7 +49,7 @@ export default function SocialComponent({ setting }: { setting?: any }) {
         <form
           action={(formData) => {
             startTransition(async () => {
-              let res = await saveSocialSettings(formData);
+              const res = await saveSocialSettings(formData);
 
               if (!res?.success) {
                 toast.error("Error", {
@@ -49,7 +60,7 @@ export default function SocialComponent({ setting }: { setting?: any }) {
 
               toast.success("Settings saved successfully");
 
-              setConfiguration({  ...(res.data ?? {}) });
+              setConfiguration((res.data as SocialSettings | undefined) ?? {});
             });
           }}
           className="space-y-5"
@@ -74,14 +85,14 @@ export default function SocialComponent({ setting }: { setting?: any }) {
           <Field
             label="Social bio"
             id="socialBio"
-            defaultValue={configuration?.socialBio}
+            defaultValue={configuration.socialBio ?? ""}
           />
 
           <label className="flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3">
             <Checkbox
               id="showSocialIcons"
               name="showSocialIcons"
-              defaultChecked={configuration?.showSocialIcons}
+              defaultChecked={configuration.showSocialIcons ?? false}
             />
             <span className="text-sm text-slate-700">
               Show social icons in footer

@@ -24,9 +24,7 @@ export async function getApplications(): Promise<Application[]> {
 }
 
 export async function createApplication(data: z.infer<typeof applicationSchema>): Promise<ActionResponse> {
-  // try {
-
-    console.log(data)
+  try {
     const application = applicationSchema.parse(data);
 
 
@@ -49,12 +47,12 @@ export async function createApplication(data: z.infer<typeof applicationSchema>)
       success: true,
       message: "Application created successfully",
     };
-  // } catch (error) {
-  //   return {
-  //     success: false,
-  //     message: formatError(error),
-  //   };
-  // }
+  } catch (error) {
+    return {
+      success: false,
+      message: formatError(error),
+    };
+  }
 }
 
 export async function getApplicationById(id: string) {

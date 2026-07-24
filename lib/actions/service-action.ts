@@ -96,6 +96,7 @@ type ActionResponse<T = undefined> = {
 };
 
 export async function getServices() {
+
   try {
     const services = await prisma.services.findMany({
       orderBy: { createdAt: "desc" },
@@ -115,6 +116,8 @@ export async function getServices() {
 }
 
 export async function getServiceById(id: string) {
+
+
   try {
     const service = await prisma.services.findUnique({
       where: { id },
@@ -222,25 +225,7 @@ export async function createService(
         orderBy: { createdAt: "desc" },
       });
 
-      const recipients = await prisma.careerApplication.findMany({
-        where: {
-          status: {
-            in: [
-              ApplicationStatus.PENDING,
-              ApplicationStatus.REVIEWING,
-              ApplicationStatus.SHORTLISTED,
-              ApplicationStatus.HIRED,
-            ],
-          },
-        },
-        select: {
-          email: true,
-          fullName: true,
-        },
-        distinct: ["email"],
-      });
-
-      await getNewsletter({status: Status.ACTIVE});
+      let recipients = await getNewsletter({ status: Status.ACTIVE });
 
       await sendNewServiceAnnouncement({
         settings,
@@ -300,7 +285,7 @@ export async function updateService(
     });
 
     await prisma.capabilities.deleteMany({ where: { serviceId: id } });
-    
+
     await prisma.capabilities.create({
       data: {
         serviceId: id,
@@ -311,7 +296,7 @@ export async function updateService(
     });
 
     await prisma.deliveryProcess.deleteMany({ where: { serviceId: id } });
-    
+
     await prisma.deliveryProcess.create({
       data: {
         serviceId: id,
@@ -322,7 +307,7 @@ export async function updateService(
     });
 
     await prisma.outcomeFocus.deleteMany({ where: { serviceId: id } });
-    
+
     await prisma.outcomeFocus.create({
       data: {
         serviceId: id,
@@ -333,7 +318,7 @@ export async function updateService(
     });
 
     await prisma.contactSection.deleteMany({ where: { serviceId: id } });
-    
+
     await prisma.contactSection.create({
       data: {
         serviceId: id,

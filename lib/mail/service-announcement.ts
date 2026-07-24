@@ -53,7 +53,7 @@ type AnnouncementOptions = {
     | "emailSignature"
   > | null;
   service: ServiceAnnouncementService;
-  recipients: AnnouncementRecipient[];
+  recipients: any;
 };
 
 function escapeHtml(value: string) {
@@ -157,8 +157,8 @@ function buildHtml({
 
   const signatureHtml = settings?.emailSignature
     ? `<div style="margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0;color:#475569;font-size:14px;line-height:1.7">${escapeHtml(
-        settings.emailSignature,
-      ).replace(/\n/g, "<br />")}</div>`
+      settings.emailSignature,
+    ).replace(/\n/g, "<br />")}</div>`
     : "";
 
   return `
@@ -166,28 +166,27 @@ function buildHtml({
     <div style="max-width:720px;margin:0 auto;padding:32px 20px">
       <div style="background:linear-gradient(135deg,#062B36 0%,#0f4c5c 100%);border-radius:24px;padding:32px;color:#fff;overflow:hidden">
         <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.85">${escapeHtml(
-          brandName,
-        )}</div>
+    brandName,
+  )}</div>
         <div style="margin-top:12px;font-size:30px;line-height:1.1;font-weight:700">${escapeHtml(
-          service.title,
-        )}</div>
+    service.title,
+  )}</div>
         <div style="margin-top:12px;font-size:16px;line-height:1.7;opacity:.92;max-width:620px">${escapeHtml(
-          service.shortDescription,
-        )}</div>
+    service.shortDescription,
+  )}</div>
         <div style="margin-top:24px">
           <a href="${serviceUrl}" style="display:inline-block;background:#f97316;color:#fff;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:700">View service</a>
         </div>
       </div>
 
-      ${
-        imageUrl
-          ? `<div style="margin-top:20px;overflow:hidden;border-radius:20px;border:1px solid #e2e8f0;background:#fff">
+      ${imageUrl
+      ? `<div style="margin-top:20px;overflow:hidden;border-radius:20px;border:1px solid #e2e8f0;background:#fff">
               <img src="${imageUrl}" alt="${escapeHtml(
-                service.title,
-              )}" style="display:block;width:100%;max-height:320px;object-fit:cover" />
+        service.title,
+      )}" style="display:block;width:100%;max-height:320px;object-fit:cover" />
             </div>`
-          : ""
-      }
+      : ""
+    }
 
       <div style="margin-top:20px;background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:28px">
         <div style="font-size:18px;font-weight:700;color:#0f172a">What is new</div>
@@ -197,16 +196,16 @@ function buildHtml({
 
         <div style="margin-top:24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
           ${highlights
-            .map(
-              (item) => `
+      .map(
+        (item) => `
               <div style="border:1px solid #e2e8f0;border-radius:18px;padding:16px;background:#f8fafc">
                 <div style="font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#f97316;font-weight:700">Highlight</div>
                 <div style="margin-top:8px;font-size:14px;line-height:1.6;color:#0f172a">${escapeHtml(
-                  item,
-                )}</div>
+          item,
+        )}</div>
               </div>`,
-            )
-            .join("")}
+      )
+      .join("")}
         </div>
 
         <div style="margin-top:24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
@@ -302,31 +301,14 @@ export async function sendNewServiceAnnouncement({
     return { sent: false, skipped: true, reason: "SMTP settings are incomplete" };
   }
 
-  const uniqueRecipients = Array.from(
-    new Map(
-      recipients
-        .map((recipient) => ({
-          email: recipient.email.trim(),
-          name: recipient.name?.trim() || undefined,
-        }))
-        .filter((recipient) => recipient.email)
-        .map((recipient) => [recipient.email.toLowerCase(), recipient] as const),
-    ).values(),
-  );
-
-  if (uniqueRecipients.length === 0) {
-    return { sent: false, skipped: true, reason: "No active recipients found" };
-  }
-
   const baseUrl = buildBaseUrl(settings?.websiteUrl);
   const imageUrl = resolveImageUrl(baseUrl, service.image);
   const subject = `New service added: ${service.title}`;
   const from = createMailbox(`${fromName} <${fromEmail}>`, fromName);
-  const to = [createMailbox(`${fromName} <${fromEmail}>`, fromName)];
-  const bcc = uniqueRecipients.map((recipient) =>
+  const to = recipients.map((recipient: any) =>
     createMailbox(
-      recipient.name
-        ? `${recipient.name} <${recipient.email}>`
+      recipient.email
+        ? ` <${recipient.email}>`
         : recipient.email,
     ),
   );
@@ -341,7 +323,6 @@ export async function sendNewServiceAnnouncement({
     },
     from,
     to,
-    bcc,
     replyTo: settings?.replyToEmail?.trim()
       ? createMailbox(settings.replyToEmail.trim())
       : undefined,

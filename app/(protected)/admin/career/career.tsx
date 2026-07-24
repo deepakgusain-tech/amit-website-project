@@ -37,7 +37,7 @@ const SingleApplication =  (props: any) => {
                         <h2 className="mb-2">Resume Download</h2>
                         {application.resume ? (
                             <a
-                                href={application.resume}
+                                href={"/api" + application.resume}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="text-blue-600 hover:text-blue-800 underline"

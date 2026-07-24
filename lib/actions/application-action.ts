@@ -13,6 +13,16 @@ type ActionResponse = {
   message: string;
 };
 
+const applicationReviewStatusSchema = z.enum([
+  "PENDING",
+  "REVIEWING",
+  "SHORTLISTED",
+  "REJECTED",
+  "HIRED",
+]);
+
+export type ApplicationReviewStatus = z.infer<typeof applicationReviewStatusSchema>;
+
 export async function getApplications(): Promise<Application[]> {
   try {
     const applications = await prisma.careerApplication.findMany({
@@ -130,6 +140,31 @@ export async function updateApplication(
     return {
       success: true,
       message: "Career Application updated successfully",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: formatError(error),
+    };
+  }
+}
+
+export async function updateApplicationStatus(
+  id: string,
+  status: ApplicationReviewStatus,
+): Promise<ActionResponse> {
+  try {
+    const applicationId = z.string().uuid().parse(id);
+    const nextStatus = applicationReviewStatusSchema.parse(status);
+
+    await prisma.careerApplication.update({
+      where: { id: applicationId },
+      data: { status: nextStatus },
+    });
+
+    return {
+      success: true,
+      message: "Application status updated successfully",
     };
   } catch (error) {
     return {

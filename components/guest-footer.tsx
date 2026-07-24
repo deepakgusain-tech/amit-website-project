@@ -87,7 +87,7 @@ export function GuestFooter({
   };
 
   return (
-    <footer className="bg-black text-slate-100">
+    <footer className="bg-white text-slate-100">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.8fr_0.8fr_1fr]">
           <div className="max-w-sm">
@@ -100,7 +100,7 @@ export function GuestFooter({
                 className="h-auto w-[120px] object-contain"
               />
             </Link>
-            <p className="mt-5 text-sm leading-7 text-slate-300">
+            <p className="mt-5 text-sm leading-7 text-slate-800">
               {settings?.description ??
                 "AS Services is a leading provider of business solutions, offering a wide range of services to help businesses streamline their operations and achieve their goals."}
             </p>
@@ -122,7 +122,7 @@ export function GuestFooter({
                     target="_blank"
                     rel="noreferrer"
                     aria-label={social.label}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-orange-400 hover:bg-orange-500 hover:text-white"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-slate-800 transition hover:border-orange-400 hover:bg-orange-500 hover:text-white"
                   >
                     <Icon className="size-4" />
                   </a>
@@ -138,7 +138,7 @@ export function GuestFooter({
                 <Link
                   key={index}
                   href={service?.id ? `/service/${service.id}` : "/service"}
-                  className="inline-flex items-center gap-2 transition hover:text-white"
+                  className="inline-flex items-center gap-2 transition text-slate-800"
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
                   {service?.title ?? service?.name ?? "Service"}
@@ -154,7 +154,7 @@ export function GuestFooter({
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="inline-flex items-center gap-2 transition hover:text-white"
+                  className="inline-flex items-center gap-2 transition text-slate-800"
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-orange-300" />
                   {link.label}
@@ -165,7 +165,7 @@ export function GuestFooter({
 
           <div>
             <p className="text-xl font-semibold text-orange-500">Newsletter</p>
-            <p className="mt-5 text-sm leading-7 text-slate-300">
+            <p className="mt-5 text-sm leading-7 text-slate-800">
               Get occasional updates on service improvements, analytics
               insights, and practical business tips.
             </p>
@@ -183,7 +183,7 @@ export function GuestFooter({
               />
               <button
                 type="submit"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-orange-500 px-5 text-sm font-semibold text-white transition hover:bg-cyan-300"
+                className="inline-flex h-12 items-center cursor-pointer justify-center gap-2 rounded-full bg-orange-500 px-5 text-sm font-semibold text-white transition hover:bg-cyan-300"
               >
                 Subscribe
                 <Send className="size-4" />
@@ -195,20 +195,20 @@ export function GuestFooter({
         <div className="mt-12 grid gap-6 border-t border-white/10 pt-6 sm:grid-cols-3">
           <a
             href={`mailto:${settings?.primaryEmail ?? ""}`}
-            className="inline-flex items-center gap-3 text-sm text-slate-300 transition hover:text-white"
+            className="inline-flex items-center gap-3 text-sm text-slate-800 transition"
           >
-            <Mail className="size-4 text-cyan-300" />
+            <Mail className="size-4 text-cyan-800" />
             {settings?.primaryEmail ?? ""}
           </a>
           <a
             href={`tel:${settings?.phone ?? "+91-9212174507"}`}
-            className="inline-flex items-center gap-3 text-sm text-slate-300 transition hover:text-white"
+            className="inline-flex items-center gap-3 text-sm text-slate-800 transition"
           >
-            <Phone className="size-4 text-cyan-300" />
+            <Phone className="size-4 text-cyan-800" />
             {settings?.phone ?? "+91-9212174507"}
           </a>
-          <div className="inline-flex items-start gap-3 text-sm text-slate-300">
-            <MapPin className="mt-0.5 size-4 text-cyan-300" />
+          <div className="inline-flex items-start gap-3 text-sm text-slate-800">
+            <MapPin className="mt-0.5 size-4 text-cyan-800" />
             <span>
               {settings?.tagline ?? ""}
             </span>
@@ -216,7 +216,7 @@ export function GuestFooter({
         </div>
 
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-800">
             © {new Date().getFullYear()} {settings?.siteName}. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-4 text-sm">
@@ -229,7 +229,7 @@ export function GuestFooter({
                    href={settings?.[social.key] || social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-slate-400 transition hover:text-white"
+                  className="inline-flex items-center gap-2 text-slate-800 transition"
                 >
                   <Icon className="size-4" />
                   <span>{social.label}</span>

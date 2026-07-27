@@ -235,7 +235,7 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
               />
               {(() => {
                 const src = getPreviewSrc(
-                  faviconPreview || (typeof configuration?.faviconPath === "string" ? configuration.faviconPath : null),
+                  faviconPreview || (typeof configuration?.faviconPath === "string" ? "/api" + configuration.faviconPath : null),
                 );
 
                 return src ? (

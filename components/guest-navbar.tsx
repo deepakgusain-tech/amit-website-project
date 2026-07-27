@@ -63,7 +63,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
           : "border-slate-200/80 bg-white/92 text-slate-900 shadow-sm shadow-slate-900/5 backdrop-blur-xl",
       ].join(" ")}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-30 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
           className="flex h-20 shrink-0 items-center rounded-xl px-2"
@@ -72,10 +72,11 @@ export function GuestNavbar({ settings }: { settings: any }) {
           <Image
             src={settings?.logoPath ? "/api" + settings.logoPath : logo}
             alt="AS Services logo"
-            width={180}
-            height={36}
+            width={220}
+            height={100}
             priority
-            className="block h-15 w-auto object-contain sm:h-14 lg:h-16"
+            unoptimized
+            className="h-20 w-auto object-contain lg:h-24"
           />
         </Link>
 
@@ -174,7 +175,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                             key={item.id}
                             href={`/service/${item.id}`}
                             className="group flex items-start gap-4 rounded-2xl border border-slate-200 p-4 transition-all duration-300 hover:border-orange-300 hover:bg-orange-50 hover:shadow-lg"
-                             onClick={() => setOpen(false)}
+                            onClick={() => setOpen(false)}
                           >
                             <div className="flex-1">
                               <h4 className="font-semibold text-slate-900">
@@ -245,7 +246,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
               >
                 Services
               </Link>
-              <Link 
+              <Link
                 href="/career"
                 className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
                 onClick={() => {

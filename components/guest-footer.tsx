@@ -95,9 +95,9 @@ export function GuestFooter({
               <Image
                 src={settings?.logoPath ? "/api" + settings.logoPath : logo}
                 alt={settings?.siteName ?? "AS Services Logo"}
-                width={180}
-                height={60}
-                className="h-auto w-[120px] object-contain"
+                width={220}
+                height={100}
+                className=" object-contain"
               />
             </Link>
             <p className="mt-5 text-sm leading-7 text-slate-800">

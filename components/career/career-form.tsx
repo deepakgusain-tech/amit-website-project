@@ -95,7 +95,7 @@ const CareerForm = ({ jobs }: { jobs: Job[] }) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-2xl border border-blue-500 bg-slate-50 p-5 shadow-[0_18px_55px_rgba(15,23,42,0.06)] sm:p-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-2xl border border-[#185980] bg-slate-50 p-5 shadow-[0_18px_55px_rgba(15,23,42,0.06)] sm:p-8">
                 <div className="grid gap-5 sm:grid-cols-2">
                     <FormField
                         control={form.control}
@@ -243,7 +243,7 @@ const CareerForm = ({ jobs }: { jobs: Job[] }) => {
 
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <p className="text-xs leading-5 text-slate-500">By applying, you confirm the information shared is accurate.</p>
-                    <Button type="submit" size="lg" variant="default" className="h-12 rounded-full px-6 bg-blue-500" disabled={isPending as unknown as boolean}>
+                    <Button type="submit" size="lg" variant="default" className="h-12 rounded-full px-6 bg-[#185980] cursor-pointer" disabled={isPending as unknown as boolean}>
                         {isPending ? (
                             <Loader className="w-4 h-4 animate-spin mr-2" />
                         ) : (

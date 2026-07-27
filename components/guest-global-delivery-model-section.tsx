@@ -63,7 +63,7 @@ export function GuestGlobalDeliveryModelSection({ settings }: { settings?: any }
               `}</style>
             </div>
           </div>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance text-slate-950 sm:text-4xl lg:text-3xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance text-[#185980] sm:text-4xl lg:text-3xl">
             {title}
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">

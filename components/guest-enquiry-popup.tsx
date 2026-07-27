@@ -128,7 +128,7 @@ export function GuestEnquiryPopup({
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-[70] bg-slate-950/45 backdrop-blur-sm data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0" />
         <DialogPrimitive.Content className="fixed left-1/2 top-1/2 z-[80] grid max-h-[92vh] w-[calc(100vw-2rem)] max-w-5xl -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-blue-500 bg-white shadow-[0_30px_100px_rgba(15,23,42,0.35)] outline-none data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:slide-in-from-bottom-3 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative hidden overflow-hidden bg-blue-800 p-8 text-white lg:block">
+          <div className="relative hidden overflow-hidden bg-[#185980] p-8 text-white lg:block">
             <div className="absolute inset-0 enquiry-grid opacity-25" />
             <div className="absolute -right-20 top-12 size-56 rounded-full bg-cyan-300/20 blur-3xl" />
             <div className="absolute -bottom-16 left-10 size-48 rounded-full bg-violet-300/15 blur-3xl" />
@@ -178,7 +178,7 @@ export function GuestEnquiryPopup({
               </div>
             </div>
 
-            <DialogPrimitive.Close className="absolute right-4 top-4 inline-flex size-9 items-center justify-center rounded-full border border-orange-200 bg-orange-500 text-white shadow-sm transition hover:bg-slate-100 hover:text-slate-950">
+            <DialogPrimitive.Close className="absolute right-4 top-4 inline-flex size-9 items-center justify-center rounded-full border border-orange-200 bg-orange-500 text-white shadow-sm transition hover:bg-orange-600 hover:text-white cursor-pointer">
               <X className="size-4" />
               <span className="sr-only">Close enquiry popup</span>
             </DialogPrimitive.Close>
@@ -194,7 +194,7 @@ export function GuestEnquiryPopup({
                       onChange={(event) =>
                         updateValue("fullName", event.target.value)
                       }
-                      className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
+                      className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm outline-none transition placeholder:text-slate-400 focus:border-[#185980] focus:bg-white focus:ring-4 focus:ring-[#185980]"
                       placeholder="Your name"
                       required
                     />
@@ -211,7 +211,7 @@ export function GuestEnquiryPopup({
                       onChange={(event) =>
                         updateValue("email", event.target.value)
                       }
-                      className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
+                      className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm outline-none transition placeholder:text-slate-400 focus:border-[#185980] focus:bg-white focus:ring-4 focus:ring-[#185980]"
                       placeholder="you@example.com"
                       required
                     />
@@ -228,7 +228,7 @@ export function GuestEnquiryPopup({
                       onChange={(event) =>
                         updateValue("phoneNumber", event.target.value)
                       }
-                      className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
+                      className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm outline-none transition placeholder:text-slate-400 focus:border-[#185980] focus:bg-white focus:ring-4 focus:ring-[#185980]"
                       placeholder="+91"
                       required
                     />
@@ -244,7 +244,7 @@ export function GuestEnquiryPopup({
                       onChange={(event) =>
                         updateValue("companyName", event.target.value)
                       }
-                      className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
+                      className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm outline-none transition placeholder:text-slate-400 focus:border-[#185980] focus:bg-white focus:ring-4 focus:ring-[#185980]"
                       placeholder="Company or organization"
                     />
                   </FieldShell>
@@ -257,7 +257,7 @@ export function GuestEnquiryPopup({
                   id="enquiry-subject"
                   value={values.subject}
                   onChange={(event) => updateValue("subject", event.target.value)}
-                  className="min-h-32 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
+                  className="min-h-32 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 outline-none transition placeholder:text-slate-400 focus:border-[#185980] focus:bg-white focus:ring-4 focus:ring-[#185980]"
                   placeholder="Subject"
                   required
                 />
@@ -269,7 +269,7 @@ export function GuestEnquiryPopup({
                   id="enquiry-message"
                   value={values.message}
                   onChange={(event) => updateValue("message", event.target.value)}
-                  className="min-h-32 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-100"
+                  className="min-h-32 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 outline-none transition placeholder:text-slate-400 focus:border-[#185980] focus:bg-white focus:ring-4 focus:ring-[#185980]"
                   placeholder="Briefly describe your requirement, timeline, or support need."
                   required
                 />
@@ -295,7 +295,7 @@ export function GuestEnquiryPopup({
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
+                  className="inline-flex cursor-pointer h-12 items-center justify-center gap-2 rounded-full bg-[#185980] px-6 text-sm font-semibold text-white transition hover:bg-[#185980] disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {isPending ? (
                     <Loader2 className="size-4 animate-spin" />

@@ -45,7 +45,7 @@ function ReasonCard({
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.06),transparent_35%)]" />
 
       <div className="relative">
-        <div className="flex size-12 items-center justify-center rounded-2xl bg-blue-500 text-white shadow-[0_12px_24px_rgba(15,23,42,0.12)]">
+        <div className="flex size-12 items-center justify-center rounded-2xl bg-[#185980] text-white shadow-[0_12px_24px_rgba(15,23,42,0.12)]">
           <Icon className="size-5" />
         </div>
 
@@ -66,7 +66,8 @@ export function GuestWhyClientsChooseUsSection({ settings }: { settings?: any })
   const description =
     settings?.whyClientsDescription ??
     "Our delivery model gives clients flexible teams, disciplined process, and visibility that makes operations easier to manage.";
-  const reasons = parseCards(settings?.whyClientsCards, [
+ 
+    const reasons = parseCards(settings?.whyClientsCards, [
     {
       title: "Scalable Teams",
       summary: "Flexible delivery capacity that grows with your needs.",
@@ -91,7 +92,7 @@ export function GuestWhyClientsChooseUsSection({ settings }: { settings?: any })
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.34em] text-blue-500">
+          <p className="text-sm font-semibold uppercase tracking-[0.34em] text-[#185980]">
             {tagline}
           </p>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance text-orange-500 sm:text-4xl lg:text-5xl">

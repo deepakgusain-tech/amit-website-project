@@ -26,7 +26,7 @@ const contactCards = [
     value: "info@asservices.com",
     href: "mailto:info@asservices.com",
     note: "Send your requirement and we'll reply promptly.",
-    accent: "from-blue-500 to-sky-500",
+    accent: "from-[#185980] to-sky-500",
   },
   {
     icon: MapPin,
@@ -34,7 +34,7 @@ const contactCards = [
     value: "Flexible across time zones",
     href: "/services",
     note: "We support clients with responsive remote delivery.",
-    accent: "from-cyan-500 to-blue-500",
+    accent: "from-cyan-500 to-[#185980]",
   },
 ]
 
@@ -90,7 +90,7 @@ export default async function ContactPage() {
   const services = await getServices()
 
   return (
-    <div className="relative overflow-hidden bg-[#eef3f8] text-slate-900">
+    <div className="relative overflow-hidden bg-[#eef3f8] text-slate-900 ">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.12),transparent_28%),radial-gradient(circle_at_80%_0,rgba(249,115,22,0.09),transparent_26%),linear-gradient(180deg,rgba(248,250,252,0.95)_0%,rgba(236,242,248,1)_100%)]" />
 
       <section className="relative isolate overflow-hidden pt-28 sm:pt-32">
@@ -127,7 +127,7 @@ export default async function ContactPage() {
               </Link>
             </div>
 
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
+            <div className="mt-8 mb-8 grid gap-5 md:grid-cols-2">
               {contactCards.map((card) => (
                 <ContactCard key={card.label} {...card} />
               ))}

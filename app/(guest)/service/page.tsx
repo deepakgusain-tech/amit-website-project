@@ -143,7 +143,7 @@ export default async function ServicePage() {
               </Button>
               <Link
                 href="#services-list"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-blue-500 px-6 text-sm font-semibold text-blue-500 transition hover:bg-blue-500 hover:text-white"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-[#185980] bg-[#185980] px-6 text-sm font-semibold text-white transition hover:bg-[#185980] hover:text-white"
               >
                 Explore Services
               </Link>
@@ -190,7 +190,7 @@ export default async function ServicePage() {
       <section id="services-list" className="bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase text-blue-500">
+            <p className="text-sm font-semibold uppercase text-[#185980]">
               Complete Service List
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-orange-500 sm:text-4xl">
@@ -210,7 +210,7 @@ export default async function ServicePage() {
       <section className="bg-slate-50 py-16 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
           <div>
-            <p className="text-sm font-semibold uppercase text-blue-500">
+            <p className="text-sm font-semibold uppercase text-[#185980]">
               {deliveryTagline}
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-orange-500 sm:text-4xl">
@@ -247,7 +247,7 @@ export default async function ServicePage() {
 
       <section className="bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-lg bg-[#062B36] p-6 text-white sm:p-10">
+          <div className="relative overflow-hidden rounded-lg bg-[#185980] p-6 text-white sm:p-10">
             <div className="absolute inset-0 service-grid opacity-20" />
             <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
@@ -259,7 +259,7 @@ export default async function ServicePage() {
                   analytics, support, and consulting into a practical delivery plan.
                 </p>
               </div>
-              <Button asChild size="lg" className="h-12 rounded-full bg-cyan-300 px-6 text-slate-950 hover:bg-white">
+              <Button asChild size="lg" className="h-12 rounded-full bg-orange-600 px-6 text-white hover:bg-orange-600 ">
                 <Link href="/contact" className="inline-flex items-center gap-2">
                   Start a Conversation
                   <ArrowRight className="size-4" />

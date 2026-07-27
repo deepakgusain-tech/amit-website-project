@@ -3,21 +3,14 @@ import { GuestFooter } from "@/components/guest-footer"
 import { GuestNavbar } from "@/components/guest-navbar"
 import { getSettings } from "@/lib/actions/settings-action"
 import { getServices } from "@/lib/actions/service-action"
-import { prisma } from "@/lib/prisma"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await prisma.siteSettings.findFirst();
+  const settings = await getSettings();
 
   return {
     title: settings?.siteName || "Amit Website - Guest",
     icons: {
       icon: settings?.faviconPath ? `/api${settings.faviconPath}` : "/favicon.ico",
-    },
-    openGraph: {
-      title: settings?.siteName || "Amit Website - Guest",
-      images: settings?.logoPath
-        ? [`/api${settings.logoPath}`]
-        : ["/logo.png"],
     },
   };
 }

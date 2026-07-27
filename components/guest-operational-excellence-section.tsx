@@ -66,7 +66,7 @@ export function GuestOperationalExcellenceSection({ settings }: { settings?: any
               </div>
             </div>
 
-            <h2 className="mt-8 text-2xl font-semibold tracking-tight text-balance text-blue-500 sm:text-3xl lg:text-4xl">
+            <h2 className="mt-8 text-2xl font-semibold tracking-tight text-balance text-[#185980] sm:text-3xl lg:text-4xl">
               {aboutTitle}
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
@@ -77,7 +77,7 @@ export function GuestOperationalExcellenceSection({ settings }: { settings?: any
               {aboutButtons.map((pill) => (
                 <span
                   key={pill}
-                  className="inline-flex items-center rounded-full border border-blue-500 px-4 py-2 text-sm font-medium text-blue-500 shadow-[0_8px_24px_rgba(15,23,42,0.04)] hover:bg-blue-500 hover:text-white"
+                  className="inline-flex items-center rounded-full border border-[#185980] px-4 py-2 text-sm font-medium text-[#185980] shadow-[0_8px_24px_rgba(15,23,42,0.04)] hover:bg-blue-500 hover:text-white"
                 >
                   {pill}
                 </span>
@@ -104,17 +104,17 @@ export function GuestOperationalExcellenceSection({ settings }: { settings?: any
             <div className="absolute -right-8 bottom-4 h-28 w-28 rounded-full bg-violet-200/35 blur-3xl" />
 
             <div className="relative rounded-[1rem] border border-slate-200 bg-white p-4 shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-5">
-              <p className="text-xl font-bold uppercase tracking-[0.34em] text-blue-500">
+              <p className="text-xl font-bold uppercase tracking-[0.34em] text-[#185980]">
                 {deliveryModelTitle}
               </p>
               <div className="mt-4 grid gap-3">
                 {deliveryModelItems.map((item) => (
                   <div
                     key={item}
-                    className="flex items-start gap-3 rounded-2xl border border-blue-500 bg-white px-4 py-3"
+                    className="flex items-start gap-3 rounded-2xl border border-[#185980] bg-white px-4 py-3"
                   >
                     <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-emerald-500" />
-                    <span className="text-sm leading-6 text-slate-700">
+                    <span className="text-sm leading-6 text-[#185980]">
                       {item}
                     </span>
                   </div>

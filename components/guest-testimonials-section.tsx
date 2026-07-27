@@ -52,14 +52,14 @@ export function GuestTestimonialsSection({ testimonials }: { testimonials: Testi
     <section className="bg-violet-100 py-16 text-slate-900 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.34em] text-blue-500">
+          <p className="text-sm font-semibold uppercase tracking-[0.34em] text-[#185980]">
             Testimonials
           </p>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance text-orange-500 sm:text-4xl lg:text-5xl">
             What clients say about working with us.
           </h2>
 
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-[#185980] sm:text-lg">
             A few concise reflections on transition quality, reporting clarity,
             and the consistency of our operational support.
           </p>

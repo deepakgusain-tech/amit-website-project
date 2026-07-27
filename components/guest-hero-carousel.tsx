@@ -227,7 +227,7 @@ export function GuestHeroSection({
                   asChild
                   size="lg"
                   variant="outline"
-                  className="rounded-full border-blue-500 bg-transparent px-6 text-blue-500 hover:bg-blue-600 hover:text-white"
+                  className="rounded-full border-[#185980] px-6 bg-[#185980] text-white hover:bg-[#185980] hover:text-white"
                 >
                   <Link
                     href="/career"

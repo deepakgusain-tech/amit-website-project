@@ -11,43 +11,6 @@ import {
 import { Button } from "@/components/ui/button"
 import { Service } from "@/lib/types"
 
-const services = [
-  {
-    icon: Boxes,
-    title: "Back Office Operations",
-    summary:
-      "Administrative processing, documentation management, workflow support.",
-    accent: "from-sky-500/20 to-cyan-500/10",
-  },
-  {
-    icon: BarChart3,
-    title: "Reporting & Analytics",
-    summary:
-      "Operational dashboards, performance reporting, data analysis.",
-    accent: "from-violet-500/20 to-fuchsia-500/10",
-  },
-  {
-    icon: Wrench,
-    title: "Technical Support",
-    summary:
-      "IT Consulting, IT Implementation, Support & Managed Services, AI & Automations",
-    accent: "from-emerald-500/20 to-teal-500/10",
-  },
-  {
-    icon: Settings2,
-    title: "Process Management",
-    summary:
-      "Process execution, quality assurance, operational governance.",
-    accent: "from-amber-500/20 to-orange-500/10",
-  },
-  {
-    icon: RefreshCcw,
-    title: "Recovery Support Services",
-    summary:
-      "Specialized operational support for recovery and repossession industry.",
-    accent: "from-rose-500/20 to-pink-500/10",
-  },
-]
 
 function ServiceCard({
   service,
@@ -94,7 +57,7 @@ export function GuestServicesSection({services}: {services: Service[]}) {
           <h2 className=" text-xl font-semibold tracking-tight text-balance text-orange-500 sm:text-4xl lg:text-5xl">
             Services We Deliver
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-blue-500 sm:text-lg">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-[#185980] sm:text-lg">
             A focused service portfolio built to support operations, reporting,
             technical enablement, and recovery workflows.
           </p>

@@ -93,7 +93,7 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-500 bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-[0_12px_30px_rgba(15,23,42,0.05)] backdrop-blur">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#185980] bg-[#185980] px-4 py-2 text-sm font-medium text-white shadow-[0_12px_30px_rgba(15,23,42,0.05)] backdrop-blur">
                 <ShieldCheck className="size-4 text-white" />
                 {settings?.aboutTagline ?? "About AS Services"}
               </div>
@@ -107,7 +107,7 @@ export default async function AboutPage() {
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg" variant="default" className="rounded-full px-6 bg-blue-500 text-white hover:bg-blue-700">
+                <Button asChild size="lg" variant="default" className="rounded-full px-6 bg-[#185980] text-white hover:bg-[#185980]">
                   <Link href="/contact" className="inline-flex items-center gap-2">
                     Talk to us
                     <ArrowRight className="size-4" />
@@ -117,7 +117,7 @@ export default async function AboutPage() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="rounded-full border-blue-600 bg-white/70 px-6 text-blue-500"
+                  className="rounded-full border-[#185980] bg-white/70 px-6 text-[#185980]"
                 >
                   <Link href="/services" className="inline-flex items-center gap-2">
                     View services
@@ -130,7 +130,7 @@ export default async function AboutPage() {
                 {aboutStrengths.map((strength) => (
                   <span
                     key={strength}
-                    className="inline-flex items-center rounded-full border border-blue-600 bg-white/90 px-4 py-2 text-sm font-medium text-blue-600 shadow-[0_10px_24px_rgba(15,23,42,0.04)]"
+                    className="inline-flex items-center rounded-full border border-[#185980] bg-white/90 px-4 py-2 text-sm font-medium text-[#185980] shadow-[0_10px_24px_rgba(15,23,42,0.04)]"
                   >
                     {strength}
                   </span>
@@ -139,14 +139,14 @@ export default async function AboutPage() {
             </div>
 
             <div className="relative">
-              <div className="relative rounded-[2rem] border border-blue-400 border-[2px] bg-white/95 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-6">
+              <div className="relative rounded-[2rem] border border-[#185980] border-[2px] bg-white/95 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-6">
                 <div className="">
                   <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.34em] text-orange-500">
                     <ShieldCheck className="size-4 text-cyan-700" />
                     Our focus
                   </div>
 
-                  <h2 className="mt-4 text-2xl font-semibold tracking-tight text-blue-500 sm:text-3xl">
+                  <h2 className="mt-4 text-2xl font-semibold tracking-tight text-[#185980] sm:text-3xl">
                     Clear service areas. Clean delivery. Measurable support.
                   </h2>
 
@@ -178,9 +178,9 @@ export default async function AboutPage() {
                       return (
                         <div
                           key={item.label}
-                          className="flex items-start gap-4 rounded-2xl border border-blue-500 border-[2px] bg-white px-4 py-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)]"
+                          className="flex items-start gap-4 rounded-2xl border border-[#185980] border-[2px] bg-white px-4 py-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)]"
                         >
-                          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-blue-500 text-white shadow-[0_10px_24px_rgba(15,23,42,0.18)]">
+                          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-[#185980] text-white shadow-[0_10px_24px_rgba(15,23,42,0.18)]">
                             <Icon className="size-4" />
                           </div>
                           <div>
@@ -211,7 +211,7 @@ export default async function AboutPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.34em] text-orange-500">
               Core services
             </p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance text-blue-500 sm:text-4xl lg:text-5xl">
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance text-[#185980] sm:text-4xl lg:text-5xl">
               The main services we provide.
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
@@ -234,7 +234,7 @@ export default async function AboutPage() {
 
       <section className="relative py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-[2rem] border border-orange-200 bg-black text-white shadow-[0_24px_80px_rgba(2,6,23,0.2)]">
+          <div className="overflow-hidden rounded-[2rem] border border-orange-200 bg-[#185980] text-white shadow-[0_24px_80px_rgba(2,6,23,0.2)]">
             <div className="flex flex-col gap-6 p-8 sm:p-10 lg:flex-row lg:items-center lg:justify-between lg:p-12">
               <div className="max-w-2xl">
                 <p className="text-sm font-semibold uppercase tracking-[0.34em] text-white/55">
@@ -250,8 +250,8 @@ export default async function AboutPage() {
                 </p>
               </div>
 
-              <Button asChild size="lg" className="rounded-full bg-white px-6 text-slate-950 hover:bg-slate-100">
-                <Link href="/contact" className="inline-flex items-center gap-2">
+              <Button asChild size="lg" variant="default" className="rounded-full bg-orange-600 text-white  px-6 hover:bg-orange-600">
+                <Link href="/contact" className="inline-flex items-center gap-2 ">
                   Contact us
                   <ArrowRight className="size-4" />
                 </Link>

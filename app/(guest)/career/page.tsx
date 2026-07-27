@@ -115,7 +115,7 @@ export default async function CareerPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#apply"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 px-6 text-sm font-semibold transition"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#185980] text-white hover:bg-[#185980] px-6 text-sm font-semibold transition"
               >
                 Apply Now
                 <ArrowRight className="size-4" />
@@ -138,7 +138,7 @@ export default async function CareerPage() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="rounded-2xl border border-blue-500 bg-white/10 p-5 backdrop-blur"
+                className="rounded-2xl border border-[#185980] bg-white/10 p-5 backdrop-blur"
               >
                 <item.icon className="size-6 text-orange-200" />
                 <p className="mt-5 text-sm text-slate-300">{item.label}</p>
@@ -167,9 +167,9 @@ export default async function CareerPage() {
             {jobs.length > 0  && jobs.map((job: any) => (
               <article
                 key={job.title}
-                className="rounded-2xl border border-blue-500 bg-slate-50 p-6 shadow-[0_14px_40px_rgba(15,23,42,0.05)]"
+                className="rounded-2xl border border-[#185980] bg-slate-50 p-6 shadow-[0_14px_40px_rgba(15,23,42,0.05)]"
               >
-                <div className="flex size-12 items-center justify-center rounded-2xl bg-blue-500 text-white">
+                <div className="flex size-12 items-center justify-center rounded-2xl bg-[#185980] text-white">
                   <BriefcaseBusiness className="size-5" />
                 </div>
                 <h3 className="mt-5 text-xl font-semibold text-orange-500">
@@ -179,11 +179,11 @@ export default async function CareerPage() {
                   {job.shortDescription}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-600 bg-white px-3 py-1.5 text-xs font-semibold text-blue-600">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[#185980] bg-white px-3 py-1.5 text-xs font-semibold text-[#185980]">
                     <Clock3 className="size-3.5" />
                     {job.employmentType?.replace("_", " ")}
                   </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-600 bg-white px-3 py-1.5 text-xs font-semibold text-blue-600">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[#185980] bg-white px-3 py-1.5 text-xs font-semibold text-[#185980]">
                     <MapPin className="size-3.5" />
                     {job.location}
                   </span>
@@ -222,7 +222,7 @@ export default async function CareerPage() {
 
       <section id="apply" className="bg-white py-16 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-          <aside className="rounded-2xl border border-slate-200 bg-blue-800 p-6 text-white sm:p-8">
+          <aside className="rounded-2xl border border-slate-200 bg-[#185980] p-6 text-white sm:p-8">
             <BadgeCheck className="size-10 text-cyan-200" />
             <h2 className="mt-6 text-3xl font-semibold tracking-tight">
               Candidate Application

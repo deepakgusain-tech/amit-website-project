@@ -58,7 +58,7 @@ function ServiceVisual({ service }: any) {
       />
       <div className="detail-orbit absolute inset-0 rounded-lg border border-white/12 bg-white/10 p-5 shadow-[0_30px_110px_rgba(0,0,0,0.25)] backdrop-blur">
         
-        <Image src={service.image ? "/api" + service.image as string : ""} alt={service.title} fill className="object-cover object-center rounded-lg" />
+        <Image src={service?.image ? "/api" + service?.image as string : ""} alt={service?.title} fill className="object-cover object-center rounded-lg" />
  
       </div>
     </div>
@@ -87,7 +87,7 @@ export default async function ServiceDetailPage({
           {service?.data?.image && (
             <div className="absolute inset-0 scale-110 blur-2xl">
               <Image
-                src={"/api" + service.data.image as string}
+                src={"/api" + service?.data?.image as string}
                 alt="Background"
                 fill
                 priority
@@ -155,7 +155,7 @@ export default async function ServiceDetailPage({
       <section className="bg-white py-16 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
           <div>
-            <div className={"inline-flex size-14 items-center justify-center rounded-lg border border-blue-500 text-blue-500"}>
+            <div className={"inline-flex size-14 items-center justify-center rounded-lg border border-[#185980] text-[#185980]"}>
               <BoxesIcon className="size-6" />
             </div>
             <h2 className="mt-6 text-3xl font-semibold text-orange-500 sm:text-4xl">
@@ -187,7 +187,7 @@ export default async function ServiceDetailPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
             <div>
-              <p className={"inline-flex rounded-full border border-blue-500 text-blue-500 px-3 py-1 text-xs font-semibold uppercase"}>
+              <p className={"inline-flex rounded-full border border-[#185980] text-[#185980] px-3 py-1 text-xs font-semibold uppercase"}>
                 Capabilities
               </p>
               <h2 className="mt-4 text-3xl font-semibold text-orange-500 sm:text-4xl">
@@ -226,7 +226,7 @@ export default async function ServiceDetailPage({
             <div className="mt-8 grid gap-4">
               {service.data?.deliveryProcess?.items.map((step: any, index: number) => (
                 <div key={step} className="flex gap-4">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-blue-500 text-sm font-semibold text-white">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#185980] text-sm font-semibold text-white">
                     {index + 1}
                   </span>
                   <div className="border-b border-slate-200 pb-4">
@@ -237,7 +237,7 @@ export default async function ServiceDetailPage({
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-lg bg-[#062B36] p-6 text-white sm:p-8">
+          <div className="relative overflow-hidden rounded-lg bg-[#185980] p-6 text-white sm:p-8">
             <div className="absolute inset-0 detail-grid opacity-20" />
             <div className={"absolute inset-x-0 top-0 h-1 bg-gradient-to-r"} />
             <div className="relative">
@@ -268,13 +268,13 @@ export default async function ServiceDetailPage({
 
       <section className="bg-slate-50 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-[0_18px_55px_rgba(15,23,42,0.06)] sm:p-10">
+          <div className="rounded-lg border border-slate-200 bg-[#185980] p-6 shadow-[0_18px_55px_rgba(15,23,42,0.06)] sm:p-10">
             <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
-                <h2 className="text-3xl font-semibold text-slate-950 sm:text-4xl">
+                <h2 className="text-3xl font-semibold text-white sm:text-4xl">
                   {service.data?.contactSection?.title}
                 </h2>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
+                <p className="mt-4 max-w-2xl text-base leading-7 text-white">
                   {service.data?.contactSection?.description}
                 </p>
               </div>

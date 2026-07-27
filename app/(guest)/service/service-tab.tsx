@@ -95,7 +95,7 @@ export default function ServiceTab({ serviceCategories, services }: any) {
 
                                     <Link
                                         href={`/service/${service.id}`}
-                                        className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-blue-500 transition group-hover:text-cyan-700"
+                                        className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#185980] transition group-hover:text-cyan-700"
                                     >
                                         View service details
                                         <ArrowRight className="size-4 transition group-hover:translate-x-1" />

@@ -212,7 +212,7 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
               />
               {(() => {
                 const src = getPreviewSrc(
-                  logoPreview || (typeof configuration?.logoPath === "string" ? configuration.logoPath : null),
+                  logoPreview || (typeof configuration?.logoPath === "string" ? "/api" + configuration.logoPath : null),
                 );
 
                 return src ? (

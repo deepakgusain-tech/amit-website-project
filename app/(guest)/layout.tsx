@@ -3,10 +3,23 @@ import { GuestFooter } from "@/components/guest-footer"
 import { GuestNavbar } from "@/components/guest-navbar"
 import { getSettings } from "@/lib/actions/settings-action"
 import { getServices } from "@/lib/actions/service-action"
+import { prisma } from "@/lib/prisma"
 
-export const metadata: Metadata = {
-  title: "Amit Website - Guest",
-  description: "Guest-facing frontend pages",
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await prisma.siteSettings.findFirst();
+
+  return {
+    title: settings?.siteName || "Amit Website - Guest",
+    icons: {
+      icon: settings?.faviconPath ? `/api${settings.faviconPath}` : "/favicon.ico",
+    },
+    openGraph: {
+      title: settings?.siteName || "Amit Website - Guest",
+      images: settings?.logoPath
+        ? [`/api${settings.logoPath}`]
+        : ["/logo.png"],
+    },
+  };
 }
 
 export default async function GuestLayout({

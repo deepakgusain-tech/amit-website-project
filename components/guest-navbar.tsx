@@ -72,11 +72,11 @@ export function GuestNavbar({ settings }: { settings: any }) {
           <Image
             src={settings?.logoPath ? "/api" + settings.logoPath : logo}
             alt="AS Services logo"
-            width={220}
-            height={100}
+            width={300}
+            height={120}
             priority
             unoptimized
-            className="h-20 w-auto object-contain lg:h-24"
+            className="h-30 w-auto object-contain"
           />
         </Link>
 

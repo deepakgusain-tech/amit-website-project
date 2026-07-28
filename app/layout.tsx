@@ -43,7 +43,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${jakartaSans.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} h-full w-full antialiased`}
     >
-      <body className="min-h-screen w-screen bg-background">
+      <body className="min-h-screen w-full overflow-x-hidden bg-background">
         <TooltipProvider>
           <div className="mx-auto w-full ">
             {children}

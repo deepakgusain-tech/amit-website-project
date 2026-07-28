@@ -101,7 +101,7 @@ export default async function ContactPage() {
               Contact AS Services
             </div>
 
-            <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+            <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-[#185980] sm:text-5xl lg:text-6xl">
               Let&apos;s talk about the support your team needs.
             </h1>
 

@@ -124,6 +124,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Give marketing pages more room on very wide desktop displays while keeping
+   the existing laptop and mobile layout unchanged. */
+@media (min-width: 1536px) {
+  .max-w-7xl {
+    max-width: 90rem;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

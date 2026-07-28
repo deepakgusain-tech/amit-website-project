@@ -19,7 +19,7 @@ export default function ServiceTab({ serviceCategories, services }: any) {
 
     return (
         <section className="py-20">
-            <div className="container">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
 
                 <div className="grid gap-12 lg:grid-cols-12">

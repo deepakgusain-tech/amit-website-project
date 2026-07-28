@@ -178,7 +178,7 @@ export function GuestHeroSection({
   }, []);
 
   return (
-    <section className="relative isolate overflow-hidden text-white">
+    <section className="relative isolate overflow-hidden text-white w-full">
       <div className="relative min-h-[100svh] overflow-hidden bg-slate-950">
         <video
           className="absolute inset-0 h-full w-full object-cover"

@@ -35,29 +35,34 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const theme = "light";
 
   return (
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${jakartaSans.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} h-full antialiased`}
+      className={`${jakartaSans.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} h-full w-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <TooltipProvider>{children}</TooltipProvider>
-        <Toaster theme={theme as "light" | "dark" | "system"}
+      <body className="min-h-screen w-screen bg-background">
+        <TooltipProvider>
+          <div className="mx-auto w-full ">
+            {children}
+          </div>
+        </TooltipProvider>
+
+        <Toaster
+          theme={theme}
           richColors
           toastOptions={{
             classNames: {
-              toast:
-                "bg-slate-900 text-white border-slate-800",
+              toast: "bg-slate-900 text-white border-slate-800",
               title: "text-white",
               description: "text-slate-300",
               actionButton: "bg-blue-600 text-white",
               cancelButton: "bg-slate-700 text-white",
             },
-          }} />
+          }}
+        />
       </body>
     </html>
   );

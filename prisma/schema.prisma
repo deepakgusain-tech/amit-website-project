@@ -129,6 +129,9 @@ model SiteSettings {
   happyCustomers     String?
   operationalSupport String?
   heroTrustTags      String? @db.Text
+  heroTagline        String?
+  heroTitle          String?
+  heroDescription    String? @db.Text
   aboutTagline       String?
   aboutTitle         String?
   aboutDescription   String? @db.Text

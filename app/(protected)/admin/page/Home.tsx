@@ -287,18 +287,30 @@ export default function Home({ setting }: { setting?: SiteSettings }) {
         </CardHeader>
         <CardContent className="p-5">
           <form action={onSubmit} className="space-y-5">
-            <input
-              type="hidden"
-              name="siteName"
-              value={configuration?.siteName ?? "AS Services"}
-            />
 
             <div className="grid gap-4 md:grid-cols-2">
               <Field
-                label="Title"
-                id="legalName"
-                defaultValue={configuration?.legalName}
-                placeholder="Global Business Support Services Delivered from India"
+                label="Hero Tagline"
+                id="heroTagline"
+                defaultValue={configuration?.heroTagline}
+                placeholder="Hero Tagline"
+              />
+              <Field
+                label="Hero Title"
+                id="heroTitle"
+                defaultValue={configuration?.heroTitle}
+                placeholder="A focused operating model built for scale, quality, and steady delivery."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="heroDescription">Hero Description</Label>
+              <Textarea
+                id="heroDescription"
+                name="heroDescription"
+                className="min-h-[120px] rounded-xl"
+                defaultValue={configuration?.heroDescription ?? ""}
+                placeholder="We combine back-office operations, IT consulting, and support services..."
               />
             </div>
 

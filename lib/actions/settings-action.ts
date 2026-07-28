@@ -165,7 +165,10 @@ export async function saveServicePageSettings(formData: FormData): Promise<Actio
 
 export async function saveHomePageSettings(formData: FormData): Promise<ActionResponse> {
   const payload = {
-    siteName: String(formData.get("siteName") ?? "").trim(),
+    heroTagline: getOptionalString(formData, "heroTagline"),
+    heroTitle: getOptionalString(formData, "heroTitle"),
+    heroDescription: getOptionalString(formData, "heroDescription"),
+    siteName: "As services",
     legalName: getOptionalString(formData, "legalName"),
     teamMembers: getOptionalString(formData, "teamMembers"),
     happyCustomers: getOptionalString(formData, "happyCustomers"),

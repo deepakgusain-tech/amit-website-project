@@ -120,9 +120,9 @@ function AnimatedCounter({
 }
 
 type HeroSettings = {
-  tagline?: string | null;
-  legalName?: string | null;
-  description?: string | null;
+  heroTagline?: string | null;
+  heroTitle?: string | null;
+  heroDescription?: string | null;
   heroTrustTags?: string | null;
 };
 
@@ -144,11 +144,11 @@ export function GuestHeroSection({
   const [metricsVisible, setMetricsVisible] = React.useState(false);
   const [activeSlide, setActiveSlide] = React.useState(0);
   const metricsRef = React.useRef<HTMLDivElement | null>(null);
-  const heroTagline = settings?.tagline ?? "Global delivery from India";
+  const heroTagline = settings?.heroTagline ?? "Global delivery from India";
   const heroTitle =
-    settings?.legalName ?? "Global Business Support Services Delivered from India";
+    settings?.heroTitle ?? "Global Business Support Services Delivered from India";
   const heroDescription =
-    settings?.description ??
+    settings?.heroDescription ??
     "Helping organizations scale through offshore back-office operations, recovery support services, reporting, analytics, IT Services and operational excellence.";
   const trustMetrics = parseMetricList(settings?.heroTrustTags, metricFallbacks);
   const trustTags = [

@@ -13,8 +13,16 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
 import { Status } from "@/lib/types";
 
 
@@ -29,6 +37,9 @@ const ctaSecondaryBase =
 
 const dropdownLinkBase =
   "block rounded-2xl border border-slate-200/80 bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-200 hover:shadow-[0_14px_35px_rgba(15,23,42,0.08)]";
+
+const mobileLinkBase =
+  "rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950";
 
 export function GuestNavbar({ settings }: { settings: any }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -81,26 +92,116 @@ export function GuestNavbar({ settings }: { settings: any }) {
         </Link>
 
         <nav className="flex items-center gap-6">
-          <button
-            type="button"
-            className={[
-              "inline-flex h-8 w-8 items-center justify-center rounded-xl border transition md:hidden",
-              isTransparentHeader
-                ? "border-white/20 text-white hover:bg-white/10"
-                : "border-slate-200 text-slate-700 hover:bg-slate-100",
-            ].join(" ")}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-            aria-controls="guest-navbar-menu"
-            onClick={() => {
-              setMobileOpen((open) => {
-                const next = !open;
-                return next;
-              });
-            }}
-          >
-            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+          {/* Mobile menu trigger + Sheet */}
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+            <SheetTrigger asChild>
+              <button
+                type="button"
+                className={[
+                  "inline-flex h-8 w-8 items-center justify-center rounded-xl border transition md:hidden",
+                  isTransparentHeader
+                    ? "border-white/20 text-white hover:bg-white/10"
+                    : "border-slate-200 text-slate-700 hover:bg-slate-100",
+                ].join(" ")}
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              >
+                <Menu className="size-5" />
+              </button>
+            </SheetTrigger>
+
+            <SheetContent side="right" className="w-[300px] sm:w-[360px] p-0">
+              <SheetHeader className="border-b border-slate-200 px-4 py-4">
+                <SheetTitle asChild>
+                  <Link
+                    href="/"
+                    className="flex items-center"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <Image
+                      src={settings?.logoPath ? "/api" + settings.logoPath : logo}
+                      alt="AS Services logo"
+                      width={160}
+                      height={64}
+                      unoptimized
+                      className="h-12 w-auto object-contain"
+                    />
+                  </Link>
+                </SheetTitle>
+              </SheetHeader>
+
+              <div className="flex flex-col gap-2 px-4 py-4">
+                <SheetClose asChild>
+                  <Link href="/" className={mobileLinkBase}>
+                    Home
+                  </Link>
+                </SheetClose>
+
+                <SheetClose asChild>
+                  <Link href="/about" className={mobileLinkBase}>
+                    About us
+                  </Link>
+                </SheetClose>
+
+                {/* Services with expandable list instead of dropdown */}
+                <div className="rounded-2xl">
+                  <button
+                    type="button"
+                    onClick={() => setOpen((prev) => !prev)}
+                    className={[
+                      mobileLinkBase,
+                      "flex w-full items-center justify-between",
+                    ].join(" ")}
+                  >
+                    Services
+                    <ChevronDown
+                      className={[
+                        "h-4 w-4 transition-transform duration-300",
+                        open ? "rotate-180" : "",
+                      ].join(" ")}
+                    />
+                  </button>
+
+                  {open ? (
+                    <div className="mt-1 grid gap-1 pl-3">
+                      {services.length > 0 &&
+                        services
+                          .filter((service: any) => service.status === Status.ACTIVE)
+                          .map((item: any) => (
+                            <SheetClose asChild key={item.id}>
+                              <Link
+                                href={`/service/${item.id}`}
+                                className="rounded-xl px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
+                              >
+                                {item.title}
+                              </Link>
+                            </SheetClose>
+                          ))}
+                    </div>
+                  ) : null}
+                </div>
+
+                <SheetClose asChild>
+                  <Link href="/career" className={mobileLinkBase}>
+                    Careers
+                  </Link>
+                </SheetClose>
+
+                <SheetClose asChild>
+                  <Link
+                    href="/contact"
+                    className={ctaPrimaryBase + " justify-center mt-2"}
+                  >
+                    Contact us
+                  </Link>
+                </SheetClose>
+
+                <GuestEnquiryPopup
+                  triggerClassName={ctaSecondaryBase + " w-full justify-center"}
+                  triggerLabel="Enquiry Us"
+                />
+              </div>
+            </SheetContent>
+          </Sheet>
 
           <div className="hidden items-center gap-4 md:flex">
             <NavigationMenu viewport={false}>
@@ -139,7 +240,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem className="relative">
-                  <DropdownMenu open={open} onOpenChange={setOpen}>
+                  <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
                         variant="ghost"
@@ -175,14 +276,12 @@ export function GuestNavbar({ settings }: { settings: any }) {
                             key={item.id}
                             href={`/service/${item.id}`}
                             className="group flex items-start gap-2 rounded-2xl border border-slate-200 px-4 py-2 transition-all duration-300 hover:border-[#185980] hover:bg-[#185980] hover:text-white hover:shadow-lg"
-                            onClick={() => setOpen(false)}
                           >
                             <div className="flex-1 hover:text-white">
                               <h4 className="font-semibold text-slate-900 hover:text-white">
                                 {item.title}
                               </h4>
                             </div>
-
                           </Link>
                         ))}
                       </div>
@@ -206,72 +305,6 @@ export function GuestNavbar({ settings }: { settings: any }) {
           </div>
         </nav>
       </div>
-
-      {mobileOpen ? (
-        <div
-          id="guest-navbar-menu"
-          className={[
-            "border-t md:hidden",
-            isTransparentHeader
-              ? "border-white/15 bg-slate-950/90 text-white backdrop-blur-xl"
-              : "border-slate-200 bg-white text-slate-900",
-          ].join(" ")}
-        >
-          <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
-            <div className="grid gap-3">
-              <Link
-                href="/"
-                className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
-                onClick={() => {
-                  setMobileOpen(false);
-                }}
-              >
-                Home
-              </Link>
-              <Link
-                href="/about"
-                className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
-                onClick={() => {
-                  setMobileOpen(false);
-                }}
-              >
-                About us
-              </Link>
-              <Link
-                href="/service"
-                className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
-                onClick={() => {
-                  setMobileOpen(false);
-                }}
-              >
-                Services
-              </Link>
-              <Link
-                href="/career"
-                className="rounded-2xl px-3 py-2.5 text-base font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
-                onClick={() => {
-                  setMobileOpen(false);
-                }}
-              >
-                Careers
-              </Link>
-              <Link
-                href="/contact"
-                className={ctaPrimaryBase + " justify-center"}
-                onClick={() => {
-                  setMobileOpen(false);
-                }}
-              >
-                Contact us
-              </Link>
-              <GuestEnquiryPopup
-                triggerClassName={ctaSecondaryBase + " w-full justify-center"}
-                triggerLabel="Enquiry Us"
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
     </header>
   );
 }

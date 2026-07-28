@@ -192,7 +192,7 @@ export function GuestFooter({
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 border-t border-white/10 pt-6 sm:grid-cols-3">
+        <div className="mt-12 grid gap-6 border-t border-white/10 pt-6 sm:grid-cols-4">
           <a
             href={`mailto:${settings?.primaryEmail ?? ""}`}
             className="inline-flex items-center gap-3 text-sm text-slate-800 transition"

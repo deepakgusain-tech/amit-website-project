@@ -49,7 +49,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 
 export function GuestTestimonialsSection({ testimonials }: { testimonials: Testimonial[] }) {
   return (
-    <section className="bg-violet-100 py-16 text-slate-900 sm:py-20">
+    <section className="bg-[#185980] py-16 text-slate-900 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.34em] text-[#185980]">

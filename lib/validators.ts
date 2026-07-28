@@ -54,6 +54,11 @@ export const generalSettingsSchema = z.object({
   mapUrl: nullableOptionalString,
   showPhone: z.boolean().default(true),
   showEmail: z.boolean().default(true),
+  metaTitle: nullableOptionalString,
+  metaDescription: nullableOptionalString,
+  metaKeywords: nullableOptionalString,
+  gstNumber: nullableOptionalString,
+  cinNumber: nullableOptionalString,
 });
 
 export const emailSettingsSchema = z.object({

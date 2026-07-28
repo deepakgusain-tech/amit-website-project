@@ -174,11 +174,11 @@ export function GuestNavbar({ settings }: { settings: any }) {
                           <Link
                             key={item.id}
                             href={`/service/${item.id}`}
-                            className="group flex items-start gap-4 rounded-2xl border border-slate-200 p-4 transition-all duration-300 hover:border-orange-300 hover:bg-orange-50 hover:shadow-lg"
+                            className="group flex items-start gap-2 rounded-2xl border border-slate-200 px-4 py-2 transition-all duration-300 hover:border-[#185980] hover:bg-[#185980] hover:text-white hover:shadow-lg"
                             onClick={() => setOpen(false)}
                           >
-                            <div className="flex-1">
-                              <h4 className="font-semibold text-slate-900">
+                            <div className="flex-1 hover:text-white">
+                              <h4 className="font-semibold text-slate-900 hover:text-white">
                                 {item.title}
                               </h4>
                             </div>

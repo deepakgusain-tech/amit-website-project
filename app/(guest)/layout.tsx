@@ -3,14 +3,29 @@ import { GuestFooter } from "@/components/guest-footer"
 import { GuestNavbar } from "@/components/guest-navbar"
 import { getSettings } from "@/lib/actions/settings-action"
 import { getServices } from "@/lib/actions/service-action"
-
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
 
   return {
-    title: settings?.siteName || "Amit Website - Guest",
+    title: settings?.siteName || "As services",
+    
+    description:
+      settings?.metaDescription ||
+      "Welcome to As services. Explore our services and solutions.",
+
+    keywords: settings?.metaKeywords
+      ? settings.metaKeywords.split(",").map((keyword) => keyword.trim())
+      : [
+          "Services",
+          "Solutions",
+          "Technology",
+          "Business",
+        ],
+
     icons: {
-      icon: settings?.faviconPath ? `/api${settings.faviconPath}` : "/favicon.ico",
+      icon: settings?.faviconPath
+        ? `/api${settings.faviconPath}`
+        : "/favicon.ico",
     },
   };
 }

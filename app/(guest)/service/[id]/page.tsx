@@ -170,11 +170,11 @@ export default async function ServiceDetailPage({
             {service.data?.serviceBenefits?.items.map((outcome: any, index: number) => (
               <div
                 key={outcome}
-                className="detail-card rounded-lg border border-orange-200 p-5"
+                className="detail-card flex items-center gap-4 rounded-lg border border-orange-200 p-5"
                 style={{ animationDelay: `${index * 90}ms` }}
               >
                 <CheckCircle2 className="size-5 text-emerald-500" />
-                <p className="mt-4 text-sm leading-6 text-blue-700">
+                <p className="text-sm leading-6 text-blue-700">
                   {outcome}
                 </p>
               </div>
@@ -198,15 +198,15 @@ export default async function ServiceDetailPage({
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 items-start">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 items-start">
               {service.data?.capabilities?.items.map((capability: any, index: number) => (
                 <div
                   key={capability}
-                  className="detail-card rounded-lg border border-orange-200 bg-white p-5 shadow-[0_12px_34px_rgba(15,23,42,0.05)]"
+                  className="detail-card rounded-lg flex items-center gap-4 border border-orange-200 bg-white p-5 shadow-[0_12px_34px_rgba(15,23,42,0.05)]"
                   style={{ animationDelay: `${index * 80}ms` }}
                 >
                   <FileCheck2 className="size-5 text-cyan-700" />
-                  <p className="mt-4 text-sm font-semibold leading-6 text-blue-800">
+                  <p className="text-sm font-semibold leading-6 text-blue-800">
                     {capability}
                   </p>
                 </div>

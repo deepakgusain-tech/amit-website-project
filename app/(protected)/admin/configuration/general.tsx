@@ -50,6 +50,9 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
     getPreviewSrc(typeof setting?.faviconPath === "string" ? setting.faviconPath : null),
   );
 
+  const logoPathPrev = setting?.logoPath;
+  const faviconPathPrev = setting?.faviconPath;
+
   useEffect(() => {
     return () => {
       if (logoPreview?.startsWith("blob:")) {
@@ -99,7 +102,9 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
         const logoFile = formData.get("logoPath");
         const faviconFile = formData.get("faviconPath");
 
-        if (logoFile instanceof File && logoFile.size > 0) {
+        console.log("formData before upload", logoFile, faviconFile);
+
+        if (logoFile instanceof File && logoFile.size > 0 && logoFile.name !== "") {
           const uploadFormData = new FormData();
           uploadFormData.append("image", logoFile);
 
@@ -115,9 +120,11 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
           }
 
           formData.set("logoPath", uploadData.url);
+        }else {
+          formData.set("logoPath", logoPathPrev || "");
         }
 
-        if (faviconFile instanceof File && faviconFile.size > 0) {
+        if (faviconFile instanceof File && faviconFile.size > 0 && faviconFile.name !== "") {
           const uploadFormData = new FormData();
           uploadFormData.append("image", faviconFile);
 
@@ -133,6 +140,8 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
           }
 
           formData.set("faviconPath", uploadData.url);
+        }else {
+          formData.set("faviconPath", faviconPathPrev || "");
         }
 
         const res = await saveGeneralSettings(formData);
@@ -146,7 +155,7 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
 
         toast.success("Settings saved successfully");
 
-        setConfiguration({ ...(res.data ?? {})})
+        setConfiguration({ ...(res.data ?? {}) })
       } catch (error) {
         toast.error("Upload failed", {
           description:
@@ -187,6 +196,21 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
               label="Website URL"
               id="websiteUrl"
               defaultValue={configuration?.websiteUrl}
+            />
+            <Field
+              label="Meta title"
+              id="metaTitle"
+              defaultValue={configuration?.metaTitle}
+            />
+            <TextAreaField
+              label="Meta description"
+              id="metaDescription"
+              defaultValue={configuration?.metaDescription}
+            />
+            <TextAreaField
+              label="Meta keywords"
+              id="metaKeywords"
+              defaultValue={configuration?.metaKeywords}
             />
           </div>
 
@@ -317,6 +341,34 @@ function Field({
         defaultValue={defaultValue}
         onChange={onChange}
         className="h-10 rounded-xl"
+      />
+    </div>
+  );
+}
+
+function TextAreaField({
+  label,
+  id,
+  defaultValue,
+  onChange,
+  rows = 5,
+}: {
+  label: string;
+  id: string;
+  defaultValue?: string;
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  rows?: number;
+}) {
+  return (
+    <div className="space-y-2  col-span-2">
+      <Label htmlFor={id}>{label}</Label>
+      <Textarea
+        id={id}
+        name={id}
+        defaultValue={defaultValue}
+        onChange={onChange}
+        rows={rows}
+        className="rounded-xl h-[100px]"
       />
     </div>
   );

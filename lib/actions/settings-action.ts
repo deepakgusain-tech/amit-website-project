@@ -102,6 +102,11 @@ export async function saveGeneralSettings(formData: FormData): Promise<ActionRes
     mapUrl: getOptionalString(formData, "mapUrl"),
     showPhone: formData.get("showPhone") === "on",
     showEmail: formData.get("showEmail") === "on",
+    metaTitle: getOptionalString(formData, "metaTitle"),
+    metaDescription: getOptionalString(formData, "metaDescription"),
+    metaKeywords: getOptionalString(formData, "metaKeywords"),
+    gstNumber: getOptionalString(formData, "gstNumber"),
+    cinNumber: getOptionalString(formData, "cinNumber"),
   }
   const parsed = generalSettingsSchema.parse(payload)
   return upsertSiteSettings(parsed)

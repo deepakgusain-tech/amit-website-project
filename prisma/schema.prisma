@@ -119,6 +119,11 @@ model SiteSettings {
   officeHours        String?
   logoPath           String?
   faviconPath        String?
+  metaTitle         String?
+  metaDescription   String? @db.Text
+  metaKeywords      String?
+  gstNumber          String?
+  cinNumber          String?
   mapUrl             String?
   teamMembers        String?
   happyCustomers     String?

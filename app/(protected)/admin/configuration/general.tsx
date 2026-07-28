@@ -227,6 +227,16 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
               id="officeHours"
               defaultValue={configuration?.officeHours}
             />
+            <Field
+              label="Gst Number"
+              id="gstNumber"
+              defaultValue={configuration?.gstNumber}
+            />
+            <Field
+              label="Cin Number"
+              id="cinNumber"
+              defaultValue={configuration?.cinNumber}
+            />
             <div className="space-y-3">
               <Field
                 label="Logo path"

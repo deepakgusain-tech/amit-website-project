@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { BadgePercent, Mail, MapPin, Phone, Send, Settings } from "lucide-react";
 import {
   FaFacebookF,
   FaInstagram,
@@ -207,6 +207,23 @@ export function GuestFooter({
             <Phone className="size-4 text-cyan-800" />
             {settings?.phone ?? "+91-9212174507"}
           </a>
+        
+          <a
+            href="#"
+            className="inline-flex items-center gap-3 text-sm text-slate-800 transition"
+          >
+            <BadgePercent className="size-4 text-cyan-800" />
+            {settings?.gstNumber ?? ""}
+          </a>
+          
+          <a
+            href="#"
+            className="inline-flex items-center gap-3 text-sm text-slate-800 transition"
+          >
+            <Settings className="size-4 text-cyan-800" />
+            {settings?.cinNumber ?? ""}
+          </a>
+          
         </div>
 
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">

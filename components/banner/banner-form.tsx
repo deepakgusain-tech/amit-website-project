@@ -186,6 +186,12 @@ const BannerForm = ({ data, update = false }: UserFormProps) => {
                         }}
                       />
 
+                      <p>
+                        The image has a resolution of:
+                        Image Width: 680 px
+                        Image Height: 720 px
+                      </p>
+
                       {preview ? (
                         <img
                           src={preview}

@@ -58,7 +58,6 @@ export async function createServiceCategory(
     await prisma.serviceCategory.create({
       data: {
         name: serviceCategory.name,
-        description: serviceCategory.description,
         status: serviceCategory.status,
       },
     });
@@ -85,7 +84,6 @@ export async function updateServiceCategory(
 
     const updateData: any = {
       name: serviceCategory.name,
-      description: serviceCategory.description,
       status: serviceCategory.status,
     };
 

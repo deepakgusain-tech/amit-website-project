@@ -166,7 +166,7 @@ export default async function ServiceDetailPage({
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2  gap-4 auto-rows-min">
             {service.data?.serviceBenefits?.items.map((outcome: any, index: number) => (
               <div
                 key={outcome}
@@ -197,7 +197,7 @@ export default async function ServiceDetailPage({
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 items-start">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2  gap-4 auto-rows-min">
             {service.data?.capabilities?.items.map((capability: any, index: number) => (
               <div
                 key={capability}

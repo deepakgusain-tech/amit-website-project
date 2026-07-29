@@ -9,39 +9,15 @@ import { Button } from "@/components/ui/button";
 
 const heroVideoSrc = new URL("../images/hero1.mp4", import.meta.url).toString();
 
-const heroSlides = [
-  {
-    src: new URL("../images/hero1.jpg", import.meta.url).toString(),
-    alt: "Team collaboration and operational support",
-    title: "Operational consistency",
-    description:
-      "Structured back-office support that helps teams stay organized and move faster.",
-  },
-  {
-    src: new URL("../images/hero2.jpg", import.meta.url).toString(),
-    alt: "Business support and analytics",
-    title: "Reporting with clarity",
-    description:
-      "Simple, practical reporting that turns daily activity into useful decision-making insight.",
-  },
-  {
-    src: new URL("../images/hero3.jpg", import.meta.url).toString(),
-    alt: "Recovery and support services",
-    title: "Reliable recovery support",
-    description:
-      "Responsive service coverage designed to keep operations steady when things change.",
-  },
-];
-
 type MetricItem = {
   key: string;
-  value: number;
+  value: string;
 };
 
 const metricFallbacks: MetricItem[] = [
-  { key: "Team Members", value: 48 },
-  { key: "Happy Customers", value: 120 },
-  { key: "Operational Support", value: 24 },
+  { key: "Team Members", value: "48" },
+  { key: "Happy Customers", value: "120" },
+  { key: "Operational Support", value: "24" },
 ];
 
 function parseMetricList(
@@ -59,9 +35,9 @@ function parseMetricList(
       return parsed
         .map((item) => ({
           key: String(item?.key ?? item?.title ?? item?.label ?? "").trim(),
-          value: Number(item?.value ?? item?.number ?? 0),
+          value: item?.value,
         }))
-        .filter((item) => item.key && Number.isFinite(item.value));
+        .filter((item) => item.key && item.value);
     }
   } catch {
     // fall through
@@ -171,7 +147,7 @@ export function GuestHeroSection({
 
   React.useEffect(() => {
     const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % heroSlides.length);
+      setActiveSlide((current) => (current + 1) % banners.length);
     }, 4500);
 
     return () => window.clearInterval(timer);
@@ -244,23 +220,31 @@ export function GuestHeroSection({
                   Trust Metrics
                 </p>
                 <div className="grid gap-3 sm:grid-cols-3">
-                  {trustMetrics.map((metric) => (
-                    <div
-                      key={metric.key}
-                      className="rounded-2xl border border-blue-500 bg-white/8 px-4 py-4 backdrop-blur"
-                    >
-                      <div className="text-3xl font-semibold tracking-tight text-white sm:text-[2rem]">
-                        <AnimatedCounter
-                          value={metric.value}
-                          suffix=""
-                          active={metricsVisible}
-                        />
+                  {trustMetrics.map((metric) => {
+                    const value = metric.value.split(" ")
+
+                    const first = Number(value[0])
+
+                    return (
+                      <div
+                        key={metric.key}
+                        className="rounded-2xl border border-blue-500 bg-white/8 px-4 py-4 backdrop-blur"
+                      >
+                        <div className="text-3xl font-semibold tracking-tight text-white sm:text-[2rem]">
+                          {
+                            isFinite(first) ? <AnimatedCounter
+                              value={value[0]}
+                              suffix={value[1]}
+                              active={metricsVisible}
+                            /> : value.join(" ")
+                          }
+                        </div>
+                        <p className="mt-1 text-sm font-medium text-orange-500">
+                          {metric.key}
+                        </p>
                       </div>
-                      <p className="mt-1 text-sm font-medium text-orange-500">
-                        {metric.key}
-                      </p>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               </div>
             </div>

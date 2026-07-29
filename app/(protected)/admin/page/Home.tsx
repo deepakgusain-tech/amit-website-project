@@ -38,13 +38,13 @@ type CardItem = {
 
 type MetricItem = {
   key: string;
-  value: number;
+  value: string;
 };
 
 const metricFallbacks: MetricItem[] = [
-  { key: "Team Members", value: 48 },
-  { key: "Happy Customers", value: 120 },
-  { key: "Operational Support", value: 24 },
+  { key: "Team Members", value: "48" },
+  { key: "Happy Customers", value: "120" },
+  { key: "Operational Support", value: "24" },
 ];
 
 function parseCardList(
@@ -88,9 +88,9 @@ function parseMetricList(
       return parsed
         .map((item) => ({
           key: String(item?.key ?? item?.title ?? item?.label ?? "").trim(),
-          value: Number(item?.value ?? item?.number ?? 0),
+          value: item?.value ,
         }))
-        .filter((item) => item.key && Number.isFinite(item.value));
+        .filter((item) => item.key && item.value);
     }
   } catch {
     // fall through
@@ -704,18 +704,18 @@ function MetricEditor({
     const next = [...items];
     next[index] = {
       ...next[index],
-      [key]: key === "value" ? Number(value) || 0 : value,
+      [key]: key === "value" ? value || "" : value,
     };
     onChange(next);
   };
 
   const addItem = () => {
-    onChange([...items, { key: "", value: 0 }]);
+    onChange([...items, { key: "", value: "" }]);
   };
 
   const removeItem = (index: number) => {
     const next = items.filter((_, itemIndex) => itemIndex !== index);
-    onChange(next.length ? next : [{ key: "", value: 0 }]);
+    onChange(next.length ? next : [{ key: "", value: "" }]);
   };
 
   return (
@@ -738,9 +738,7 @@ function MetricEditor({
               className="h-10 rounded-xl"
             />
             <Input
-              type="number"
-              min="0"
-              value={Number.isFinite(item.value) ? item.value : 0}
+              value={item.value}
               placeholder="48"
               onChange={(event) => updateItem(index, "value", event.target.value)}
               className="h-10 rounded-xl"

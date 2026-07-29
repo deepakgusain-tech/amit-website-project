@@ -261,7 +261,7 @@ const ServiceForm = ({ categories, data, update }: ServiceFormProps) => {
                                                 }
                                             }}
                                         />
-                                        {preview && (
+                                        {preview ? (
                                             <Image
                                                 src={preview}
                                                 alt="Preview"
@@ -269,7 +269,15 @@ const ServiceForm = ({ categories, data, update }: ServiceFormProps) => {
                                                 height={256}
                                                 className="h-32 w-full rounded-md object-cover"
                                             />
-                                        )}
+                                        ): data?.image && (
+                                            <Image
+                                                src={data.image as string}
+                                                alt="Preview"
+                                                width={800}
+                                                height={256}
+                                                className="h-32 w-full rounded-md object-cover"
+                                            />
+                                        )} 
                                     </div>
                                 </FormControl>
                                 <FormMessage />

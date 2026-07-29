@@ -166,7 +166,7 @@ export function GuestHeroSection({
           aria-hidden="true"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent mt-4" />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/30 to-slate-950/85" />
 
         <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl items-center px-4 py-28 sm:px-6 lg:px-8">
@@ -254,7 +254,7 @@ export function GuestHeroSection({
               <div className="absolute -left-8 top-8 h-20 w-28 rounded-full bg-cyan-400/15 blur-3xl" />
               <div className="absolute -right-10 bottom-8 h-20 w-36 rounded-full bg-orange-500/10 blur-3xl" />
 
-              <div className="relative overflow-hidden rounded-[2.25rem] border border-white/12 bg-slate-950/40 shadow-[0_24px_80px_rgba(2,6,23,0.35)] backdrop-blur-md">
+              <div className="relative overflow-hidden rounded-[2.25rem] ">
                 <div className="relative aspect-[4/4.35] min-h-[26rem]">
                   {banners
                     .filter((banner: BannerItem) => banner.status.toLowerCase() === "active")
@@ -278,9 +278,9 @@ export function GuestHeroSection({
                           priority={index === 0}
                           className="object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent" />
+                        <div className="absolute inset-0 " />
 
-                        <div className="absolute inset-x-0 bottom-0 p-6">
+                        {/* <div className="absolute inset-x-0 bottom-0 p-6">
                           <div className="rounded-[1.4rem] border border-white/12 bg-black/35 p-5 backdrop-blur-md">
                             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/55">
                               Featured service view
@@ -292,7 +292,7 @@ export function GuestHeroSection({
                               {banner.description}
                             </p>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     ))}
                 </div>

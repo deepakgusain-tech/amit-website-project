@@ -201,11 +201,11 @@ export default async function ServiceDetailPage({
             {service.data?.capabilities?.items.map((capability: any, index: number) => (
               <div
                 key={capability}
-                className="detail-card rounded-lg flex items-center gap-4 border border-orange-200 bg-white p-5 shadow-[0_12px_34px_rgba(15,23,42,0.05)]"
-                style={{ animationDelay: `${index * 80}ms` }}
+                className="detail-card flex items-center gap-4 rounded-lg border border-orange-200 p-5"
+                style={{ animationDelay: `${index * 90}ms` }}
               >
-                 <CheckCircle2 className="size-5 text-emerald-500" />
-                <p className="text-sm font-semibold leading-6 text-[#185980]">
+                <CheckCircle2 className="size-5 text-emerald-500" />
+                <p className="text-sm leading-6 font-semibold  text-[#185980] ">
                   {capability}
                 </p>
               </div>

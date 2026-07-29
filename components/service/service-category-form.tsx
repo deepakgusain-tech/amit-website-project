@@ -28,7 +28,6 @@ const ServiceCategoryForm = ({ data, update = false }: UserFormProps) => {
     const defaultFormValues: z.infer<typeof serviceCategorySchema> = data
         ? {
               name: data.name,
-              description: data.description ?? undefined,
               status: data.status as z.infer<typeof serviceCategorySchema>["status"],
               id: data.id,
               createdAt: data.createdAt,
@@ -118,25 +117,6 @@ const ServiceCategoryForm = ({ data, update = false }: UserFormProps) => {
                             )}
                         />
                     </div>
-
-                    <div className="flex flex-col gap-5 col-span-full">
-                        <FormField
-                            control={form.control}
-                            name="description"
-                            render={({
-                                field,
-                            }) => (
-                                <FormItem>
-                                    <FormLabel>Description</FormLabel>
-                                    <FormControl>
-                                        <Textarea placeholder="Enter description" className="min-h-[200px]"  {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-
                 </div>
                 <div className="flex gap-2">
                     <Button type="submit" className="cursor-pointer" disabled={isPending}>

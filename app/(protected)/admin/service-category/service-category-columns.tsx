@@ -15,10 +15,6 @@ export const getServiceCategoryColumns = ({
       header: "Name",
     },
     {
-      accessorKey: "description",
-      header: "Description",
-    },
-    {
       id: "actions",
       header: "Action",
       cell: ({ row }) => <div className="flex gap-2">

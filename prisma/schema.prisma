@@ -184,7 +184,6 @@ model SiteSettings {
 model ServiceCategory {
   id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name        String
-  description String?    @db.Text
   status      Status     @default(ACTIVE)
   services    Services[]
 

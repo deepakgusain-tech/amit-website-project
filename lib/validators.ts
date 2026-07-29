@@ -100,7 +100,6 @@ export const servicePageSettingsSchema = z.object({
 export const serviceCategorySchema = z.object({
   id: z.string().optional(),
   name: z.string().min(1, "name is required"),
-  description: z.string().optional(),
   status: z.enum(Object.values(Status)),
   createdAt: z.date().nullable().optional(),
   updatedAt: z.date().nullable().optional(),

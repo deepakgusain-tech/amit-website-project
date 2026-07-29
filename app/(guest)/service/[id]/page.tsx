@@ -57,9 +57,9 @@ function ServiceVisual({ service }: any) {
         className="absolute inset-8 rounded-full blur-3xl"
       />
       <div className="detail-orbit absolute inset-0 rounded-lg border border-white/12 bg-white/10 p-5 shadow-[0_30px_110px_rgba(0,0,0,0.25)] backdrop-blur">
-        
+
         <Image src={service?.image ? "/api" + service?.image as string : ""} alt={service?.title} fill className="object-cover object-center rounded-lg" />
- 
+
       </div>
     </div>
   )
@@ -155,9 +155,9 @@ export default async function ServiceDetailPage({
       <section className="bg-white py-16 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
           <div>
-            <div className={"inline-flex size-14 items-center justify-center rounded-lg border border-[#185980] text-[#185980]"}>
-              <BoxesIcon className="size-6" />
-            </div>
+            <p className={"inline-flex rounded-full border border-[#185980] text-[#185980] px-3 py-1 text-xs font-semibold uppercase"}>
+              Service Benefits
+            </p>
             <h2 className="mt-6 text-3xl font-semibold text-orange-500 sm:text-4xl">
               {service.data?.serviceBenefits?.title}
             </h2>
@@ -174,7 +174,7 @@ export default async function ServiceDetailPage({
                 style={{ animationDelay: `${index * 90}ms` }}
               >
                 <CheckCircle2 className="size-5 text-emerald-500" />
-                <p className="text-sm leading-6 text-blue-700">
+                <p className="text-sm leading-6 font-semibold  text-[#185980] ">
                   {outcome}
                 </p>
               </div>
@@ -184,34 +184,32 @@ export default async function ServiceDetailPage({
       </section>
 
       <section id="capabilities" className="bg-slate-50 py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
-            <div>
-              <p className={"inline-flex rounded-full border border-[#185980] text-[#185980] px-3 py-1 text-xs font-semibold uppercase"}>
-                Capabilities
-              </p>
-              <h2 className="mt-4 text-3xl font-semibold text-orange-500 sm:text-4xl">
-                {service.data?.capabilities?.title}
-              </h2>
-              <p className="mt-4 text-base leading-7 text-slate-600">
-                {service.data?.capabilities?.description}
-              </p>
-            </div>
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
+          <div>
+            <p className={"inline-flex rounded-full border border-[#185980] text-[#185980] px-3 py-1 text-xs font-semibold uppercase"}>
+              Capabilities
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold text-orange-500 sm:text-4xl">
+              {service.data?.capabilities?.title}
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              {service.data?.capabilities?.description}
+            </p>
+          </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 items-start">
-              {service.data?.capabilities?.items.map((capability: any, index: number) => (
-                <div
-                  key={capability}
-                  className="detail-card rounded-lg flex items-center gap-4 border border-orange-200 bg-white p-5 shadow-[0_12px_34px_rgba(15,23,42,0.05)]"
-                  style={{ animationDelay: `${index * 80}ms` }}
-                >
-                  <FileCheck2 className="size-5 text-cyan-700" />
-                  <p className="text-sm font-semibold leading-6 text-blue-800">
-                    {capability}
-                  </p>
-                </div>
-              ))}
-            </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 items-start">
+            {service.data?.capabilities?.items.map((capability: any, index: number) => (
+              <div
+                key={capability}
+                className="detail-card rounded-lg flex items-center gap-4 border border-orange-200 bg-white p-5 shadow-[0_12px_34px_rgba(15,23,42,0.05)]"
+                style={{ animationDelay: `${index * 80}ms` }}
+              >
+                 <CheckCircle2 className="size-5 text-emerald-500" />
+                <p className="text-sm font-semibold leading-6 text-[#185980]">
+                  {capability}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

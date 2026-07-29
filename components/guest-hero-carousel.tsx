@@ -166,10 +166,10 @@ export function GuestHeroSection({
           aria-hidden="true"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent mt-4" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent " />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/30 to-slate-950/85" />
 
-        <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl items-center px-4 py-28 sm:px-6 lg:px-8">
+        <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl items-center px-4 py-28 sm:px-6 lg:px-8 mt-4">
           <div className="grid w-full items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.32em] text-white/65">

@@ -421,7 +421,7 @@ export function DataTable<T>({ data, columns, title = "", actions }: DataTablePr
                 sensors={sensors}
                 id={sortableId}
               >
-                <Table className="bg-white table-fixed w-full">
+                <Table className="bg-white w-full">
                   <TableHeader className="bg-muted sticky top-0 z-10">
                     {table.getHeaderGroups().map((headerGroup) => (
                       <TableRow key={headerGroup.id}>

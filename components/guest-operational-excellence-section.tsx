@@ -77,7 +77,7 @@ export function GuestOperationalExcellenceSection({ settings }: { settings?: any
               {aboutButtons.map((pill) => (
                 <span
                   key={pill}
-                  className="inline-flex items-center rounded-full border border-[#185980] px-4 py-2 text-sm font-medium text-[#185980] shadow-[0_8px_24px_rgba(15,23,42,0.04)] hover:bg-blue-500 hover:text-white"
+                  className="inline-flex items-center rounded-full border border-[#185980] px-4 py-2 text-sm font-medium text-[#185980] shadow-[0_8px_24px_rgba(15,23,42,0.04)] hover:bg-[#185980] hover:text-white"
                 >
                   {pill}
                 </span>

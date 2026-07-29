@@ -221,7 +221,8 @@ export function GuestHeroSection({
                 </p>
                 <div className="grid gap-3 sm:grid-cols-3">
                   {trustMetrics.map((metric) => {
-                    const value = metric.value.split(" ")
+
+                    const value = typeof metric.value === "string" ? metric.value.split(" ") : [metric.value];
 
                     const first = Number(value[0])
 

@@ -271,19 +271,22 @@ export function GuestNavbar({ settings }: { settings: any }) {
                       className="w-[420px] rounded-3xl border border-slate-200 bg-white p-5 shadow-2xl"
                     >
                       <div className="grid gap-3">
-                        {services.length > 0 && services.filter((service: any) => service.status === Status.ACTIVE).map((item: any) => (
-                          <Link
-                            key={item.id}
-                            href={`/service/${item.id}`}
-                            className="group flex items-start gap-2 rounded-2xl border border-slate-200 px-4 py-2 transition-all duration-300 hover:border-[#185980] hover:bg-[#185980] hover:text-white hover:shadow-lg"
-                          >
-                            <div className="flex-1 hover:text-white">
-                              <h4 className="font-semibold text-slate-900 hover:text-white">
-                                {item.title}
-                              </h4>
-                            </div>
-                          </Link>
-                        ))}
+                        {services.length > 0 &&
+                          services
+                            .filter((service: any) => service.status === Status.ACTIVE)
+                            .map((item: any) => (
+                              <Link
+                                key={item.id}
+                                href={`/service/${item.id}`}
+                                className="group flex items-start gap-2 rounded-2xl border border-slate-200 px-4 py-2 transition-all duration-300 hover:border-[#185980] hover:bg-[#185980] hover:shadow-lg"
+                              >
+                                <div className="flex-1">
+                                  <h4 className="font-semibold text-slate-900 transition-colors duration-300 group-hover:text-white">
+                                    {item.title}
+                                  </h4>
+                                </div>
+                              </Link>
+                            ))}
                       </div>
                     </DropdownMenuContent>
                   </DropdownMenu>

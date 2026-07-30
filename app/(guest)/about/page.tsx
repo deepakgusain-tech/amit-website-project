@@ -87,13 +87,13 @@ export default async function AboutPage() {
 
   return (
     <div className="relative overflow-hidden bg-[#eef3f8] text-slate-900">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(15,23,42,0.05),transparent_34%),radial-gradient(circle_at_80%_0,rgba(8,145,178,0.08),transparent_26%),linear-gradient(180deg,rgba(248,250,252,0.92)_0%,rgba(236,242,248,1)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-black/90" />
 
-      <section className="relative isolate overflow-hidden py-28 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative isolate overflow-hidden pt-28 sm:pt-32 pb-4">
+        <div className="mx-auto max-w-7xl h-auto px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#185980] bg-[#185980] px-4 py-2 text-sm font-medium text-white shadow-[0_12px_30px_rgba(15,23,42,0.05)] backdrop-blur">
+              <div className="inline-flex mt-2 items-center gap-2 rounded-full border border-[#185980] bg-[#185980] px-4 py-2 text-sm font-medium text-white shadow-[0_12px_30px_rgba(15,23,42,0.05)] backdrop-blur">
                 <ShieldCheck className="size-4 text-white" />
                 {settings?.aboutTagline ?? "About AS Services"}
               </div>
@@ -102,7 +102,7 @@ export default async function AboutPage() {
                 {settings?.aboutTitle ?? "Focused services that help teams run better."}
               </h1>
 
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">
                 {settings?.aboutDescription ?? "We help organizations strengthen operations, improve reporting, and support critical workflows with a calm, dependable delivery model."}
               </p>
 
@@ -117,7 +117,7 @@ export default async function AboutPage() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="rounded-full border-[#185980] bg-white/70 px-6 text-[#185980] hover:bg-[#185980] hover:text-white"
+                  className="rounded-full border-[#185980] bg-transparent px-6 text-white hover:bg-[#185980] hover:text-white"
                 >
                   <Link href="/service" className="inline-flex items-center gap-2">
                     View services
@@ -130,7 +130,7 @@ export default async function AboutPage() {
                 {aboutStrengths.map((strength) => (
                   <span
                     key={strength}
-                    className="inline-flex items-center rounded-full border border-[#185980] bg-white/90 px-4 py-2 text-sm font-medium text-[#185980] hover:bg-[#185980] hover:text-white cursor-pointer shadow-[0_10px_24px_rgba(15,23,42,0.04)]"
+                    className="inline-flex items-center rounded-full border border-[#185980] bg-transparent px-4 py-2 text-sm font-medium text-white hover:bg-[#185980] hover:text-white cursor-poiter shadow-[0_10px_24px_rgba(15,23,42,0.04)]"
                   >
                     {strength}
                   </span>
@@ -139,7 +139,7 @@ export default async function AboutPage() {
             </div>
 
             <div className="relative">
-              <div className="relative rounded-[2rem] border border-[#185980] border-[2px] bg-white/95 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-6">
+              <div className="relative rounded-[2rem] border border-[#185980] border-[2px]  p-5 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-6">
                 <div className="">
                   <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.34em] text-orange-500">
                     <ShieldCheck className="size-4 text-cyan-700" />
@@ -150,7 +150,7 @@ export default async function AboutPage() {
                     Clear service areas. Clean delivery. Measurable support.
                   </h2>
 
-                  <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+                  <p className="mt-4 text-sm leading-7 text-white/80 sm:text-base">
                     We keep the story simple so clients can quickly understand
                     where we add value and how we work.
                   </p>
@@ -178,7 +178,7 @@ export default async function AboutPage() {
                       return (
                         <div
                           key={item.label}
-                          className="flex items-start gap-4 rounded-2xl border border-[#185980] border-[2px] bg-white px-4 py-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)]"
+                          className="flex items-start gap-4 rounded-2xl border border-[#185980] border-[2px] px-4 py-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)]"
                         >
                           <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-[#185980] text-white shadow-[0_10px_24px_rgba(15,23,42,0.18)]">
                             <Icon className="size-4" />
@@ -190,7 +190,7 @@ export default async function AboutPage() {
                               </h3>
                               <CheckCircle2 className="size-4 text-cyan-600" />
                             </div>
-                            <p className="mt-1 text-sm leading-6 text-slate-600">
+                            <p className="mt-1 text-sm leading-6 text-white/80">
                               {item.text}
                             </p>
                           </div>

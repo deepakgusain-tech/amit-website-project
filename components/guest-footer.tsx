@@ -87,8 +87,8 @@ export function GuestFooter({
   };
 
   return (
-    <footer className="bg-white text-slate-100">
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <footer className="bg-white text-slate-100 border-t-[1px] border-orange-300 shadow-[0_18px_50px_rgba(15,23,42,0.06)] ">
+      <div className="mx-auto w-full px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.8fr_0.8fr_1fr]">
           <div className="max-w-sm">
             <Link href="/" className="inline-flex items-center">

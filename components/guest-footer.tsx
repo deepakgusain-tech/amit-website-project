@@ -132,7 +132,7 @@ export function GuestFooter({
           </div>
 
           <div>
-            <p className="text-xl font-semibold text-orange-500">Services</p>
+            <p className="text-xl font-semibold text-orange-500 pb-3 border-b-[2px] border-[#185980]">Services</p>
             <div className="mt-5 grid gap-4 text-sm text-slate-300">
               {activeServices.map((service: any, index: number) => (
                 <Link
@@ -148,7 +148,7 @@ export function GuestFooter({
           </div>
 
           <div>
-            <p className="text-xl font-semibold text-orange-500">About Us</p>
+            <p className="text-xl font-semibold text-orange-500 pb-3 border-b-[2px] border-[#185980]">About Us</p>
             <div className="mt-5 grid gap-4 text-sm text-slate-300">
               {aboutLinks.map((link) => (
                 <Link
@@ -164,7 +164,7 @@ export function GuestFooter({
           </div>
 
           <div>
-            <p className="text-xl font-semibold text-orange-500">Newsletter</p>
+            <p className="text-xl font-semibold text-orange-500 pb-3 border-b-[2px] border-[#185980]">Newsletter</p>
             <p className="mt-5 text-sm leading-7 text-slate-800">
               Get occasional updates on service improvements, analytics
               insights, and practical business tips.

@@ -107,7 +107,7 @@ export default async function AboutPage() {
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg" variant="default" className="rounded-full px-6 bg-[#185980] text-white hover:bg-[#185980]">
+                <Button asChild size="lg" variant="default" className="rounded-full px-6 bg-orange-600 text-white hover:bg-orange-700">
                   <Link href="/contact" className="inline-flex items-center gap-2">
                     Talk to us
                     <ArrowRight className="size-4" />
@@ -117,9 +117,9 @@ export default async function AboutPage() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="rounded-full border-[#185980] bg-white/70 px-6 text-[#185980]"
+                  className="rounded-full border-[#185980] bg-white/70 px-6 text-[#185980] hover:bg-[#185980] hover:text-white"
                 >
-                  <Link href="/services" className="inline-flex items-center gap-2">
+                  <Link href="/service" className="inline-flex items-center gap-2">
                     View services
                     <ArrowRight className="size-4" />
                   </Link>
@@ -130,7 +130,7 @@ export default async function AboutPage() {
                 {aboutStrengths.map((strength) => (
                   <span
                     key={strength}
-                    className="inline-flex items-center rounded-full border border-[#185980] bg-white/90 px-4 py-2 text-sm font-medium text-[#185980] shadow-[0_10px_24px_rgba(15,23,42,0.04)]"
+                    className="inline-flex items-center rounded-full border border-[#185980] bg-white/90 px-4 py-2 text-sm font-medium text-[#185980] hover:bg-[#185980] hover:text-white cursor-pointer shadow-[0_10px_24px_rgba(15,23,42,0.04)]"
                   >
                     {strength}
                   </span>

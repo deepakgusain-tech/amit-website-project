@@ -210,7 +210,7 @@ export default async function CareerPage() {
             {benefits.map((benefit) => (
               <div
                 key={benefit}
-                className="flex items-start gap-3 rounded-2xl border border-orange-200 bg-white p-5"
+                className="detail-card flex items-start gap-3 rounded-2xl border border-orange-200 bg-white p-5"
               >
                 <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-emerald-500" />
                 <p className="text-sm leading-6 text-slate-700">{benefit}</p>

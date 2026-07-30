@@ -220,7 +220,7 @@ export function GuestHeroSection({
               <div className="absolute -right-10 bottom-8 h-20 w-36 rounded-full bg-orange-500/10 blur-3xl" />
 
               <div className="relative overflow-hidden rounded-[2.25rem] ">
-                <div className="relative aspect-[4/4.35] max-h-[20rem] w-full">
+                <div className="relative aspect-[4/4.35] max-h-[24rem] w-full">
                   {banners
                     .filter((banner: BannerItem) => banner.status.toLowerCase() === "active")
                     .map((banner: BannerItem, index: number) => (

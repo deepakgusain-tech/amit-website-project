@@ -49,6 +49,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
   const isTransparentHeader = isHomePage && !scrolled;
   const [services, setServices] = useState([])
   const [open, setOpen] = useState(false);
+  const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -239,58 +240,58 @@ export function GuestNavbar({ settings }: { settings: any }) {
                     Careers
                   </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem className="relative">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        className={[
-                          "group bg-transparent border-0 shadow-none",
-                          "hover:bg-transparent",
-                          "active:bg-transparent",
-                          "focus:bg-transparent",
-                          "data-[state=open]:bg-transparent",
-                          "focus-visible:bg-transparent",
-                          "focus-visible:ring-0 focus-visible:ring-offset-0",
-                          "data-[state=open]:text-orange-500",
-                          "data-[state=open]:after:scale-x-100",
-                          "data-[state=open]:after:bg-orange-500 mt-1",
-
-                          navLinkBase,
-                          isTransparentHeader ? "text-white" : "text-orange-500",
-                        ].join(" ")}
-                      >
-                        Services
-                        <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-180" />
-                      </Button>
-                    </DropdownMenuTrigger>
-
-                    <DropdownMenuContent
-                      align="center"
-                      sideOffset={16}
-                      className="w-[420px] rounded-3xl border border-slate-200 bg-white p-5 shadow-2xl"
+                <DropdownMenu
+                  open={desktopDropdownOpen}
+                  onOpenChange={setDesktopDropdownOpen}
+                >
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className={[
+                        "group bg-transparent border-0 shadow-none",
+                        "hover:bg-transparent",
+                        "active:bg-transparent",
+                        "focus:bg-transparent",
+                        "data-[state=open]:bg-transparent",
+                        "focus-visible:bg-transparent",
+                        "focus-visible:ring-0 focus-visible:ring-offset-0",
+                        "data-[state=open]:text-orange-500",
+                        "data-[state=open]:after:scale-x-100",
+                        "data-[state=open]:after:bg-orange-500 mt-1",
+                        navLinkBase,
+                        isTransparentHeader ? "text-white" : "text-orange-500",
+                      ].join(" ")}
                     >
-                      <div className="grid gap-3">
-                        {services.length > 0 &&
-                          services
-                            .filter((service: any) => service.status === Status.ACTIVE)
-                            .map((item: any) => (
-                              <Link
-                                key={item.id}
-                                href={`/service/${item.id}`}
-                                className="group flex items-start gap-2 rounded-2xl border border-slate-200 px-4 py-2 transition-all duration-300 hover:border-[#185980] hover:bg-[#185980] hover:shadow-lg"
-                              >
-                                <div className="flex-1">
-                                  <h4 className="font-semibold text-slate-900 transition-colors duration-300 group-hover:text-white">
-                                    {item.title}
-                                  </h4>
-                                </div>
-                              </Link>
-                            ))}
-                      </div>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </NavigationMenuItem>
+                      Services
+                      <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-180" />
+                    </Button>
+                  </DropdownMenuTrigger>
+
+                  <DropdownMenuContent
+                    align="center"
+                    sideOffset={16}
+                    className="w-[420px] rounded-3xl border border-slate-200 bg-white p-5 shadow-2xl"
+                  >
+                    <div className="grid gap-3">
+                      {services
+                        .filter((service: any) => service.status === Status.ACTIVE)
+                        .map((item: any) => (
+                          <Link
+                            key={item.id}
+                            href={`/service/${item.id}`}
+                            onClick={() => setDesktopDropdownOpen(false)}
+                            className="group flex items-start gap-2 rounded-2xl border border-slate-200 px-4 py-2 transition-all duration-300 hover:border-[#185980] hover:bg-[#185980] hover:shadow-lg"
+                          >
+                            <div className="flex-1">
+                              <h4 className="font-semibold text-slate-900 transition-colors duration-300 group-hover:text-white">
+                                {item.title}
+                              </h4>
+                            </div>
+                          </Link>
+                        ))}
+                    </div>
+                  </DropdownMenuContent>
+                </DropdownMenu>
 
                 <NavigationMenuItem className="ml-2">
                   <Link href="/contact" className={ctaPrimaryBase}>

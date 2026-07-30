@@ -739,7 +739,6 @@ async function seedContent() {
     const created = await prisma.serviceCategory.create({
       data: {
         name: category.name,
-        description: category.description,
         status: active,
       },
     });

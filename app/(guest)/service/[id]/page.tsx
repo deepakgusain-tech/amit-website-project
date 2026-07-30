@@ -153,7 +153,7 @@ export default async function ServiceDetailPage({
       </section>
 
       <section className="bg-white py-16 sm:py-20">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8 items-start">
           <div>
             <p className={"inline-flex rounded-full border border-[#185980] text-[#185980] px-3 py-1 text-xs font-semibold uppercase"}>
               Service Benefits
@@ -184,7 +184,7 @@ export default async function ServiceDetailPage({
       </section>
 
       <section id="capabilities" className="bg-slate-50 py-16 sm:py-20">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8 items-start">
           <div>
             <p className={"inline-flex rounded-full border border-[#185980] text-[#185980] px-3 py-1 text-xs font-semibold uppercase"}>
               Capabilities

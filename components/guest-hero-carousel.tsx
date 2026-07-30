@@ -281,7 +281,7 @@ export function GuestHeroSection({
               </div>
             </div>
           </div>
-          <div ref={metricsRef} className="col-span-2 mt-3 w-full">
+          <div ref={metricsRef} className="col-span-2 mt-4 w-full">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-white/55">
               Trust Metrics
             </p>

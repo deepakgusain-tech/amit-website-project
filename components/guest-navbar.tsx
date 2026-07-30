@@ -74,10 +74,10 @@ export function GuestNavbar({ settings }: { settings: any }) {
           : "border-slate-200/80 bg-white/92 text-slate-900 shadow-sm shadow-slate-900/5 backdrop-blur-xl",
       ].join(" ")}
     >
-      <div className="mx-auto flex h-30 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-30 max-w-7xl items-center justify-between gap-4 px-5">
         <Link
           href="/"
-          className="flex h-20 shrink-0 items-center rounded-xl px-2"
+          className="flex h-20 shrink-0 items-center rounded-xl"
           onClick={() => setMobileOpen(false)}
         >
           <Image

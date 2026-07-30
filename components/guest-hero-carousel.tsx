@@ -169,7 +169,7 @@ export function GuestHeroSection({
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent " />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/30 to-slate-950/85" />
 
-        <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl items-start px-4 py-28 sm:px-6 lg:px-8 mt-8">
+        <div className="relative mx-auto flex flex-col min-h-[100svh] w-full max-w-7xl items-start px-4 py-28 sm:px-6 lg:px-8 mt-8">
           <div className="grid w-full items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.32em] text-white/65">
@@ -214,48 +214,13 @@ export function GuestHeroSection({
                   </Link>
                 </Button>
               </div>
-
-              <div ref={metricsRef} className="mt-10 max-w-3xl">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-white/55">
-                  Trust Metrics
-                </p>
-                <div className="grid gap-3 sm:grid-cols-3">
-                  {trustMetrics.map((metric) => {
-
-                    const value = typeof metric.value === "string" ? metric.value.split(" ") : [metric.value];
-
-                    const first = Number(value[0])
-
-                    return (
-                      <div
-                        key={metric.key}
-                        className="rounded-2xl border border-blue-500 bg-white/8 px-4 py-4 backdrop-blur"
-                      >
-                        <div className="text-3xl font-semibold tracking-tight text-white sm:text-[2rem]">
-                          {
-                            isFinite(first) ? <AnimatedCounter
-                              value={value[0]}
-                              suffix={value[1]}
-                              active={metricsVisible}
-                            /> : value.join(" ")
-                          }
-                        </div>
-                        <p className="mt-1 text-sm font-medium text-orange-500">
-                          {metric.key}
-                        </p>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
             </div>
-
             <div className="relative hidden lg:block">
               <div className="absolute -left-8 top-8 h-20 w-28 rounded-full bg-cyan-400/15 blur-3xl" />
               <div className="absolute -right-10 bottom-8 h-20 w-36 rounded-full bg-orange-500/10 blur-3xl" />
 
               <div className="relative overflow-hidden rounded-[2.25rem] ">
-                <div className="relative aspect-[4/4.35] min-h-[26rem]">
+                <div className="relative aspect-[4/4.35] max-h-[28rem] w-full">
                   {banners
                     .filter((banner: BannerItem) => banner.status.toLowerCase() === "active")
                     .map((banner: BannerItem, index: number) => (
@@ -297,7 +262,7 @@ export function GuestHeroSection({
                     ))}
                 </div>
 
-                <div className="absolute inset-x-0 bottom-5 flex justify-center gap-2 px-4">
+                <div className="absolute inset-x-0 bottom-1 flex justify-center gap-2 px-4">
                   {banners.filter((banner: BannerItem) => banner.status.toLowerCase() === "active").map((banner: BannerItem, index: number) => (
                     <button
                       key={banner.id}
@@ -314,6 +279,39 @@ export function GuestHeroSection({
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+          <div ref={metricsRef} className="col-span-2 mt-3 w-full">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-white/55">
+              Trust Metrics
+            </p>
+            <div className="grid gap-3 md:grid-cols-6 grid-cols-1">
+              {trustMetrics.map((metric) => {
+
+                const value = typeof metric.value === "string" ? metric.value.split(" ") : [metric.value];
+
+                const first = Number(value[0])
+
+                return (
+                  <div
+                    key={metric.key}
+                    className="rounded-2xl border border-blue-500 bg-white/8 px-4 py-4 backdrop-blur w-full"
+                  >
+                    <div className="text-3xl font-semibold tracking-tight text-white sm:text-[2rem]">
+                      {
+                        isFinite(first) ? <AnimatedCounter
+                          value={value[0]}
+                          suffix={value[1]}
+                          active={metricsVisible}
+                        /> : value.join(" ")
+                      }
+                    </div>
+                    <p className="mt-1 text-sm font-medium text-orange-500">
+                      {metric.key}
+                    </p>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>

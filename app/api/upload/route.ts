@@ -8,19 +8,42 @@ export async function POST(req: Request) {
   const file = formData.get("image") ?? formData.get("file");
 
   if (!(file instanceof File)) {
-    return NextResponse.json({ message: "No image uploaded" }, { status: 400 });
+    return NextResponse.json(
+      { message: "No file uploaded" },
+      { status: 400 }
+    );
   }
 
-  const allowedTypes = [
+  const allowedDocumentTypes = [
     "application/pdf",
     "application/msword",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   ];
 
-  const contentType = typeof file.type === "string" ? file.type : "";
+  const allowedVideoTypes = [
+    "video/mp4",
+    "video/webm",
+    "video/ogg",
+    "video/quicktime", // .mov
+    "video/x-msvideo", // .avi
+    "video/x-matroska", // .mkv
+  ];
 
-  if (!(contentType.startsWith("image/") || allowedTypes.includes(contentType))) {
-    return NextResponse.json({ message: "Invalid file type" }, { status: 400 });
+  const contentType = file.type || "";
+
+  const isValid =
+    contentType.startsWith("image/") ||
+    allowedDocumentTypes.includes(contentType) ||
+    allowedVideoTypes.includes(contentType);
+
+  if (!isValid) {
+    return NextResponse.json(
+      {
+        message:
+          "Invalid file type. Only images, videos, PDF, DOC, and DOCX are allowed.",
+      },
+      { status: 400 }
+    );
   }
 
   const bytes = await file.arrayBuffer();
@@ -29,13 +52,14 @@ export async function POST(req: Request) {
   const uploadDir = path.join(process.cwd(), "public/uploads");
   await fs.mkdir(uploadDir, { recursive: true });
 
-  const ext = file.name.split(".").pop() || "bin";
-  const filename = `${crypto.randomUUID()}.${ext}`;
+  const extension = path.extname(file.name) || ".bin";
+  const filename = `${crypto.randomUUID()}${extension}`;
 
   await fs.writeFile(path.join(uploadDir, filename), buffer);
 
   return NextResponse.json({
     success: true,
     url: `/uploads/${filename}`,
+    type: contentType,
   });
 }

@@ -166,6 +166,7 @@ export async function saveServicePageSettings(formData: FormData): Promise<Actio
 export async function saveHomePageSettings(formData: FormData): Promise<ActionResponse> {
   const payload = {
     heroTagline: getOptionalString(formData, "heroTagline"),
+    heroBackgroundImagePath: getOptionalString(formData, "heroBackgroundImagePath"),
     heroTitle: getOptionalString(formData, "heroTitle"),
     heroDescription: getOptionalString(formData, "heroDescription"),
     siteName: "As services",

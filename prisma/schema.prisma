@@ -132,6 +132,7 @@ model SiteSettings {
   heroTagline        String?
   heroTitle          String?
   heroDescription    String? @db.Text
+  heroBackgroundImagePath String?
   aboutTagline       String?
   aboutTitle         String?
   aboutDescription   String? @db.Text

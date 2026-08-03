@@ -8,6 +8,12 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const heroVideoSrc = new URL("../images/hero1.mp4", import.meta.url).toString();
+const videoExtensions = new Set(["mp4", "webm", "ogg", "mov", "avi", "mkv"]);
+
+function isVideoSource(src: string) {
+  const extension = src.split("?")[0].split(".").pop()?.toLowerCase();
+  return videoExtensions.has(extension ?? "");
+}
 
 type MetricItem = {
   key: string;
@@ -97,6 +103,7 @@ function AnimatedCounter({
 
 type HeroSettings = {
   heroTagline?: string | null;
+  heroBackgroundImagePath?: string | null;
   heroTitle?: string | null;
   heroDescription?: string | null;
   heroTrustTags?: string | null;
@@ -126,6 +133,8 @@ export function GuestHeroSection({
   const heroDescription =
     settings?.heroDescription ??
     "Helping organizations scale through offshore back-office operations, recovery support services, reporting, analytics, IT Services and operational excellence.";
+  const heroBackgroundSrc = settings?.heroBackgroundImagePath?.trim() || heroVideoSrc;
+  const heroBackgroundIsVideo = isVideoSource(heroBackgroundSrc);
   const trustMetrics = parseMetricList(settings?.heroTrustTags, metricFallbacks);
   const trustTags = [
     "US Client Delivery Experience",
@@ -156,15 +165,26 @@ export function GuestHeroSection({
   return (
     <section className="relative isolate overflow-hidden text-white w-full">
       <div className="relative min-h-[100svh] overflow-hidden bg-slate-950">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src={heroVideoSrc}
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-        />
+        {heroBackgroundIsVideo ? (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src={heroBackgroundSrc}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          />
+        ) : (
+          <Image
+            src={heroBackgroundSrc}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        )}
 
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent " />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/30 to-slate-950/85" />

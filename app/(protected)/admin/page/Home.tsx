@@ -88,7 +88,7 @@ function parseMetricList(
       return parsed
         .map((item) => ({
           key: String(item?.key ?? item?.title ?? item?.label ?? "").trim(),
-          value: item?.value ,
+          value: item?.value,
         }))
         .filter((item) => item.key && item.value);
     }
@@ -119,6 +119,15 @@ function getPreviewSrc(value: string | null | undefined) {
   }
 
   return null;
+}
+
+const videoExtensions = new Set(["mp4", "webm", "ogg", "mov", "avi", "mkv"]);
+
+function isVideoSource(src: string, mimeType?: string | null) {
+  if (mimeType) return mimeType.startsWith("video/");
+
+  const extension = src.split("?")[0].split(".").pop()?.toLowerCase();
+  return videoExtensions.has(extension ?? "");
 }
 
 export default function Home({ setting }: { setting?: SiteSettings }) {
@@ -175,6 +184,13 @@ export default function Home({ setting }: { setting?: SiteSettings }) {
     getPreviewSrc(configuration?.globalDeliveryImagePath),
   );
 
+  const [heroBackgroundImagePath, setHeroBackgroundImagePath] = useState<string | null>(
+    getPreviewSrc(configuration?.heroBackgroundImagePath),
+  );
+  const [heroBackgroundMediaType, setHeroBackgroundMediaType] = useState<
+    string | null
+  >(null);
+
   useEffect(() => {
     return () => {
       if (globalDeliveryImagePreview?.startsWith("blob:")) {
@@ -183,10 +199,19 @@ export default function Home({ setting }: { setting?: SiteSettings }) {
     };
   }, [globalDeliveryImagePreview]);
 
+  useEffect(() => {
+    return () => {
+      if (heroBackgroundImagePath?.startsWith("blob:")) {
+        URL.revokeObjectURL(heroBackgroundImagePath);
+      }
+    };
+  }, [heroBackgroundImagePath]);
+
   const onSubmit = async (formData: FormData) => {
     startTransition(async () => {
       try {
         const globalDeliveryImage = formData.get("globalDeliveryImagePath");
+        const heroBackgroundImage = formData.get("heroBackgroundImagePath");
 
         if (globalDeliveryImage instanceof File) {
           if (globalDeliveryImage.size > 0) {
@@ -207,6 +232,28 @@ export default function Home({ setting }: { setting?: SiteSettings }) {
             formData.set("globalDeliveryImagePath", uploadData.url);
           } else {
             formData.delete("globalDeliveryImagePath");
+          }
+        }
+
+        if (heroBackgroundImage instanceof File) {
+          if (heroBackgroundImage.size > 0) {
+            const uploadFormData = new FormData();
+            uploadFormData.append("image", heroBackgroundImage);
+
+            const fileUploadRes = await fetch("/api/upload", {
+              method: "POST",
+              body: uploadFormData,
+            });
+
+            const uploadData = await fileUploadRes.json();
+
+            if (!fileUploadRes.ok) {
+              throw new Error(uploadData?.message || "Hero media upload failed");
+            }
+
+            formData.set("heroBackgroundImagePath", uploadData.url);
+          } else {
+            formData.delete("heroBackgroundImagePath");
           }
         }
 
@@ -267,6 +314,11 @@ export default function Home({ setting }: { setting?: SiteSettings }) {
           getPreviewSrc(nextSetting?.globalDeliveryImagePath),
         );
 
+        setHeroBackgroundImagePath(
+          getPreviewSrc(nextSetting?.heroBackgroundImagePath),
+        );
+        setHeroBackgroundMediaType(null);
+
         toast.success("Homepage content saved successfully");
       } catch (error) {
         toast.error("Save failed", {
@@ -301,6 +353,74 @@ export default function Home({ setting }: { setting?: SiteSettings }) {
                 defaultValue={configuration?.heroTitle}
                 placeholder="A focused operating model built for scale, quality, and steady delivery."
               />
+
+              <div className="space-y-3">
+                <Label htmlFor="heroBackgroundImagePath">Hero Background Media</Label>
+                <Input
+                  id="heroBackgroundImagePath"
+                  name="heroBackgroundImagePath"
+                  type="file"
+                  accept="image/*,video/mp4,video/webm,video/ogg,video/quicktime,video/x-msvideo,video/x-matroska"
+                  onChange={(event) => {
+                    const file = event.target.files?.[0];
+
+                    if (!file) {
+                      setHeroBackgroundImagePath(
+                        getPreviewSrc(configuration?.heroBackgroundImagePath),
+                      );
+                      setHeroBackgroundMediaType(null);
+                      return;
+                    }
+
+                    if (!file.type.startsWith("image/") && !file.type.startsWith("video/")) {
+                      toast.error("Please select an image or video file");
+                      event.currentTarget.value = "";
+                      return;
+                    }
+
+                    const previewUrl = URL.createObjectURL(file);
+                    setHeroBackgroundImagePath(previewUrl);
+                    setHeroBackgroundMediaType(file.type);
+                  }}
+                  className="h-10 rounded-xl"
+                />
+
+                {(() => {
+                  const src =
+                    heroBackgroundImagePath ||
+                    getPreviewSrc(configuration?.heroBackgroundImagePath) ||
+                    "";
+
+                  if (!src) return null;
+
+                  const isVideo = isVideoSource(src, heroBackgroundMediaType);
+
+                  return (
+                    <div className="relative h-[220px] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+                      {isVideo ? (
+                        <video
+                          src={src}
+                          controls
+                          playsInline
+                          preload="metadata"
+                          className="h-full w-full object-contain object-center p-3"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      ) : (
+                        <Image
+                          src={src}
+                          alt="Hero Background Preview"
+                          fill
+                          className="object-contain object-center p-3"
+                          sizes="(max-width: 768px) 100vw, 600px"
+                          unoptimized={src.startsWith("blob:")}
+                        />
+                      )}
+                    </div>
+                  );
+                })()}
+              </div>
             </div>
 
             <div className="space-y-2">
@@ -372,6 +492,7 @@ export default function Home({ setting }: { setting?: SiteSettings }) {
                 defaultValue={configuration?.aboutTitle}
                 placeholder="A focused operating model built for scale, quality, and steady delivery."
               />
+
             </div>
 
             <div className="space-y-2">

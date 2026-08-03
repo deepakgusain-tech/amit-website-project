@@ -155,6 +155,7 @@ export function GuestHeroSection({
   }, []);
 
   React.useEffect(() => {
+
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % banners.length);
     }, 4500);

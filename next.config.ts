@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
   
    allowedDevOrigins: [
     "200.141.2.23",
+    "advancesupportservices.com",
+    "www.advancesupportservices.com"
   ],
 
   experimental: {

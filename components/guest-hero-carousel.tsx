@@ -169,7 +169,7 @@ export function GuestHeroSection({
         {heroBackgroundIsVideo ? (
           <video
             className="absolute inset-0 h-full w-full object-cover"
-            src={heroBackgroundSrc}
+            src={"/api" + heroBackgroundSrc}
             autoPlay
             muted
             loop
@@ -178,7 +178,7 @@ export function GuestHeroSection({
           />
         ) : (
           <Image
-            src={heroBackgroundSrc}
+            src={"/api" + heroBackgroundSrc}
             alt=""
             fill
             priority

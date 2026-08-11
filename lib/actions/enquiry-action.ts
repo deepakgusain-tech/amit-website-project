@@ -4,6 +4,8 @@ import { prisma } from "../db/prisma-helper";
 import { enquirySchema } from "../validators";
 import { formatError, omitTimestamps } from "../utils";
 import { z } from "zod";
+import { getSettings } from "./settings-action";
+import { sendLeadEmails } from "../mail/lead";
 
 type ActionResponse<T = undefined> = {
   success: boolean;
@@ -64,6 +66,15 @@ export async function createEnquiry(
         subject: enquiry.subject,
         message: enquiry.message,
       },
+    });
+
+    const settings = await prisma.siteSettings.findFirst({
+      orderBy: { createdAt: "desc" },
+    });
+
+    await sendLeadEmails({
+      settings,
+      person: data,
     });
 
     return {

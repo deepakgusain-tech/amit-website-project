@@ -6,6 +6,7 @@ import { formatError, omitTimestamps } from "../utils";
 import { Newsletter } from "../types";
 import { z } from "zod";
 import { Status } from "../generated/prisma";
+import { sendNewsletterSubscriptionEmails } from "../mail/newletter";
 
 type ActionResponse = {
   success: boolean;
@@ -30,12 +31,25 @@ export async function createNewsletter(data: z.infer<typeof newsletterSchema>): 
   try {
     const newsletter = newsletterSchema.parse(data);
 
-    await prisma.newsletterSubscription.create({
+    const createdSubscription = await prisma.newsletterSubscription.create({
       data: {
         email: newsletter.email,
         status: newsletter.status,
       },
     });
+
+    try {
+      const settings = await prisma.siteSettings.findFirst({
+        orderBy: { createdAt: "desc" },
+      });
+
+      await sendNewsletterSubscriptionEmails({
+        settings,
+        email: createdSubscription.email,
+      });
+    } catch (error) {
+      console.error("Newsletter email failed", error);
+    }
 
     return {
       success: true,

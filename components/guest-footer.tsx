@@ -183,7 +183,7 @@ export function GuestFooter({
               />
               <button
                 type="submit"
-                className="inline-flex h-12 items-center cursor-pointer justify-center gap-2 rounded-full bg-orange-500 px-5 text-sm font-semibold text-white transition hover:bg-cyan-300"
+                className="inline-flex h-12 items-center cursor-pointer justify-center gap-2 rounded-full bg-orange-500 px-5 text-sm font-semibold text-white transition hover:bg-orange-600"
               >
                 Subscribe
                 <Send className="size-4" />

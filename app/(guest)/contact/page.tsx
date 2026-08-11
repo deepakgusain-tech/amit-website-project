@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, Clock3, Mail, MapPin, Phone, Sparkles } from "lucide-react"
-
+import { getSettings } from "@/lib/actions/settings-action"
 import { ContactForm } from "./contact-form"
 import { getServices } from "@/lib/actions/service-action"
 
@@ -11,38 +11,6 @@ export const metadata: Metadata = {
     "Contact AS Services for back office operations, analytics, technical support, IT consulting, managed services, and recovery support.",
 }
 
-const contactCards = [
-  {
-    icon: Phone,
-    label: "Call Us",
-    value: "+91-9212174507",
-    href: "tel:+919212174507",
-    note: "Speak with a team member directly.",
-    accent: "from-orange-500 to-orange-600",
-  },
-  {
-    icon: Mail,
-    label: "Email Us",
-    value: "info@asservices.com",
-    href: "mailto:info@asservices.com",
-    note: "Send your requirement and we'll reply promptly.",
-    accent: "from-[#185980] to-sky-500",
-  },
-  {
-    icon: MapPin,
-    label: "Delivery",
-    value: "Flexible across time zones",
-    href: "/services",
-    note: "We support clients with responsive remote delivery.",
-    accent: "from-cyan-500 to-[#185980]",
-  },
-]
-
-const quickPoints = [
-  "Fast response and clear next steps",
-  "Operations, analytics, and IT support enquiries",
-  "Practical guidance for scope and delivery",
-]
 
 function ContactCard({
   icon: Icon,
@@ -51,7 +19,8 @@ function ContactCard({
   note,
   href,
   accent,
-}: (typeof contactCards)[number]) {
+}: any) {
+
   return (
     <Link
       href={href}
@@ -88,6 +57,35 @@ function ContactCard({
 
 export default async function ContactPage() {
   const services = await getServices()
+
+  const settings = await getSettings();
+
+  const contactCards = [
+    {
+      icon: Phone,
+      label: "Call Us",
+      value: settings?.primaryPhone || "+91-9212174507",
+      href: settings?.primaryPhone ? `tel:${settings.primaryPhone}` : "tel:+919212174507",
+      note: "Speak with a team member directly.",
+      accent: "from-orange-500 to-orange-600",
+    },
+    {
+      icon: Mail,
+      label: "Email Us",
+      value: settings?.primaryEmail || "info@asservices.com",
+      href: settings?.primaryEmail ? `mailto:${settings.primaryEmail}` : "mailto:info@asservices.com",
+      note: "Send your requirement and we'll reply promptly.",
+      accent: "from-[#185980] to-sky-500",
+    },
+    {
+      icon: MapPin,
+      label: "Delivery",
+      value: settings?.officeHours || "Flexible across time zones",
+      href: "/services",
+      note: "We support clients with responsive remote delivery.",
+      accent: "from-cyan-500 to-[#185980]",
+    },
+  ]
 
   return (
     <div className="relative overflow-hidden bg-[#eef3f8] text-slate-900 mt-4">

@@ -46,29 +46,26 @@ export async function sendNewsletterSubscriptionEmails({
 
   const deliveries = [] as Promise<unknown>[];
 
-  if (inbox) {
-    deliveries.push(
-      sendMail({
-        host: smtpHost,
-        port: smtpPort,
-        secure: smtpPort === 465,
-        auth: { username: smtpUsername, password: smtpPassword },
-        from,
-        to: [createMailbox(inbox)],
-        replyTo: createMailbox(email),
-        subject: `New newsletter subscription: ${email}`,
-        text: [
-          `New newsletter subscription received`,
-          "",
-          `Email: ${email}`,
-        ].join("\n"),
-        html: `
+  deliveries.push(
+    sendMail({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpPort === 465,
+      auth: { username: smtpUsername, password: smtpPassword },
+      from,
+      to: [createMailbox(email)],
+      subject: `New newsletter subscription: ${email}`,
+      text: [
+        `New newsletter subscription received`,
+        "",
+        `Email: ${email}`,
+      ].join("\n"),
+      html: `
           <h1>New newsletter subscription</h1>
           <p><strong>Email:</strong> ${safeEmail}</p>
         `,
-      }),
-    );
-  }
+    }),
+  );
 
   deliveries.push(
     sendMail({

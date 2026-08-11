@@ -179,7 +179,7 @@ export function GuestFooter({
                 value={newsletter}
                 onChange={(e) => setNewsletter(e.target.value)}
                 placeholder="Enter your email"
-                className="h-12 rounded-full border border-blue-500 bg-white/5 px-4 text-sm text-white outline-none transition placeholder:text-slate-400 focus:border-blue-500"
+                className="h-12 rounded-full border border-blue-500 bg-white/5 px-4 text-sm text-slate-600 outline-none transition placeholder:text-black focus:border-blue-500"
               />
               <button
                 type="submit"

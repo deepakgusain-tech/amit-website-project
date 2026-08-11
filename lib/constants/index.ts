@@ -1,7 +1,7 @@
 import { Status } from "@/lib/generated/prisma/client";
 
-export const APP_NAME = process.env.NEXT_APP_APP_NAME ?? "Asset Management System";
-export const APP_DESCRIPTION = process.env.NEXT_APP_DESCRIPTION ?? "Asset Management System";
+export const APP_NAME = process.env.NEXT_APP_APP_NAME;
+export const APP_DESCRIPTION = process.env.NEXT_APP_DESCRIPTION;
 export const SERVER_URL = process.env.NEXT_APP_SERVER_URL ?? "http://localhost:3000";
 
 export const roleDefaultValues = {

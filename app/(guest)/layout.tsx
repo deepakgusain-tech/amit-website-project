@@ -3,6 +3,7 @@ import { GuestFooter } from "@/components/guest-footer"
 import { GuestNavbar } from "@/components/guest-navbar"
 import { getSettings } from "@/lib/actions/settings-action"
 import { getServices } from "@/lib/actions/service-action"
+
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
 

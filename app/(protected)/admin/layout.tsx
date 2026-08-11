@@ -1,12 +1,41 @@
-
+import type { Metadata } from "next"
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { redirect } from "next/navigation";
+import { getSettings } from "@/lib/actions/settings-action"
 
 export const dynamic = "force-dynamic"
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+
+  return {
+    title: settings?.siteName || "As services",
+    
+    description:
+      settings?.metaDescription ||
+      "Welcome to As services. Explore our services and solutions.",
+
+    keywords: settings?.metaKeywords
+      ? settings.metaKeywords.split(",").map((keyword) => keyword.trim())
+      : [
+          "Services",
+          "Solutions",
+          "Technology",
+          "Business",
+        ],
+
+    icons: {
+      icon: settings?.faviconPath
+        ? `/api${settings.faviconPath}`
+        : "/favicon.ico",
+    },
+  };
+}
 
 export default async function RootLayout({
     children,

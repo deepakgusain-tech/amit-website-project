@@ -198,7 +198,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
 
                 <GuestEnquiryPopup
                   triggerClassName={ctaSecondaryBase + " w-full justify-center"}
-                  triggerLabel="Enquiry Us"
+                  triggerLabel="Enquire"
                 />
               </div>
             </SheetContent>
@@ -301,7 +301,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                 <NavigationMenuItem className="ml-2">
                   <GuestEnquiryPopup
                     triggerClassName={ctaSecondaryBase}
-                    triggerLabel="Enquiry Us"
+                    triggerLabel="Enquire"
                   />
                 </NavigationMenuItem>
               </NavigationMenuList>

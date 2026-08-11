@@ -261,6 +261,34 @@ function parseCapabilities(lines: string[]) {
     .map((line) => line.toUpperCase());
 }
 
+function normalizeSmtpHost(host: string) {
+  const normalized = host.trim().toLowerCase();
+
+  if (
+    normalized === "smtp.office365.com" ||
+    normalized === "outlook.office365.com" ||
+    normalized === "smtp.live.com" ||
+    normalized === "smtp-mail.outlook.com"
+  ) {
+    return "smtp-mail.outlook.com";
+  }
+
+  return normalized;
+}
+
+function resolveSmtpSettings(host: string, port: number, secure?: boolean) {
+  const normalizedHost = normalizeSmtpHost(host);
+  const isOutlookHost = normalizedHost.includes("outlook") || normalizedHost.includes("office365");
+  const resolvedPort = isOutlookHost ? 587 : Number(port) || 587;
+  const resolvedSecure = isOutlookHost ? false : (secure ?? resolvedPort === 465);
+
+  return {
+    host: normalizedHost,
+    port: resolvedPort,
+    secure: resolvedSecure,
+  };
+}
+
 async function connectSocket(host: string, port: number, secure: boolean) {
   if (secure) {
     return await new Promise<tls.TLSSocket>((resolve, reject) => {
@@ -292,9 +320,8 @@ async function expectResponse(session: SmtpSession, expected: number[]) {
 }
 
 export async function sendMail(options: SendMailOptions) {
-  const port = Number(options.port) || 587;
-  const secure = options.secure ?? port === 465;
-  const socket = await connectSocket(options.host, port, secure);
+  const { host, port, secure } = resolveSmtpSettings(options.host, options.port, options.secure);
+  const socket = await connectSocket(host, port, secure);
   const session = new SmtpSession(socket);
 
   try {
@@ -307,18 +334,31 @@ export async function sendMail(options: SendMailOptions) {
     if (!secure && capabilities.includes("STARTTLS")) {
       session.write("STARTTLS");
       await expectResponse(session, [220]);
-      await session.upgradeToTls(options.host);
+      await session.upgradeToTls(host);
 
       session.write("EHLO localhost");
       response = await expectResponse(session, [250]);
     }
 
     session.write("AUTH LOGIN");
-    await expectResponse(session, [334]);
+    try {
+      await expectResponse(session, [334]);
+    } catch (error) {
+      throw new Error(
+        "SMTP authentication was not accepted. Enable SMTP AUTH for the Outlook account and ensure the account allows automated sign-ins.",
+      );
+    }
+
     session.write(Buffer.from(options.auth.username).toString("base64"));
     await expectResponse(session, [334]);
     session.write(Buffer.from(options.auth.password).toString("base64"));
-    await expectResponse(session, [235]);
+    try {
+      await expectResponse(session, [235]);
+    } catch (error) {
+      throw new Error(
+        "SMTP authentication failed. Verify the Outlook username/password or app password and allow SMTP AUTH.",
+      );
+    }
 
     session.write(`MAIL FROM:<${options.from.address}>`);
     await expectResponse(session, [250]);

@@ -60,7 +60,7 @@ export function GuestOperationalExcellenceSection({ settings }: { settings?: any
                 {aboutTagline}
               </h2>
 
-              <div className="relative mt-4 h-[5px] w-75 overflow-hidden rounded-full bg-slate-200">
+              <div className="relative mt-4 h-[5px] w-full overflow-hidden rounded-full bg-slate-200">
                 <div className="absolute inset-0 animated-gradient-line" />
                 <div className="absolute inset-y-0 shine-effect" />
               </div>

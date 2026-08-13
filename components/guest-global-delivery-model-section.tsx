@@ -43,7 +43,7 @@ export function GuestGlobalDeliveryModelSection({ settings }: { settings?: any }
               {tagline}
             </h2>
 
-            <div className="relative mt-3 h-1.5 w-100 overflow-hidden rounded-full bg-white">
+            <div className="relative mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-500" />
               <div
                 className="absolute inset-y-0 -left-1/2 w-1/2 bg-white/60 blur-sm"

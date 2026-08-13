@@ -104,7 +104,7 @@ export default async function ContactPage() {
             </h1>
 
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
-              Reach out for back office operations, reporting and analytics,
+              Reach out for business process operations, reporting and analytics,
               technical support, consulting, or recovery support. We&apos;ll help
               you understand the best next step quickly and clearly.
             </p>

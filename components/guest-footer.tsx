@@ -22,10 +22,12 @@ const serviceLinks = [
   { label: "Technical Support & Services", href: "#services" },
 ];
 
-const aboutLinks = [
+const pagesLinks = [
+  { label: "Home", href: "/" },
   { label: "About us", href: "/about" },
   { label: "Contact us", href: "/contact" },
-  { label: "Home", href: "/" },
+  { label: "Career", href: "/career" },
+  { label: "Services", href: "/service" },
 ];
 
 const socialLinks = [
@@ -148,9 +150,9 @@ export function GuestFooter({
           </div>
 
           <div>
-            <p className="text-xl font-semibold text-orange-500 pb-3 border-b-[2px] border-[#185980]">About Us</p>
+            <p className="text-xl font-semibold text-orange-500 pb-3 border-b-[2px] border-[#185980]">Pages</p>
             <div className="mt-5 grid gap-4 text-sm text-slate-300">
-              {aboutLinks.map((link) => (
+              {pagesLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}

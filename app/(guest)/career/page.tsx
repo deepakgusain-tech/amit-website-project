@@ -97,11 +97,7 @@ export default async function CareerPage() {
       
         <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
           <div className="max-w-3xl">
-            {/* <div className="inline-flex items-center gap-2 rounded-full border border-blue-500 bg-white/10 px-4 py-2 text-sm font-semibold text-blue-500  hover:bg-blue-500 hover:text-white">
-              <Sparkles className="size-4" />
-              Build your next move with AS Services
-            </div> */}
-
+           
             <h1 className="mt-7 text-4xl font-semibold tracking-tight text-balance text-orange-500 sm:text-5xl lg:text-6xl">
               Advance your career in operations, analytics, and IT services.
             </h1>
@@ -132,16 +128,16 @@ export default async function CareerPage() {
           <div className="grid content-start gap-4 sm:grid-cols-2">
             {[
               { icon: UsersRound, label: "Team Culture", value: "Collaborative" },
-              { icon: GraduationCap, label: "Learning", value: "Guided training" },
+              { icon: GraduationCap, label: "Learning", value: "Guided Training" },
               { icon: BriefcaseBusiness, label: "Departments", value: "Ops, IT, Data" },
-              { icon: Clock3, label: "Work Model", value: "Flexible shifts" },
+              { icon: Clock3, label: "Work Model", value: "Flexible Shifts" },
             ].map((item) => (
               <div
                 key={item.label}
                 className="rounded-2xl border border-[#185980] bg-white/10 p-5 backdrop-blur"
               >
                 <item.icon className="size-6 text-orange-200" />
-                <p className="mt-5 text-sm text-slate-300">{item.label}</p>
+                <p className="mt-5 text-sm text-slate-300 text-capitalize">{item.label}</p>
                 <p className="mt-1 text-xl font-semibold text-orange-500">
                   {item.value}
                 </p>

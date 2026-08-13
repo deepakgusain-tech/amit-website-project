@@ -215,9 +215,7 @@ export default async function AboutPage() {
               The main services we provide.
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-              These are the service lines we want visitors to notice first:
-              practical, high-value, and designed to support dependable
-              operations.
+              Our services are Fundamental, Outcome based and Designed to support dependable operations.
             </p>
           </div>
 

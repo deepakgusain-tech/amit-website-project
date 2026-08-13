@@ -142,7 +142,7 @@ export function GuestFooter({
                   href={service?.id ? `/service/${service.id}` : "/service"}
                   className="inline-flex items-center gap-2 transition text-slate-800"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-orange-300" />
                   {service?.title ?? service?.name ?? "Service"}
                 </Link>
               ))}

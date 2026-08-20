@@ -28,6 +28,7 @@ const pagesLinks = [
   { label: "Contact us", href: "/contact" },
   { label: "Career", href: "/career" },
   { label: "Services", href: "/service" },
+  { label: "Events", href: "/events" },
 ];
 
 const socialLinks = [

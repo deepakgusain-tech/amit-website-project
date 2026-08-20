@@ -188,6 +188,12 @@ export function GuestNavbar({ settings }: { settings: any }) {
                 </SheetClose>
 
                 <SheetClose asChild>
+                  <Link href="/events" className={mobileLinkBase}>
+                    Events
+                  </Link>
+                </SheetClose>
+
+                <SheetClose asChild>
                   <Link
                     href="/contact"
                     className={ctaPrimaryBase + " justify-center mt-2"}
@@ -238,6 +244,17 @@ export function GuestNavbar({ settings }: { settings: any }) {
                     ].join(" ")}
                   >
                     Careers
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link
+                    href="/events"
+                    className={[
+                      navLinkBase,
+                      isTransparentHeader ? "text-white" : "text-slate-700",
+                    ].join(" ")}
+                  >
+                    Events
                   </Link>
                 </NavigationMenuItem>
                 <DropdownMenu

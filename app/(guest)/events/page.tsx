@@ -14,6 +14,10 @@ import {
 import eventImage from "@/images/technology.jpg"
 import operationsImage from "@/images/outsourcing.jpg"
 import analyticsImage from "@/images/analatics.jpg"
+import teamImage from "@/images/hero1.jpg"
+import workshopImage from "@/images/hero2.jpg"
+import meetupImage from "@/images/hero3.jpg"
+import { EventGallery } from "../../../components/event-gallery"
 
 export const metadata: Metadata = {
   title: "Events | AS Services",
@@ -31,8 +35,10 @@ const events = [
     time: "10:30 AM - 1:00 PM",
     description:
       "A focused conversation on building dependable processes while keeping teams agile and client-ready.",
-    image: operationsImage,
-    imageAlt: "Team collaborating on business operations",
+    images: [
+      { image: operationsImage, alt: "Team collaborating on business operations" },
+      { image: teamImage, alt: "Team members collaborating during an event" },
+    ],
     accent: "bg-orange-500",
   },
   {
@@ -44,8 +50,10 @@ const events = [
     time: "3:00 PM - 4:30 PM",
     description:
       "Learn how clean reporting rhythms and useful dashboards can turn everyday operations into better decisions.",
-    image: analyticsImage,
-    imageAlt: "Analytics dashboard on a laptop",
+    images: [
+      { image: analyticsImage, alt: "Analytics dashboard on a laptop" },
+      { image: workshopImage, alt: "Workshop presentation in a modern workspace" },
+    ],
     accent: "bg-[#185980]",
   },
   {
@@ -57,8 +65,10 @@ const events = [
     time: "5:30 PM - 7:30 PM",
     description:
       "Connect with service leaders sharing practical lessons from support, delivery, and customer experience teams.",
-    image: eventImage,
-    imageAlt: "Technology leaders discussing a digital presentation",
+    images: [
+      { image: eventImage, alt: "Technology leaders discussing a digital presentation" },
+      { image: meetupImage, alt: "Professionals connecting at a business meetup" },
+    ],
     accent: "bg-cyan-600",
   },
 ]
@@ -121,8 +131,8 @@ export default function EventsPage() {
               <article key={event.title} className="group flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-50 shadow-[0_16px_40px_rgba(15,23,42,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(15,23,42,0.1)]">
                 <div className="relative h-52 overflow-hidden bg-slate-200">
                   <Image
-                    src={event.image}
-                    alt={event.imageAlt}
+                    src={event.images[0].image}
+                    alt={event.images[0].alt}
                     fill
                     sizes="(min-width: 1024px) 33vw, 100vw"
                     className="object-cover transition duration-500 group-hover:scale-105"
@@ -159,6 +169,8 @@ export default function EventsPage() {
           </div>
         </div>
       </section>
+
+      <EventGallery />
 
       <section className="bg-white px-4 py-16 sm:py-20"><div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 rounded-[1.75rem] bg-[#185980] p-8 text-white sm:flex-row sm:items-center sm:p-12"><div><p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-300">Stay in the loop</p><h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Bring your questions. We’ll bring the conversation.</h2></div><Link href="/contact" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600">Get event details <ArrowRight className="size-4" /></Link></div></section>
     </div>

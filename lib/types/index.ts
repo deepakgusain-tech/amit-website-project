@@ -8,6 +8,7 @@ import {
     serviceCategorySchema, 
     serviceSchema, 
     testimonialSchema, 
+    upcommingEventSchema, 
     userSchema 
 } from "../validators";
 
@@ -18,6 +19,7 @@ export type ServiceCategory = z.infer<typeof serviceCategorySchema>
 export type Service = z.infer<typeof serviceSchema>
 export type Newsletter = z.infer<typeof newsletterSchema>
 export type Testimonial = z.infer<typeof testimonialSchema>
+export type UpcommingEvent = z.infer<typeof upcommingEventSchema>
 export type Job = z.infer<typeof jobSchema>
 export type Application = z.infer<typeof applicationSchema>
 

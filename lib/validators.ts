@@ -193,3 +193,19 @@ export const applicationSchema = z.object({
   updatedAt: z.date().nullable().optional(),
 });
 
+export const upcommingEventSchema = z.object({
+  id: z.string().optional(),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  category: z.string().min(1, "Category is required"),
+  imageUrl: z.union([z.instanceof(File), z.string().nullable()]).optional(),
+  eventDate: z.date("Please provide a valid event date"),
+  startTime: z.string().min(1, "Start time is required"),
+  endTime: z.string().min(1, "End time is required"),
+  location: z.string().min(1, "Location is required"),
+  showSaveTheDate: z.boolean().default(true),
+  saveTheDateText: z.string().default("SAVE THE DATE"),
+  status: z.enum(Object.values(Status)).default(Status.ACTIVE),
+  createdAt: z.date().nullable().optional(),
+  updatedAt: z.date().nullable().optional(),
+});

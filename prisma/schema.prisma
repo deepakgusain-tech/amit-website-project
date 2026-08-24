@@ -109,52 +109,52 @@ model Enquiry {
 model SiteSettings {
   id String @id @default("site-settings")
 
-  siteName           String
-  legalName          String?
-  primaryEmail       String?
-  primaryPhone       String?
-  websiteUrl         String?
-  timezone           String?
-  officeAddress      String? @db.Text
-  officeHours        String?
-  logoPath           String?
-  faviconPath        String?
-  metaTitle         String?
-  metaDescription   String? @db.Text
-  metaKeywords      String?
-  gstNumber          String?
-  cinNumber          String?
-  mapUrl             String?
-  teamMembers        String?
-  happyCustomers     String?
-  operationalSupport String?
-  heroTrustTags      String? @db.Text
-  heroTagline        String?
-  heroTitle          String?
-  heroDescription    String? @db.Text
-  heroBackgroundImagePath String?
-  aboutTagline       String?
-  aboutTitle         String?
-  aboutDescription   String? @db.Text
-  aboutButtons       String? @db.Text
-  deliveryModelTitle  String?
-  deliveryModelItems  String? @db.Text
-  whyClientsTagline   String?
-  whyClientsTitle     String?
-  whyClientsDescription String? @db.Text
-  whyClientsCards     String? @db.Text
-  globalDeliveryTagline String?
-  globalDeliveryTitle   String?
-  globalDeliveryDescription String? @db.Text
-  globalDeliveryImagePath String?
-  serviceHeroTitle      String?
-  serviceHeroDescription String? @db.Text
-  serviceDeliveryTagline String?
-  serviceDeliveryTitle   String?
+  siteName                   String
+  legalName                  String?
+  primaryEmail               String?
+  primaryPhone               String?
+  websiteUrl                 String?
+  timezone                   String?
+  officeAddress              String? @db.Text
+  officeHours                String?
+  logoPath                   String?
+  faviconPath                String?
+  metaTitle                  String?
+  metaDescription            String? @db.Text
+  metaKeywords               String?
+  gstNumber                  String?
+  cinNumber                  String?
+  mapUrl                     String?
+  teamMembers                String?
+  happyCustomers             String?
+  operationalSupport         String?
+  heroTrustTags              String? @db.Text
+  heroTagline                String?
+  heroTitle                  String?
+  heroDescription            String? @db.Text
+  heroBackgroundImagePath    String?
+  aboutTagline               String?
+  aboutTitle                 String?
+  aboutDescription           String? @db.Text
+  aboutButtons               String? @db.Text
+  deliveryModelTitle         String?
+  deliveryModelItems         String? @db.Text
+  whyClientsTagline          String?
+  whyClientsTitle            String?
+  whyClientsDescription      String? @db.Text
+  whyClientsCards            String? @db.Text
+  globalDeliveryTagline      String?
+  globalDeliveryTitle        String?
+  globalDeliveryDescription  String? @db.Text
+  globalDeliveryImagePath    String?
+  serviceHeroTitle           String?
+  serviceHeroDescription     String? @db.Text
+  serviceDeliveryTagline     String?
+  serviceDeliveryTitle       String?
   serviceDeliveryDescription String? @db.Text
-  serviceDeliveryCards   String? @db.Text
-  showPhone          Boolean @default(true)
-  showEmail          Boolean @default(true)
+  serviceDeliveryCards       String? @db.Text
+  showPhone                  Boolean @default(true)
+  showEmail                  Boolean @default(true)
 
   smtpHost            String?
   smtpPort            String?
@@ -183,10 +183,10 @@ model SiteSettings {
 }
 
 model ServiceCategory {
-  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String
-  status      Status     @default(ACTIVE)
-  services    Services[]
+  id       String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name     String
+  status   Status     @default(ACTIVE)
+  services Services[]
 
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @updatedAt @db.Timestamp(6)
@@ -340,4 +340,21 @@ model CareerApplication {
   updatedAt DateTime @updatedAt
 
   job Job? @relation(fields: [jobId], references: [id], onDelete: Cascade)
+}
+
+model UpcommingEvents {
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title           String
+  description     String            @db.Text
+  category        String
+  imageUrl        String?
+  eventDate       DateTime
+  startTime       String
+  endTime         String
+  location        String
+  showSaveTheDate Boolean           @default(true)
+  saveTheDateText String            @default("SAVE THE DATE")
+  status          Status            @default(ACTIVE)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
 }

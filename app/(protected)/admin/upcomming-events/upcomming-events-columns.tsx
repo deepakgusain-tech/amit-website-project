@@ -20,7 +20,7 @@ export const getUpcommingEventColumns = ({ onDelete }: Props): ColumnDef<Upcommi
 
       return imageUrl ? (
         <img
-          src={imageUrl}
+          src={"/api" + imageUrl}
           alt={upcommingEvent.title}
           className="w-10 h-10 rounded-full object-cover"
         />

@@ -59,7 +59,7 @@ export default async function EventsPage() {
               {featuredEvent.images[0] && (
                 <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-2xl bg-slate-900/30">
                   <Image
-                    src={featuredEvent.images[0].url}
+                    src={"/api" + featuredEvent.images[0].url}
                     alt={featuredEvent.title}
                     fill
                     sizes="(min-width: 1024px) 40vw, 100vw"

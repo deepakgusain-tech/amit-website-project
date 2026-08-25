@@ -1,41 +1,35 @@
 "use client"
 
-import Image, { type StaticImageData } from "next/image"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
 
-import analyticsImage from "@/images/analatics.jpg"
-import eventImage from "@/images/technology.jpg"
-import meetupImage from "@/images/hero3.jpg"
-import operationsImage from "@/images/outsourcing.jpg"
-import teamImage from "@/images/hero1.jpg"
-import workshopImage from "@/images/hero2.jpg"
+import type { UpcommingEvent } from "@/lib/types"
 
 type GalleryItem = {
-  image: StaticImageData
+  image: string
   alt: string
-  category: string
+  eventTitle: string
   label: string
   className: string
 }
 
-const categories = ["All", "Office", "Business Meeting", "Conference", "Meeting Room", "Presentation", "Work", "Team"]
-
-const galleryItems: GalleryItem[] = [
-  { image: teamImage, alt: "Team member working in an office", category: "Office", label: "Shared thinking", className: "" },
-  { image: operationsImage, alt: "Colleagues collaborating around a table", category: "Business Meeting", label: "Operations That Scale", className: "" },
-  { image: meetupImage, alt: "Professionals connecting during a meetup", category: "Team", label: "New connections", className: "" },
-  { image: workshopImage, alt: "Speaker presenting at a workshop", category: "Presentation", label: "Ideas in action", className: "" },
-  { image: analyticsImage, alt: "Analytics discussion during a workshop", category: "Conference", label: "Data Clarity Workshop", className: "" },
-  { image: eventImage, alt: "Technology event discussion", category: "Meeting Room", label: "The Service Desk Exchange", className: "" },
-]
-
-export function EventGallery() {
+export function EventGallery({ events }: { events: UpcommingEvent[] }) {
   const [activeCategory, setActiveCategory] = useState("All")
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const galleryItems: GalleryItem[] = events.flatMap((event) =>
+    event.images.map((image, index) => ({
+      image,
+      alt: `${event.title} image ${index + 1}`,
+      eventTitle: event.title,
+      label: event.title,
+      className: "",
+    }))
+  )
+  const categories = ["All", ...Array.from(new Set(events.map((event) => event.title)))]
   const visibleItems = activeCategory === "All"
     ? galleryItems
-    : galleryItems.filter((item) => item.category === activeCategory)
+    : galleryItems.filter((item) => item.eventTitle === activeCategory)
 
   const selectedItem = selectedIndex === null ? null : visibleItems[selectedIndex]
 
@@ -61,7 +55,7 @@ export function EventGallery() {
   }, [selectedIndex, visibleItems.length])
 
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-[#eef3f8] py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.34em] text-orange-500">Event showcase</p>
@@ -86,7 +80,7 @@ export function EventGallery() {
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           {visibleItems.map((item) => (
-              <figure key={`${item.category}-${item.label}`} className={`group relative h-64 overflow-hidden rounded-xl bg-slate-100 md:h-72 ${item.className}`}>
+              <figure key={`${item.eventTitle}-${item.image}`} className={`group relative h-64 overflow-hidden rounded-xl bg-slate-100 md:h-72 ${item.className}`}>
               <button type="button" onClick={() => setSelectedIndex(visibleItems.indexOf(item))} className="absolute inset-0 z-10 cursor-zoom-in" aria-label={`Open ${item.label} image`}>
                 <Image src={item.image} alt={item.alt} fill sizes="(min-width: 768px) 25vw, 100vw" className="object-cover transition duration-500 group-hover:scale-105" />
               </button>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import moment from "moment"
 import {
   ArrowRight,
   CalendarDays,
@@ -18,6 +19,7 @@ import teamImage from "@/images/hero1.jpg"
 import workshopImage from "@/images/hero2.jpg"
 import meetupImage from "@/images/hero3.jpg"
 import { EventGallery } from "../../../components/event-gallery"
+import { getUpcommingEvents } from "@/lib/actions/upcomming-events"
 
 export const metadata: Metadata = {
   title: "Events | AS Services",
@@ -79,7 +81,17 @@ const formats = [
   { icon: CheckCircle2, title: "Meetups", text: "Informal industry gatherings for exchanging ideas and making useful connections." },
 ]
 
-export default function EventsPage() {
+const getDaysToGo = (eventDate: Date | string) => Math.max(
+  0,
+  moment(eventDate).startOf("day").diff(moment().startOf("day"), "days")
+);
+
+export default async function EventsPage() {
+
+  const events = await getUpcommingEvents();
+
+  console.log("Upcoming events:", events);
+
   return (
     <div className="overflow-hidden bg-[#eef3f8] text-slate-900">
       <section className="relative isolate overflow-hidden bg-[#102f45] pt-32 text-white sm:pt-36">
@@ -127,31 +139,36 @@ export default function EventsPage() {
           </div>
 
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {events.map((event) => (
-              <article key={event.title} className="group flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-50 shadow-[0_16px_40px_rgba(15,23,42,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(15,23,42,0.1)]">
+            {events.length > 0 && events.map((event: any) => (
+              event.status === "NEW" && <article key={event.title} className="group flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-50 shadow-[0_16px_40px_rgba(15,23,42,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(15,23,42,0.1)]">
                 <div className="relative h-52 overflow-hidden bg-slate-200">
                   <Image
-                    src={event.images[0].image}
-                    alt={event.images[0].alt}
+                    src={event.images[0]}
+                    alt={event.title}
                     fill
                     sizes="(min-width: 1024px) 33vw, 100vw"
                     className="object-cover transition duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent" />
                   <span className="absolute bottom-4 left-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-                    <CalendarDays className="size-4 text-orange-300" />
+                    <CalendarDays className="size-4 text-white" />
                     Save the date
                   </span>
                 </div>
-                <div className={`${event.accent} flex items-center justify-between px-6 py-5 text-white`}>
-                  <div><p className="text-4xl font-semibold leading-none">{event.date}</p><p className="mt-1 text-xs font-bold tracking-[0.25em]">{event.month}</p></div>
-                  <span className="rounded-full border border-white/30 px-3 py-1 text-xs font-semibold">{event.type}</span>
+                <div className={`bg-orange-500 flex items-center justify-between px-6 py-5 text-white`}>
+                  <div><p className="text-4xl font-semibold leading-none">{moment(event.eventDate).format("D")}</p><p className="mt-1 text-xs font-bold tracking-[0.25em]">{moment(event.eventDate).format("MMMM")}</p></div>
+                  <div className="flex flex-col items-end gap-2">
+                    <span className="rounded-full border border-white/30 px-3 py-1 text-xs font-semibold">{event.category}</span>
+                    <span className="text-xs font-semibold">
+                      {getDaysToGo(event.eventDate)} {getDaysToGo(event.eventDate) === 1 ? "day" : "days"} to go
+                    </span>
+                  </div>
                 </div>
                 <div className="flex flex-1 flex-col p-6">
                   <h3 className="text-xl font-semibold text-[#185980]">{event.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-slate-600">{event.description}</p>
                   <div className="mt-auto grid gap-3 border-t border-slate-200 pt-5 text-sm text-slate-600">
-                    <span className="inline-flex items-center gap-2"><Clock3 className="size-4 text-orange-500" />{event.time}</span>
+                    <span className="inline-flex items-center gap-2"><Clock3 className="size-4 text-orange-500" />{moment(event.startTime, 'HH:mm').format('h:mm A')}</span>
                     <span className="inline-flex items-center gap-2"><MapPin className="size-4 text-orange-500" />{event.location}</span>
                   </div>
                 </div>
@@ -161,16 +178,7 @@ export default function EventsPage() {
         </div>
       </section>
 
-      <section className="bg-[#eef3f8] py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl"><p className="text-sm font-semibold uppercase tracking-[0.34em] text-orange-500">What to expect</p><h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#185980] sm:text-4xl">A useful room, every time.</h2></div>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {formats.map(({ icon: Icon, title, text }) => <div key={title} className="rounded-2xl border border-slate-200 bg-white p-6"><div className="flex size-11 items-center justify-center rounded-xl bg-[#185980] text-white"><Icon className="size-5" /></div><h3 className="mt-5 text-lg font-semibold text-slate-950">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{text}</p></div>)}
-          </div>
-        </div>
-      </section>
-
-      <EventGallery />
+      <EventGallery events={events} />
 
       <section className="bg-white px-4 py-16 sm:py-20"><div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 rounded-[1.75rem] bg-[#185980] p-8 text-white sm:flex-row sm:items-center sm:p-12"><div><p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-300">Stay in the loop</p><h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Bring your questions. We’ll bring the conversation.</h2></div><Link href="/contact" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600">Get event details <ArrowRight className="size-4" /></Link></div></section>
     </div>

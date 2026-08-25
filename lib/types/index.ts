@@ -28,6 +28,13 @@ export enum Status {
     INACTIVE = "INACTIVE",
 }
 
+export enum UpcomingEventStatus {
+    COMPLETED = "COMPLETED",
+    NEW = "NEW",
+    ACTIVE = "ACTIVE",
+    INACTIVE = "INACTIVE",
+}
+
 export enum EmploymentType {
     FULL_TIME = "FULL_TIME",
     PART_TIME = "PART_TIME",

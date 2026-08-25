@@ -12,6 +12,13 @@ enum Status {
   INACTIVE
 }
 
+enum UpcomingEventStatus {
+  COMPLETED
+  NEW
+  ACTIVE
+  INACTIVE
+}
+
 enum EmploymentType {
   FULL_TIME
   PART_TIME
@@ -354,7 +361,18 @@ model UpcommingEvents {
   location        String
   showSaveTheDate Boolean           @default(true)
   saveTheDateText String            @default("SAVE THE DATE")
-  status          Status            @default(ACTIVE)
+  status          UpcomingEventStatus @default(NEW)
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
+  images          EventImage[]
+}
+
+model EventImage {
+  id        String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  eventId   String          @db.Uuid
+  url       String
+  sortOrder Int             @default(0)
+  event     UpcommingEvents @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId, sortOrder])
 }

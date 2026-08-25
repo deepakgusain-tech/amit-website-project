@@ -11,13 +11,17 @@ type ActionResponse = {
     message: string;
 };
 
-export async function getUpcommingEvents(): Promise<UpcommingEvent[]> {
+export async function getUpcommingEvents(): Promise<any> {
     try {
         const upcommingEvents = await prisma.upcommingEvents.findMany({
             orderBy: { createdAt: "desc" },
+            include: { images: { orderBy: { sortOrder: "asc" } } },
         });
 
-        return upcommingEvents;
+        return upcommingEvents.map(({ images, ...event }) => ({
+            ...event,
+            images: images.map((image) => image.url),
+        }));
     } catch {
         return [];
     }
@@ -29,12 +33,15 @@ export async function createUpcommingEvent(data: z.infer<typeof upcommingEventSc
 
         console.log("Creating upcomming event:", upcommingEvent);
 
-        const createdUpcommingEvent = await prisma.upcommingEvents.create({
+        await prisma.upcommingEvents.create({
             data: {
                 title: upcommingEvent.title,
                 description: upcommingEvent.description,
                 category: upcommingEvent.category,
-                imageUrl: upcommingEvent.imageUrl as string,
+                imageUrl: upcommingEvent.images[0] ?? (typeof upcommingEvent.imageUrl === "string" ? upcommingEvent.imageUrl : null),
+                images: {
+                    create: upcommingEvent.images.map((url, sortOrder) => ({ url, sortOrder })),
+                },
                 eventDate: upcommingEvent.eventDate,
                 startTime: upcommingEvent.startTime,
                 endTime: upcommingEvent.endTime,
@@ -60,7 +67,8 @@ export async function createUpcommingEvent(data: z.infer<typeof upcommingEventSc
 export async function getUpcommingEventById(id: string) {
     try {
         const upcommingEvent = await prisma.upcommingEvents.findUnique({
-            where: { id }
+            where: { id },
+            include: { images: { orderBy: { sortOrder: "asc" } } },
         });
 
         if (!upcommingEvent) {
@@ -72,7 +80,10 @@ export async function getUpcommingEventById(id: string) {
 
         return {
             success: true,
-            data: omitTimestamps(upcommingEvent),
+            data: {
+                ...omitTimestamps(upcommingEvent),
+                images: upcommingEvent.images.map((image) => image.url),
+            },
             message: "Upcoming event fetched successfully",
         };
     } catch (error) {
@@ -90,7 +101,7 @@ export async function updateUpcommingEvents(
     try {
         const upcommingEvent = upcommingEventSchema.parse(data);
 
-        const imageValue = upcommingEvent.imageUrl instanceof File ? upcommingEvent.imageUrl.name : upcommingEvent.imageUrl ?? null;
+        const imageValue = upcommingEvent.images[0] ?? (typeof upcommingEvent.imageUrl === "string" ? upcommingEvent.imageUrl : null);
 
         const updateData = {
             title: upcommingEvent.title,
@@ -106,9 +117,17 @@ export async function updateUpcommingEvents(
             status: upcommingEvent.status,
         };
 
-        await prisma.upcommingEvents.update({
-            where: { id },
-            data: updateData,
+        await prisma.$transaction(async (transaction) => {
+            await transaction.upcommingEvents.update({
+                where: { id },
+                data: {
+                    ...updateData,
+                    images: {
+                        deleteMany: {},
+                        create: upcommingEvent.images.map((url, sortOrder) => ({ url, sortOrder })),
+                    },
+                },
+            });
         });
 
         return {

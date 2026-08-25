@@ -1,5 +1,5 @@
 import z from "zod";
-import { ApplicationStatus, EmploymentType, Status, WorkMode } from "./generated/prisma";
+import { ApplicationStatus, EmploymentType, Status, UpcomingEventStatus, WorkMode } from "./generated/prisma";
 
 const nullableOptionalString = z.string().nullable().optional();
 const nullableOptionalEmail = z.union([z.email(), z.literal(""), z.null()]).optional();
@@ -172,7 +172,7 @@ export const jobSchema = z.object({
   experience: z.string().trim().optional(),
   location: z.string().trim().optional(),
   vacancies: z.coerce.number().int("Vacancies must be a whole number.").min(1, "Vacancies must be at least 1.").optional(),
-  status: z.enum(Object.values(Status)).default(Status.ACTIVE),
+  status: z.enum(Object.values(UpcomingEventStatus)).default(UpcomingEventStatus.NEW),
   createdAt: z.date().nullable().optional(),
   updatedAt: z.date().nullable().optional(),
 });
@@ -198,14 +198,15 @@ export const upcommingEventSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
   category: z.string().min(1, "Category is required"),
-  imageUrl: z.union([z.instanceof(File), z.string().nullable()]).optional(),
+  imageUrl: z.union([z.instanceof(File), z.array(z.instanceof(File)), z.string().nullable()]).optional(),
+  images: z.array(z.string()).default([]),
   eventDate: z.date("Please provide a valid event date"),
   startTime: z.string().min(1, "Start time is required"),
   endTime: z.string().min(1, "End time is required"),
   location: z.string().min(1, "Location is required"),
   showSaveTheDate: z.boolean().default(true),
   saveTheDateText: z.string().default("SAVE THE DATE"),
-  status: z.enum(Object.values(Status)).default(Status.ACTIVE),
+  status: z.enum(Object.values(UpcomingEventStatus)).default(UpcomingEventStatus.NEW),
   createdAt: z.date().nullable().optional(),
   updatedAt: z.date().nullable().optional(),
 });

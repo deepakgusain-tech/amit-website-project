@@ -3,21 +3,24 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { EditIcon, Trash } from "lucide-react";
 import Link from "next/link";
+import type { UpcommingEvent } from "@/lib/types";
 
 type Props = {
   onDelete: (id: string) => void;
 };
 
-export const getUpcommingEventColumns = ({ onDelete }: Props): ColumnDef<any>[] => [
+export const getUpcommingEventColumns = ({ onDelete }: Props): ColumnDef<UpcommingEvent>[] => [
   {
-    accessorKey: "image",
+    accessorKey: "imageUrl",
     header: "Image",
     cell: ({ row }) => {
       const upcommingEvent = row.original;
 
-      return upcommingEvent.image ? (
+      const imageUrl = upcommingEvent.images?.[0] ?? upcommingEvent.imageUrl;
+
+      return imageUrl ? (
         <img
-          src={"/api" + upcommingEvent.image}
+          src={imageUrl}
           alt={upcommingEvent.title}
           className="w-10 h-10 rounded-full object-cover"
         />
@@ -38,6 +41,10 @@ export const getUpcommingEventColumns = ({ onDelete }: Props): ColumnDef<any>[] 
 
       return status === "ACTIVE" ? (
         <Badge className="bg-green-500">ACTIVE</Badge>
+      ) : status === "COMPLETED" ? (
+        <Badge className="bg-blue-500">COMPLETED</Badge>
+      ) : status === "NEW" ? (
+        <Badge className="bg-orange-500">NEW</Badge>
       ) : (
         <Badge variant="destructive">INACTIVE</Badge>
       );
@@ -66,7 +73,7 @@ export const getUpcommingEventColumns = ({ onDelete }: Props): ColumnDef<any>[] 
             size="icon"
             variant="destructive"
             className="cursor-pointer"
-            onClick={() => onDelete(upcommingEvent.id)}
+            onClick={() => onDelete(upcommingEvent.id!)}
           >
             <Trash size={16} />
           </Button>

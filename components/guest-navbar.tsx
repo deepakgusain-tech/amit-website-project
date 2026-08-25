@@ -47,6 +47,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const isTransparentHeader = isHomePage && !scrolled;
+  const isActiveLink = (href: string) => href === "/" ? pathname === href : pathname.startsWith(href);
   const [services, setServices] = useState([])
   const [open, setOpen] = useState(false);
   const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
@@ -132,13 +133,13 @@ export function GuestNavbar({ settings }: { settings: any }) {
 
               <div className="flex flex-col gap-2 px-4 py-4">
                 <SheetClose asChild>
-                  <Link href="/" className={mobileLinkBase}>
+                  <Link href="/" className={`${mobileLinkBase} ${isActiveLink("/") ? "border-b-2 border-orange-500 text-orange-500" : ""}`}>
                     Home
                   </Link>
                 </SheetClose>
 
                 <SheetClose asChild>
-                  <Link href="/about" className={mobileLinkBase}>
+                  <Link href="/about" className={`${mobileLinkBase} ${isActiveLink("/about") ? "border-b-2 border-orange-500 text-orange-500" : ""}`}>
                     About us
                   </Link>
                 </SheetClose>
@@ -151,6 +152,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                     className={[
                       mobileLinkBase,
                       "flex w-full items-center justify-between",
+                      isActiveLink("/service") ? "border-b-2 border-orange-500 text-orange-500" : "",
                     ].join(" ")}
                   >
                     Services
@@ -182,13 +184,13 @@ export function GuestNavbar({ settings }: { settings: any }) {
                 </div>
 
                 <SheetClose asChild>
-                  <Link href="/career" className={mobileLinkBase}>
+                  <Link href="/career" className={`${mobileLinkBase} ${isActiveLink("/career") ? "border-b-2 border-orange-500 text-orange-500" : ""}`}>
                     Careers
                   </Link>
                 </SheetClose>
 
                 <SheetClose asChild>
-                  <Link href="/events" className={mobileLinkBase}>
+                  <Link href="/events" className={`${mobileLinkBase} ${isActiveLink("/events") ? "border-b-2 border-orange-500 text-orange-500" : ""}`}>
                     Events
                   </Link>
                 </SheetClose>
@@ -218,7 +220,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                     href="/"
                     className={[
                       navLinkBase,
-                      isTransparentHeader ? "text-white" : "text-slate-700",
+                      isActiveLink("/") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
                     Home
@@ -229,7 +231,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                     href="/about"
                     className={[
                       navLinkBase,
-                      isTransparentHeader ? "text-white" : "text-slate-700",
+                      isActiveLink("/about") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
                     About us
@@ -240,7 +242,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                     href="/career"
                     className={[
                       navLinkBase,
-                      isTransparentHeader ? "text-white" : "text-slate-700",
+                      isActiveLink("/career") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
                     Careers
@@ -251,7 +253,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                     href="/events"
                     className={[
                       navLinkBase,
-                      isTransparentHeader ? "text-white" : "text-slate-700",
+                      isActiveLink("/events") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
                     Events
@@ -276,7 +278,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                         "data-[state=open]:after:scale-x-100",
                         "data-[state=open]:after:bg-orange-500 mt-1",
                         navLinkBase,
-                        isTransparentHeader ? "text-white" : "text-orange-500",
+                        isActiveLink("/service") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
                       ].join(" ")}
                     >
                       Services

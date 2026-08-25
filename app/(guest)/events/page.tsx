@@ -5,21 +5,13 @@ import moment from "moment"
 import {
   ArrowRight,
   CalendarDays,
-  CheckCircle2,
   Clock3,
   MapPin,
-  Sparkles,
-  UsersRound,
 } from "lucide-react"
 
 import eventImage from "@/images/technology.jpg"
-import operationsImage from "@/images/outsourcing.jpg"
-import analyticsImage from "@/images/analatics.jpg"
-import teamImage from "@/images/hero1.jpg"
-import workshopImage from "@/images/hero2.jpg"
-import meetupImage from "@/images/hero3.jpg"
 import { EventGallery } from "../../../components/event-gallery"
-import { getUpcommingEvents } from "@/lib/actions/upcomming-events"
+import { getUpcommingEvents, getUpcommingFeatureEvent } from "@/lib/actions/upcomming-events"
 
 export const metadata: Metadata = {
   title: "Events | AS Services",
@@ -27,59 +19,6 @@ export const metadata: Metadata = {
     "Meet AS Services at practical conversations, workshops, and business technology events.",
 }
 
-const events = [
-  {
-    date: "18",
-    month: "SEP",
-    title: "Operations That Scale",
-    type: "Leadership roundtable",
-    location: "New Delhi | Hybrid",
-    time: "10:30 AM - 1:00 PM",
-    description:
-      "A focused conversation on building dependable processes while keeping teams agile and client-ready.",
-    images: [
-      { image: operationsImage, alt: "Team collaborating on business operations" },
-      { image: teamImage, alt: "Team members collaborating during an event" },
-    ],
-    accent: "bg-orange-500",
-  },
-  {
-    date: "04",
-    month: "OCT",
-    title: "Data Clarity Workshop",
-    type: "Interactive workshop",
-    location: "Online session",
-    time: "3:00 PM - 4:30 PM",
-    description:
-      "Learn how clean reporting rhythms and useful dashboards can turn everyday operations into better decisions.",
-    images: [
-      { image: analyticsImage, alt: "Analytics dashboard on a laptop" },
-      { image: workshopImage, alt: "Workshop presentation in a modern workspace" },
-    ],
-    accent: "bg-[#185980]",
-  },
-  {
-    date: "22",
-    month: "NOV",
-    title: "The Service Desk Exchange",
-    type: "Industry meetup",
-    location: "Gurugram | In person",
-    time: "5:30 PM - 7:30 PM",
-    description:
-      "Connect with service leaders sharing practical lessons from support, delivery, and customer experience teams.",
-    images: [
-      { image: eventImage, alt: "Technology leaders discussing a digital presentation" },
-      { image: meetupImage, alt: "Professionals connecting at a business meetup" },
-    ],
-    accent: "bg-cyan-600",
-  },
-]
-
-const formats = [
-  { icon: UsersRound, title: "Roundtables", text: "Small-group conversations with people solving similar operational challenges." },
-  { icon: Sparkles, title: "Workshops", text: "Hands-on sessions built around useful tools, habits, and measurable outcomes." },
-  { icon: CheckCircle2, title: "Meetups", text: "Informal industry gatherings for exchanging ideas and making useful connections." },
-]
 
 const getDaysToGo = (eventDate: Date | string) => Math.max(
   0,
@@ -90,13 +29,15 @@ export default async function EventsPage() {
 
   const events = await getUpcommingEvents();
 
+  const featuredEvent = await getUpcommingFeatureEvent();
+
   return (
     <div className="overflow-hidden bg-[#eef3f8] text-slate-900">
       <section className="relative isolate overflow-hidden bg-[#102f45] pt-32 text-white sm:pt-36">
         <Image src={eventImage} alt="People collaborating around technology" fill priority className="object-cover opacity-30" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,47,69,0.98)_0%,rgba(16,47,69,0.84)_48%,rgba(16,47,69,0.55)_100%)]" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-28">
-          <div className="max-w-3xl">
+          <div className="flex flex-col items-start justify-center gap-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-300/40 bg-orange-500/15 px-4 py-2 text-sm font-medium text-orange-100">
               <CalendarDays className="size-4 text-orange-300" />
               Connect, learn, move forward
@@ -113,15 +54,28 @@ export default async function EventsPage() {
             </Link>
           </div>
 
-          <div className="self-end rounded-[1.75rem] border border-white/15 bg-white/10 p-6 backdrop-blur-md sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-orange-300">Featured event</p>
-            <h2 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">Operations That Scale</h2>
-            <p className="mt-3 text-sm leading-7 text-slate-200">A candid roundtable for leaders building reliable, flexible delivery teams.</p>
-            <div className="mt-6 grid gap-3 text-sm text-slate-200">
-              <span className="inline-flex items-center gap-3"><CalendarDays className="size-4 text-orange-300" />18 September 2026</span>
-              <span className="inline-flex items-center gap-3"><MapPin className="size-4 text-orange-300" />New Delhi and online</span>
+          {
+            featuredEvent && <div className=" rounded-[1.75rem] border border-white/15 bg-white/10 p-6 backdrop-blur-md sm:p-8">
+              {featuredEvent.images[0] && (
+                <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-2xl bg-slate-900/30">
+                  <Image
+                    src={featuredEvent.images[0].url}
+                    alt={featuredEvent.title}
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover transition duration-500 hover:scale-105"
+                  />
+                </div>
+              )}
+              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-orange-300">Featured event</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">{featuredEvent?.title}</h2>
+              <p className="mt-3 text-sm leading-7 text-slate-200">{featuredEvent?.description}</p>
+              <div className="mt-6 grid gap-3 text-sm text-slate-200">
+                <span className="inline-flex items-center gap-3"><CalendarDays className="size-4 text-orange-300" />{moment(featuredEvent?.eventDate).format("D MMMM YYYY")}</span>
+                <span className="inline-flex items-center gap-3"><MapPin className="size-4 text-orange-300" />{featuredEvent?.location}</span>
+              </div>
             </div>
-          </div>
+          }
         </div>
       </section>
 

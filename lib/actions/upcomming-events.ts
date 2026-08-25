@@ -11,6 +11,21 @@ type ActionResponse = {
     message: string;
 };
 
+export async function getUpcommingFeatureEvent(): Promise<any> {
+    try {
+        const upcommingEvent = await prisma.upcommingEvents.findFirst({
+            where: { status: "NEW" },
+            orderBy: { createdAt: "desc" },
+            include: { images: { orderBy: { sortOrder: "asc" } } },
+        });
+
+        return upcommingEvent;
+    } catch {
+        return null;
+    }
+}
+
+
 export async function getUpcommingEvents(): Promise<any> {
     try {
         const upcommingEvents = await prisma.upcommingEvents.findMany({

@@ -172,7 +172,7 @@ export const jobSchema = z.object({
   experience: z.string().trim().optional(),
   location: z.string().trim().optional(),
   vacancies: z.coerce.number().int("Vacancies must be a whole number.").min(1, "Vacancies must be at least 1.").optional(),
-  status: z.enum(Object.values(UpcomingEventStatus)).default(UpcomingEventStatus.NEW),
+  status: z.enum(Object.values(Status)).default(Status.ACTIVE),
   createdAt: z.date().nullable().optional(),
   updatedAt: z.date().nullable().optional(),
 });

@@ -40,7 +40,11 @@ type UpcomingEventFormProps = {
 const UpcommingEventForm = ({ data, update = false }: UpcomingEventFormProps) => {
   const router = useRouter();
   const id = data?.id;
-  const existingImages = data?.images ?? (typeof data?.imageUrl === "string" ? [data.imageUrl] : []);
+  const existingImages = (data?.images ?? (typeof data?.imageUrl === "string" ? [data.imageUrl] : [])).map((image) =>
+    image.startsWith("/api/") || image.startsWith("http")
+      ? image
+      : `/api${image.startsWith("/") ? image : `/${image}`}`
+  );
   const [previews, setPreviews] = useState<string[]>(existingImages);
   const [isPending, setIsPending] = useState(false);
   const [mounted, setIsMounted] = useState(false);
@@ -49,8 +53,6 @@ const UpcommingEventForm = ({ data, update = false }: UpcomingEventFormProps) =>
     resolver: zodResolver(upcommingEventSchema),
     defaultValues: data || defaultValues,
   });
-
-
 
   useEffect(() => {
     setIsMounted(true);

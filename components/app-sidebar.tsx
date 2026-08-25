@@ -24,7 +24,8 @@ import {
   UsersIcon,
   Mails,
   ClipboardPenLine,
-  BookOpen
+  BookOpen,
+  CalendarClock
 } from "lucide-react"
 
 const data = {
@@ -83,6 +84,11 @@ const data = {
       title: "Banner",
       url: "/admin/banner",
       icon: <BarChart3 />,
+    },
+    {
+      title: "Events",
+      url: "/admin/upcomming-events",
+      icon: <CalendarClock />,
     },
     {
       title: "Page",

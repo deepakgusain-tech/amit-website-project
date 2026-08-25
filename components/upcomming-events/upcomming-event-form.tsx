@@ -67,15 +67,19 @@ const UpcommingEventForm = ({ data, update = false }: UpcomingEventFormProps) =>
         ? Array.from(values.imageUrl)
         : Array.isArray(values.imageUrl) ? values.imageUrl
         : values.imageUrl instanceof File ? [values.imageUrl] : [];
-      const uploadedImages: string[] = [...existingImages];
+      let uploadedImages: string[] = [];
 
       for (const imageFile of imageFiles) {
+        if (!(imageFile instanceof File)) continue;
+
         const formData = new FormData();
         formData.append("image", imageFile);
         const uploadResponse = await fetch("/api/upload", { method: "POST", body: formData });
         if (!uploadResponse.ok) throw new Error("Image upload failed");
         uploadedImages.push((await uploadResponse.json()).url);
       }
+
+      uploadedImages = uploadedImages.map((image: any) => image.replace(/^\/api/, ""));
 
       const payload: z.infer<typeof upcommingEventSchema> = {
         ...values,

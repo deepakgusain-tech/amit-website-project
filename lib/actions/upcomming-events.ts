@@ -117,17 +117,15 @@ export async function updateUpcommingEvents(
             status: upcommingEvent.status,
         };
 
-        await prisma.$transaction(async (transaction) => {
-            await transaction.upcommingEvents.update({
-                where: { id },
-                data: {
-                    ...updateData,
-                    images: {
-                        deleteMany: {},
-                        create: upcommingEvent.images.map((url, sortOrder) => ({ url, sortOrder })),
-                    },
+        await prisma.upcommingEvents.update({
+            where: { id },
+            data: {
+                ...updateData,
+                images: {
+                    deleteMany: {},
+                    create: upcommingEvent.images.map((url, sortOrder) => ({ url, sortOrder })),
                 },
-            });
+            },
         });
 
         return {

@@ -18,6 +18,8 @@ export const getUpcommingEventColumns = ({ onDelete }: Props): ColumnDef<Upcommi
 
       const imageUrl = upcommingEvent.images?.[0] ?? upcommingEvent.imageUrl;
 
+      console.log(upcommingEvent.images)
+
       return imageUrl ? (
         <img
           src={"/api" + imageUrl}

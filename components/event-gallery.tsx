@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
 
-import type { UpcommingEvent } from "@/lib/types"
+import { UpcomingEventStatus, type UpcommingEvent } from "@/lib/types"
 
 type GalleryItem = {
   image: string
@@ -15,9 +15,10 @@ type GalleryItem = {
 }
 
 export function EventGallery({ events }: { events: UpcommingEvent[] }) {
-  const [activeCategory, setActiveCategory] = useState("All")
+  const [activeTitle, setActiveTitle] = useState("All")
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-  const galleryItems: GalleryItem[] = events.flatMap((event) =>
+  const completedEvents = events.filter((event) => event.status === UpcomingEventStatus.COMPLETED)
+  const galleryItems: GalleryItem[] = completedEvents.flatMap((event) =>
     event.images.map((image, index) => ({
       image,
       alt: `${event.title} image ${index + 1}`,
@@ -26,10 +27,10 @@ export function EventGallery({ events }: { events: UpcommingEvent[] }) {
       className: "",
     }))
   )
-  const categories = ["All", ...Array.from(new Set(events.map((event) => event.title)))]
-  const visibleItems = activeCategory === "All"
+  const eventTitles = ["All", ...Array.from(new Set(completedEvents.map((event) => event.title)))]
+  const visibleItems = activeTitle === "All"
     ? galleryItems
-    : galleryItems.filter((item) => item.eventTitle === activeCategory)
+    : galleryItems.filter((item) => item.eventTitle === activeTitle)
 
   const selectedItem = selectedIndex === null ? null : visibleItems[selectedIndex]
 
@@ -65,14 +66,14 @@ export function EventGallery({ events }: { events: UpcommingEvent[] }) {
 
         <div className="mt-8 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <div className="flex min-w-max gap-2">
-            {categories.map((category) => (
+            {eventTitles.map((title) => (
               <button
-                key={category}
+                key={title}
                 type="button"
-                onClick={() => { setActiveCategory(category); setSelectedIndex(null) }}
-                className={`h-12 whitespace-nowrap rounded-xl border px-5 text-sm font-semibold transition ${activeCategory === category ? "border-[#185980] bg-[#185980] text-white shadow-[0_10px_24px_rgba(24,89,128,0.2)]" : "border-slate-200 bg-white text-slate-600 hover:border-orange-300 hover:text-orange-600"}`}
+                onClick={() => { setActiveTitle(title); setSelectedIndex(null) }}
+                className={`h-12 whitespace-nowrap rounded-xl border px-5 text-sm font-semibold transition ${activeTitle === title ? "border-[#185980] bg-[#185980] text-white shadow-[0_10px_24px_rgba(24,89,128,0.2)]" : "border-slate-200 bg-white text-slate-600 hover:border-orange-300 hover:text-orange-600"}`}
               >
-                {category}
+                {title}
               </button>
             ))}
           </div>

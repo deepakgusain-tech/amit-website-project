@@ -90,8 +90,6 @@ export default async function EventsPage() {
 
   const events = await getUpcommingEvents();
 
-  console.log("Upcoming events:", events);
-
   return (
     <div className="overflow-hidden bg-[#eef3f8] text-slate-900">
       <section className="relative isolate overflow-hidden bg-[#102f45] pt-32 text-white sm:pt-36">

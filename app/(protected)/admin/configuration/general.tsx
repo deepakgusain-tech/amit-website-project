@@ -102,8 +102,6 @@ export default function GeneralComponent({ setting }: { setting?: any }) {
         const logoFile = formData.get("logoPath");
         const faviconFile = formData.get("faviconPath");
 
-        console.log("formData before upload", logoFile, faviconFile);
-
         if (logoFile instanceof File && logoFile.size > 0 && logoFile.name !== "") {
           const uploadFormData = new FormData();
           uploadFormData.append("image", logoFile);

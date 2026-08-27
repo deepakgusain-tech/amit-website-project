@@ -66,16 +66,6 @@ function getPreviewSrc(value: string | null | undefined) {
 export default function Event({ setting }: { setting?: SiteSettings }) {
   const [pending, startTransition] = useTransition();
   const [configuration, setConfiguration] = useState(setting);
-  const [aboutButtons, setAboutButtons] = useState<string[]>(
-    () =>
-      parseList(configuration?.aboutButtons, [
-        "Transition",
-        "Operations",
-        "Training",
-        "Scalability",
-      ]),
-  );
-
 
   const [heroBackgroundImagePath, setHeroBackgroundImagePath] = useState<string | null>(
     getPreviewSrc(configuration?.eventHeroBackgroundImagePath),
@@ -92,7 +82,7 @@ export default function Event({ setting }: { setting?: SiteSettings }) {
   const onSubmit = async (formData: FormData) => {
     startTransition(async () => {
       try {
-        const heroBackgroundImage = formData.get("heroBackgroundImagePath");
+        const heroBackgroundImage = formData.get("eventHeroBackgroundImagePath");
 
         if (heroBackgroundImage instanceof File) {
           if (heroBackgroundImage.size > 0) {
@@ -128,14 +118,6 @@ export default function Event({ setting }: { setting?: SiteSettings }) {
         const nextSetting = res.data as SiteSettings | undefined;
 
         setConfiguration(nextSetting);
-        setAboutButtons(
-          parseList(nextSetting?.aboutButtons, [
-            "Transition",
-            "Operations",
-            "Training",
-            "Scalability",
-          ]),
-        );
 
         setHeroBackgroundImagePath(
           getPreviewSrc(nextSetting?.eventHeroBackgroundImagePath),

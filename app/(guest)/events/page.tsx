@@ -37,7 +37,7 @@ export default async function EventsPage() {
   return (
     <div className="overflow-hidden bg-[#eef3f8] text-slate-900">
       <section className="relative isolate overflow-hidden bg-[#102f45] pt-32 text-white sm:pt-36">
-        <Image src={eventImage} alt="People collaborating around technology" fill priority className="object-cover opacity-30" />
+        <Image src={configuration?.eventHeroBackgroundImagePath ? "/api" + configuration.eventHeroBackgroundImagePath : eventImage} alt="People collaborating around technology" fill priority className="object-cover opacity-30" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,47,69,0.98)_0%,rgba(16,47,69,0.84)_48%,rgba(16,47,69,0.55)_100%)]" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-28">
           <div className="flex flex-col items-start justify-center gap-6">

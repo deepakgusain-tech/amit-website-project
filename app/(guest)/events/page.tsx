@@ -12,6 +12,7 @@ import {
 import eventImage from "@/images/technology.jpg"
 import { EventGallery } from "../../../components/event-gallery"
 import { getUpcommingEvents, getUpcommingFeatureEvent } from "@/lib/actions/upcomming-events"
+import { getSettings } from "@/lib/actions/settings-action"
 
 export const metadata: Metadata = {
   title: "Events | AS Services",
@@ -27,6 +28,8 @@ const getDaysToGo = (eventDate: Date | string) => Math.max(
 
 export default async function EventsPage() {
 
+  const configuration = await getSettings();
+
   const events = await getUpcommingEvents();
 
   const featuredEvent = await getUpcommingFeatureEvent();
@@ -40,14 +43,25 @@ export default async function EventsPage() {
           <div className="flex flex-col items-start justify-center gap-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-300/40 bg-orange-500/15 px-4 py-2 text-sm font-medium text-orange-100">
               <CalendarDays className="size-4 text-orange-300" />
-              Connect, learn, move forward
+              {configuration?.eventHeroTagline && (
+                <span className="ml-2">{configuration.eventHeroTagline}</span>
+              )}
             </div>
             <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-orange-400 sm:text-5xl lg:text-6xl">
-              Ideas are better when they move through a room.
+              {
+                configuration?.eventHeroTitle && (
+                  <span className="block mt-4 text-3xl font-normal text-white sm:text-4xl lg:text-5xl">
+                    {configuration.eventHeroTitle}
+                  </span>
+                )
+              }
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200 sm:text-xl">
-              Join AS Services for thoughtful conversations, practical workshops,
-              and meetups built around the way modern teams actually work.
+              { configuration?.eventHeroDescription && (
+                  <span className="block mt-4 text-lg font-normal text-slate-200 sm:text-xl">
+                    {configuration.eventHeroDescription}
+                  </span>
+                )}
             </p>
             <Link href="#upcoming" className="mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-orange-500 px-6 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(249,115,22,0.28)] transition hover:-translate-y-0.5 hover:bg-orange-600">
               Explore upcoming events <ArrowRight className="size-4" />
@@ -132,7 +146,7 @@ export default async function EventsPage() {
 
       <EventGallery events={events} />
 
-      <section className="bg-white px-4 py-16 sm:py-20"><div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 rounded-[1.75rem] bg-[#185980] p-8 text-white sm:flex-row sm:items-center sm:p-12"><div><p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-300">Stay in the loop</p><h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Bring your questions. We’ll bring the conversation.</h2></div><Link href="/contact" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600">Get event details <ArrowRight className="size-4" /></Link></div></section>
+      <section className="bg-white px-4 py-16 sm:py-20"><div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 rounded-[1.75rem] bg-[#185980] p-8 text-white sm:flex-row sm:items-center sm:p-12"><div><p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-300">{configuration?.eventContactTitle}</p><h2 className="mt-3 text-2xl font-semibold sm:text-3xl">{configuration?.eventContactDescription}</h2></div><Link href="/contact" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600">Get event details <ArrowRight className="size-4" /></Link></div></section>
     </div>
   )
 }

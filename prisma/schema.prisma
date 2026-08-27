@@ -163,6 +163,13 @@ model SiteSettings {
   showPhone                  Boolean @default(true)
   showEmail                  Boolean @default(true)
 
+  eventHeroTagline             String?
+  eventHeroTitle               String?
+  eventHeroDescription         String? @db.Text
+  eventHeroBackgroundImagePath String?
+  eventContactTitle            String?
+  eventContactDescription      String?
+
   smtpHost            String?
   smtpPort            String?
   smtpUsername        String?
@@ -350,20 +357,20 @@ model CareerApplication {
 }
 
 model UpcommingEvents {
-  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id              String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title           String
-  description     String            @db.Text
+  description     String              @db.Text
   category        String
   imageUrl        String?
   eventDate       DateTime
   startTime       String
   endTime         String
   location        String
-  showSaveTheDate Boolean           @default(true)
-  saveTheDateText String            @default("SAVE THE DATE")
+  showSaveTheDate Boolean             @default(true)
+  saveTheDateText String              @default("SAVE THE DATE")
   status          UpcomingEventStatus @default(NEW)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
   images          EventImage[]
 }
 

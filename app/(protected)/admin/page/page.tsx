@@ -5,7 +5,7 @@ import Home from "./Home";
 import About from "./About";
 import Services from "./Services";
 import Contact from "./Contact";
-
+import Event from "./Event";
 
 export default async function Page() {
   const setting = await getSettings();
@@ -21,6 +21,8 @@ export default async function Page() {
           <TabsList variant="line" className="w-full justify-start">
             <TabsTrigger value="home">Home Page</TabsTrigger>
             <TabsTrigger value="services">Service Page</TabsTrigger>
+            <TabsTrigger value="events">Event Page</TabsTrigger>
+
           </TabsList>
 
           <div className="pt-4">
@@ -32,6 +34,9 @@ export default async function Page() {
             </TabsContent>
             <TabsContent value="services">
               <Services setting={setting} />
+            </TabsContent>
+            <TabsContent value="events">
+              <Event />
             </TabsContent>
             <TabsContent value="contact">
               <Contact />

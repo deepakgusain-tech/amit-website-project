@@ -202,4 +202,17 @@ export async function saveHomePageSettings(formData: FormData): Promise<ActionRe
   return upsertSiteSettings(payload)
 }
 
+export async function saveEventPageSettings(formData: FormData): Promise<ActionResponse> {
+  const payload = {
+    eventHeroTagline: getOptionalString(formData, "eventHeroTagline"),
+    eventHeroBackgroundImagePath: getOptionalString(formData, "eventHeroBackgroundImagePath"),
+    eventHeroTitle: getOptionalString(formData, "eventHeroTitle"),
+    eventHeroDescription: getOptionalString(formData, "eventHeroDescription"),
+    eventContactTitle: getOptionalString(formData, "eventContactTitle"),
+    eventContactDescription: getOptionalString(formData, "eventContactDescription"),
+  }
+
+  return upsertSiteSettings(payload)
+}
+
 

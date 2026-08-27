@@ -68,7 +68,7 @@ export default function Event({ setting }: { setting?: SiteSettings }) {
   const [configuration, setConfiguration] = useState(setting);
 
   const [heroBackgroundImagePath, setHeroBackgroundImagePath] = useState<string | null>(
-    configuration?.eventHeroBackgroundImagePath as string
+    "/api" + configuration?.eventHeroBackgroundImagePath as string
   );
 
   useEffect(() => {

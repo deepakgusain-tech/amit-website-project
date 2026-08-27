@@ -83,7 +83,7 @@ export function EventGallery({ events }: { events: UpcommingEvent[] }) {
           {visibleItems.map((item) => (
               <figure key={`${item.eventTitle}-${item.image}`} className={`group relative h-64 overflow-hidden rounded-xl bg-slate-100 md:h-72 ${item.className}`}>
               <button type="button" onClick={() => setSelectedIndex(visibleItems.indexOf(item))} className="absolute inset-0 z-10 cursor-zoom-in" aria-label={`Open ${item.label} image`}>
-                <Image src={item.image} alt={item.alt} fill sizes="(min-width: 768px) 25vw, 100vw" className="object-cover transition duration-500 group-hover:scale-105" />
+                <Image src={"/api" + item.image} alt={item.alt} fill sizes="(min-width: 768px) 25vw, 100vw" className="object-cover transition duration-500 group-hover:scale-105" />
               </button>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
               <figcaption className="absolute inset-x-0 bottom-0 p-4 text-sm font-semibold text-white">{item.label}</figcaption>

@@ -138,7 +138,7 @@ export default function Event({ setting }: { setting?: SiteSettings }) {
       <Card className="border-slate-200/80 shadow-sm">
         <CardHeader className="border-b border-slate-200/70 py-4">
           <CardTitle className="text-base font-semibold">
-            Event Hero Banner
+            Event
           </CardTitle>
         </CardHeader>
         <CardContent className="p-5">
@@ -222,6 +222,63 @@ export default function Event({ setting }: { setting?: SiteSettings }) {
               />
             </div>
 
+            <hr />
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <Field
+                label="Event Upcoming Tagline"
+                id="eventUpcommingTagline"
+                defaultValue={configuration?.eventUpcommingTagline}
+                placeholder="Event Upcoming Tagline"
+              />
+              <Field
+                label="Event Upcoming Title"
+                id="eventUpcommingTitle"
+                defaultValue={configuration?.eventUpcommingTitle}
+                placeholder="A focused operating model built for scale, quality, and steady delivery."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="eventUpcommingDescription">Event Upcoming Description</Label>
+              <Textarea
+                id="eventUpcommingDescription"
+                name="eventUpcommingDescription"
+                className="min-h-[120px] rounded-xl"
+                defaultValue={configuration?.eventUpcommingDescription ?? ""}
+                placeholder="We combine back-office operations, IT consulting, and support services..."
+              />
+            </div>
+
+            <hr />
+            <div className="grid gap-4 md:grid-cols-2">
+              <Field
+                label="Event Gallery Tagline"
+                id="eventGalleryTagline"
+                defaultValue={configuration?.eventGalleryTagline}
+              />
+              <Field
+                label="Event Gallery Title"
+                id="eventGalleryTitle"
+                defaultValue={configuration?.eventGalleryTitle}
+                placeholder="Event Gallery Title"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="eventGalleryDescription">Event Gallery Description</Label>
+              <Textarea
+                id="eventGalleryDescription"
+                name="eventGalleryDescription"
+                className="min-h-[120px] rounded-xl"
+                defaultValue={configuration?.eventGalleryDescription ?? ""}
+                placeholder="We combine back-office operations, IT consulting, and support services..."
+              />
+            </div>
+
+
+            <hr />
+
             <Field
               label="Event Contact Title"
               id="eventContactTitle"
@@ -251,7 +308,7 @@ export default function Event({ setting }: { setting?: SiteSettings }) {
                 ) : (
                   <Save className="mr-2 size-4" />
                 )}
-                Save Event Hero Banner
+                Save
               </Button>
             </div>
           </form>

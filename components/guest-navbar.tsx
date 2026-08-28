@@ -191,7 +191,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
 
                 <SheetClose asChild>
                   <Link href="/events" className={`${mobileLinkBase} ${isActiveLink("/events") ? "border-b-2 border-orange-500 text-orange-500" : ""}`}>
-                    Events
+                    Events & Culture
                   </Link>
                 </SheetClose>
 
@@ -256,7 +256,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                       isActiveLink("/events") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
-                    Events
+                    Events & Culture
                   </Link>
                 </NavigationMenuItem>
                 <DropdownMenu

@@ -167,8 +167,18 @@ model SiteSettings {
   eventHeroTitle               String?
   eventHeroDescription         String? @db.Text
   eventHeroBackgroundImagePath String?
+  
+  eventUpcommingTagline             String?
+  eventUpcommingTitle               String?
+  eventUpcommingDescription         String? @db.Text
+
+  eventGalleryTagline             String?
+  eventGalleryTitle               String?
+  eventGalleryDescription         String? @db.Text
+  
   eventContactTitle            String?
   eventContactDescription      String?
+
 
   smtpHost            String?
   smtpPort            String?

@@ -210,6 +210,12 @@ export async function saveEventPageSettings(formData: FormData): Promise<ActionR
     eventHeroDescription: getOptionalString(formData, "eventHeroDescription"),
     eventContactTitle: getOptionalString(formData, "eventContactTitle"),
     eventContactDescription: getOptionalString(formData, "eventContactDescription"),
+    eventUpcommingTagline: getOptionalString(formData, "eventUpcommingTagline"),
+    eventUpcommingTitle: getOptionalString(formData, "eventUpcommingTitle"),
+    eventUpcommingDescription: getOptionalString(formData, "eventUpcommingDescription"),
+    eventGalleryTagline: getOptionalString(formData, "eventGalleryTagline"),
+    eventGalleryTitle: getOptionalString(formData, "eventGalleryTitle"),
+    eventGalleryDescription: getOptionalString(formData, "eventGalleryDescription"),
   }
 
   return upsertSiteSettings(payload)

@@ -14,7 +14,7 @@ type GalleryItem = {
   className: string
 }
 
-export function EventGallery({ events }: { events: UpcommingEvent[] }) {
+export function EventGallery({ events, configuration }: { events: UpcommingEvent[]; configuration: any }) {
   const [activeTitle, setActiveTitle] = useState("All")
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const completedEvents = events.filter((event) => event.status === UpcomingEventStatus.COMPLETED)
@@ -56,12 +56,12 @@ export function EventGallery({ events }: { events: UpcommingEvent[] }) {
   }, [selectedIndex, visibleItems.length])
 
   return (
-    <section className="bg-[#eef3f8] py-16 sm:py-20">
+    <section id="gallery" className="bg-[#eef3f8] py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.34em] text-orange-500">Event showcase</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#185980] sm:text-4xl">A closer look at the conversations.</h2>
-          <p className="mt-4 text-base leading-7 text-slate-600">Browse moments from our workshops, meetings, and industry gatherings.</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.34em] text-orange-500">{configuration?.eventGalleryTagline}</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#185980] sm:text-4xl">{configuration?.eventGalleryTitle}</h2>
+          <p className="mt-4 text-base leading-7 text-slate-600">{configuration?.eventGalleryDescription}</p>
         </div>
 
         <div className="mt-8 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -79,9 +79,9 @@ export function EventGallery({ events }: { events: UpcommingEvent[] }) {
           </div>
         </div>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           {visibleItems.map((item) => (
-              <figure key={`${item.eventTitle}-${item.image}`} className={`group relative h-64 overflow-hidden rounded-xl bg-slate-100 md:h-72 ${item.className}`}>
+            <figure key={`${item.eventTitle}-${item.image}`} className={`group relative h-64 overflow-hidden rounded-xl bg-slate-100 md:h-72 ${item.className}`}>
               <button type="button" onClick={() => setSelectedIndex(visibleItems.indexOf(item))} className="absolute inset-0 z-10 cursor-zoom-in" aria-label={`Open ${item.label} image`}>
                 <Image src={"/api" + item.image} alt={item.alt} fill sizes="(min-width: 768px) 25vw, 100vw" className="object-cover transition duration-500 group-hover:scale-105" />
               </button>

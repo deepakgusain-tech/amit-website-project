@@ -38,11 +38,10 @@ export default async function EventsPage() {
     <div className="overflow-hidden bg-[#eef3f8] text-slate-900">
       <section className="relative isolate overflow-hidden bg-[#102f45] pt-32 text-white sm:pt-36">
         <Image src={configuration?.eventHeroBackgroundImagePath ? "/api" + configuration.eventHeroBackgroundImagePath : eventImage} alt="People collaborating around technology" fill priority className="object-cover opacity-30" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,47,69,0.98)_0%,rgba(16,47,69,0.84)_48%,rgba(16,47,69,0.55)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,47,69,0.5)_0%,rgba(16,47,69,0.5)_48%,rgba(16,47,69,0)_100%)]" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-28">
           <div className="flex flex-col items-start justify-center gap-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-300/40 bg-orange-500/15 px-4 py-2 text-sm font-medium text-orange-100">
-              <CalendarDays className="size-4 text-orange-300" />
               {configuration?.eventHeroTagline && (
                 <span className="ml-2">{configuration.eventHeroTagline}</span>
               )}
@@ -57,15 +56,22 @@ export default async function EventsPage() {
               }
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200 sm:text-xl">
-              { configuration?.eventHeroDescription && (
-                  <span className="block mt-4 text-lg font-normal text-slate-200 sm:text-xl">
-                    {configuration.eventHeroDescription}
-                  </span>
-                )}
+              {configuration?.eventHeroDescription && (
+                <span className="block mt-4 text-lg font-normal text-slate-200 sm:text-xl">
+                  {configuration.eventHeroDescription}
+                </span>
+              )}
             </p>
-            <Link href="#upcoming" className="mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-orange-500 px-6 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(249,115,22,0.28)] transition hover:-translate-y-0.5 hover:bg-orange-600">
-              Explore upcoming events <ArrowRight className="size-4" />
-            </Link>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link href="#upcoming" className="mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-orange-500 px-6 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(249,115,22,0.28)] transition hover:-translate-y-0.5 hover:bg-orange-600">
+                Explore upcoming events
+              </Link>
+
+              <Link href="#gallery" className="mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-transparent px-6 text-sm font-semibold text-orange-500 border border-orange-500 shadow-[0_14px_32px_rgba(249,115,22,0.28)] transition hover:-translate-y-0.5 hover:bg-orange-600 hover:text-white">
+                View Gallery
+              </Link>
+            </div>
+
           </div>
 
           {
@@ -97,9 +103,9 @@ export default async function EventsPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.34em] text-orange-500">Upcoming events</p>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#185980] sm:text-4xl">Make time for useful conversations.</h2>
-              <p className="mt-4 text-base leading-7 text-slate-600">Small, focused gatherings for people who care about better delivery and better work.</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.34em] text-orange-500">{configuration?.eventUpcommingTagline}</p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#185980] sm:text-4xl">{configuration?.eventUpcommingTitle}</h2>
+              <p className="mt-4 text-base leading-7 text-slate-600">{configuration?.eventUpcommingDescription}</p>
             </div>
             <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-[#185980] hover:text-orange-600">Host a conversation <ArrowRight className="size-4" /></Link>
           </div>
@@ -144,9 +150,19 @@ export default async function EventsPage() {
         </div>
       </section>
 
-      <EventGallery events={events} />
+      <EventGallery events={events} configuration={configuration} />
 
-      <section className="bg-white px-4 py-16 sm:py-20"><div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 rounded-[1.75rem] bg-[#185980] p-8 text-white sm:flex-row sm:items-center sm:p-12"><div><p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-300">{configuration?.eventContactTitle}</p><h2 className="mt-3 text-2xl font-semibold sm:text-3xl">{configuration?.eventContactDescription}</h2></div><Link href="/contact" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600">Get event details <ArrowRight className="size-4" /></Link></div></section>
+      <section className="bg-white px-4 py-16 sm:py-20">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 rounded-[1.75rem] bg-[#185980] p-8 text-white sm:flex-row sm:items-center sm:p-12"><div>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-300">{configuration?.eventContactTitle}</p>
+          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">{configuration?.eventContactDescription}</h2>
+        </div>
+          <Link href="/career" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600">
+            Expore Careers
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
+      </section>
     </div>
   )
 }

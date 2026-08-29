@@ -42,6 +42,7 @@ export default async function EventsPage() {
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-28">
           <div className="flex flex-col items-start justify-center gap-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-300/40 bg-orange-500/15 px-4 py-2 text-sm font-medium text-orange-100">
+              <CalendarDays className="size-4 text-orange-300" />
               {configuration?.eventHeroTagline && (
                 <span className="ml-2">{configuration.eventHeroTagline}</span>
               )}

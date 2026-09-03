@@ -115,14 +115,15 @@ export async function updateUpcommingEvents(
 ): Promise<ActionResponse> {
     try {
         const upcommingEvent = upcommingEventSchema.parse(data);
-
-        const imageValue = upcommingEvent.images[0] ?? (typeof upcommingEvent.imageUrl === "string" ? upcommingEvent.imageUrl : null);
+        const hasUploadedImages = upcommingEvent.images.length > 0;
+        const imageValue = hasUploadedImages
+            ? upcommingEvent.images[0]
+            : typeof upcommingEvent.imageUrl === "string" ? upcommingEvent.imageUrl : undefined;
 
         const updateData = {
             title: upcommingEvent.title,
             description: upcommingEvent.description,
             category: upcommingEvent.category,
-            imageUrl: imageValue,
             eventDate: upcommingEvent.eventDate,
             startTime: upcommingEvent.startTime,
             endTime: upcommingEvent.endTime,
@@ -130,16 +131,21 @@ export async function updateUpcommingEvents(
             showSaveTheDate: upcommingEvent.showSaveTheDate,
             saveTheDateText: upcommingEvent.saveTheDateText,
             status: upcommingEvent.status,
+            ...(imageValue !== undefined ? { imageUrl: imageValue } : {}),
         };
 
         await prisma.upcommingEvents.update({
             where: { id },
             data: {
                 ...updateData,
-                images: {
-                    deleteMany: {},
-                    create: upcommingEvent.images.map((url, sortOrder) => ({ url, sortOrder })),
-                },
+                ...(hasUploadedImages
+                    ? {
+                        images: {
+                            deleteMany: {},
+                            create: upcommingEvent.images.map((url, sortOrder) => ({ url, sortOrder })),
+                        },
+                    }
+                    : {}),
             },
         });
 

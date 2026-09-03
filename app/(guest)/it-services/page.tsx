@@ -11,12 +11,12 @@ import {
   LockKeyhole,
   Smartphone,
   Rocket,
-  ShieldCheck,
   TestTube2,
   Workflow,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { ItServicesCarousel } from "@/components/it-services-carousel";
 import technologyImage from "@/images/technology.jpg";
 
 export const metadata: Metadata = {
@@ -130,36 +130,7 @@ export default function ItServicesPage() {
           </div>
 
           <div className="relative min-h-[330px] lg:min-h-[410px]">
-            <div className="absolute inset-5 rounded-lg border border-cyan-200/20 bg-[#0b3a46]/85 p-5 shadow-[0_28px_90px_rgba(0,0,0,0.3)] backdrop-blur sm:inset-8">
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                <div className="flex gap-2" aria-hidden="true">
-                  <span className="size-2.5 rounded-full bg-orange-400" />
-                  <span className="size-2.5 rounded-full bg-cyan-300" />
-                  <span className="size-2.5 rounded-full bg-emerald-300" />
-                </div>
-                <span className="text-xs font-semibold uppercase tracking-[0.15em] text-cyan-100">Technology, in motion</span>
-              </div>
-              <div className="mt-8 grid gap-4">
-                <div className="rounded-lg border border-white/10 bg-slate-950/30 p-5">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-semibold text-white">Web development</span>
-                    <span className="text-emerald-300">Live</span>
-                  </div>
-                  <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10"><span className="block h-full w-[88%] rounded-full bg-cyan-300" /></div>
-                </div>
-                <div className="rounded-lg border border-white/10 bg-slate-950/30 p-5">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-semibold text-white">AWS · Azure · GCP</span>
-                    <span className="text-orange-300">Scaling</span>
-                  </div>
-                  <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10"><span className="block h-full w-[72%] rounded-full bg-orange-400" /></div>
-                </div>
-              </div>
-              <div className="mt-7 flex items-center gap-3 text-sm text-slate-300">
-                <ShieldCheck className="size-5 text-cyan-300" />
-                Secure by design, ready for what is next.
-              </div>
-            </div>
+            <ItServicesCarousel />
           </div>
         </div>
       </section>

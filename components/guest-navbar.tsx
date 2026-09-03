@@ -250,6 +250,18 @@ export function GuestNavbar({ settings }: { settings: any }) {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <Link
+                    href="/it-services"
+                    className={[
+                      navLinkBase,
+                      isActiveLink("/it-services") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
+                    ].join(" ")}
+                  >
+                    It Services
+                  </Link>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                  <Link
                     href="/events"
                     className={[
                       navLinkBase,
@@ -259,6 +271,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                     Events & Culture
                   </Link>
                 </NavigationMenuItem>
+
                 <DropdownMenu
                   open={desktopDropdownOpen}
                   onOpenChange={setDesktopDropdownOpen}

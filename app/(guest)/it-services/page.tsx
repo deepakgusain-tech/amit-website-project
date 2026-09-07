@@ -107,7 +107,7 @@ export default function ItServicesPage() {
           <div className="max-w-3xl">
             <p className="inline-flex items-center gap-2 rounded-full border border-cyan-200/30 bg-cyan-200/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-100">
               <Rocket className="size-4" />
-              Software & Cloud solutions or Digital Solutions
+              Digital Solutions
             </p>
             <h1 className="mt-7 max-w-3xl text-4xl font-semibold leading-tight text-orange-500 text-balance sm:text-5xl lg:text-6xl">
               Digital products built for the way your business grows.

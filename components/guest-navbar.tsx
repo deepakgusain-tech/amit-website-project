@@ -189,23 +189,22 @@ export function GuestNavbar({ settings }: { settings: any }) {
                   </Link>
                 </SheetClose>
 
+                
+                <SheetClose asChild>
+                  <Link
+                    href="/it-services"
+                     className={`${mobileLinkBase} ${isActiveLink("/it-services") ? "border-b-2 border-orange-500 text-orange-500" : ""}`}
+                  >
+                    Software & Cloud solutions or Digital Solutions
+                  </Link>
+                </SheetClose>
+
                 <SheetClose asChild>
                   <Link href="/events" className={`${mobileLinkBase} ${isActiveLink("/events") ? "border-b-2 border-orange-500 text-orange-500" : ""}`}>
                     Events & Culture
                   </Link>
                 </SheetClose>
 
-                <SheetClose asChild>
-                  <Link
-                    href="/it-services"
-                    className={[
-                      navLinkBase,
-                      isActiveLink("/it-services") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
-                    ].join(" ")}
-                  >
-                    Software & Cloud solutions or Digital Solutions
-                  </Link>
-                </SheetClose>
 
                 <SheetClose asChild>
                   <Link

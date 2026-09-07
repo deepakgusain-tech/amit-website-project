@@ -197,6 +197,18 @@ export function GuestNavbar({ settings }: { settings: any }) {
 
                 <SheetClose asChild>
                   <Link
+                    href="/it-services"
+                    className={[
+                      navLinkBase,
+                      isActiveLink("/it-services") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
+                    ].join(" ")}
+                  >
+                    Software & Cloud solutions or Digital Solutions
+                  </Link>
+                </SheetClose>
+
+                <SheetClose asChild>
+                  <Link
                     href="/contact"
                     className={ctaPrimaryBase + " justify-center mt-2"}
                   >
@@ -256,7 +268,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                       isActiveLink("/it-services") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
-                    It Services
+                    Software & Cloud solutions or Digital Solutions
                   </Link>
                 </NavigationMenuItem>
 

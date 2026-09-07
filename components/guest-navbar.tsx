@@ -195,7 +195,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                     href="/it-services"
                      className={`${mobileLinkBase} ${isActiveLink("/it-services") ? "border-b-2 border-orange-500 text-orange-500" : ""}`}
                   >
-                    Software & Cloud solutions or Digital Solutions
+                   Digital Solutions
                   </Link>
                 </SheetClose>
 
@@ -267,7 +267,7 @@ export function GuestNavbar({ settings }: { settings: any }) {
                       isActiveLink("/it-services") ? "text-orange-500 after:scale-x-100" : isTransparentHeader ? "text-white" : "text-slate-700",
                     ].join(" ")}
                   >
-                    Software & Cloud solutions or Digital Solutions
+                   Digital Solutions
                   </Link>
                 </NavigationMenuItem>
 

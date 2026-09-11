@@ -188,7 +188,7 @@ export function GuestHeroSection({
         )}
 
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/60 to-transparent " />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/85 to-slate-950/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/60 to-slate-950/60" />
 
         <div className="relative mx-auto flex flex-col min-h-[100svh] w-full max-w-7xl items-start px-4 py-28 sm:px-6 lg:px-8 mt-8">
           <div className="grid w-full items-start gap-10 lg:grid-cols-2 grid-cols-1">
@@ -197,7 +197,7 @@ export function GuestHeroSection({
                 {heroTagline}
               </p>
 
-              <h1 className="mt-5 max-w-2xl font-[family-name:var(--font-hero)] text-5xl font-bold leading-[1.08] tracking-tight text-orange-500 text-balance sm:text-4xl lg:text-7xl">
+              <h1 className="mt-5 font-[family-name:var(--font-hero)] text-4xl font-bold leading-[1.08] tracking-tight text-orange-500 text-balance sm:text-4xl lg:text-6xl">
                 {heroTitle}
               </h1>
 

@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  JetBrains_Mono,
+  Plus_Jakarta_Sans,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner";
@@ -15,6 +20,13 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-hero",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "600", "700"],
 });
 
 const jetBrainsMono = JetBrains_Mono({
@@ -42,7 +54,7 @@ export default function RootLayout({
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${jakartaSans.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} h-full w-full antialiased`}
+      className={`${jakartaSans.variable} ${spaceGrotesk.variable} ${cormorantGaramond.variable} ${jetBrainsMono.variable} h-full w-full antialiased`}
     >
       <body className="min-h-screen w-full overflow-x-hidden bg-background">
         <TooltipProvider>

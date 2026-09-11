@@ -191,13 +191,13 @@ export function GuestHeroSection({
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/30 to-slate-950/85" />
 
         <div className="relative mx-auto flex flex-col min-h-[100svh] w-full max-w-7xl items-start px-4 py-28 sm:px-6 lg:px-8 mt-8">
-          <div className="grid w-full items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="max-w-3xl">
+          <div className="grid w-full items-start gap-10 lg:grid-cols-2 grid-cols-1">
+            <div className="">
               <p className="text-sm font-semibold uppercase tracking-[0.32em] text-white/65">
                 {heroTagline}
               </p>
 
-              <h1 className="mt-5 max-w-2xl text-4xl text-orange-500 font-semibold leading-[1.08] tracking-tight text-balance sm:text-4xl lg:text-[3.15rem]">
+              <h1 className="mt-5 max-w-2xl font-[family-name:var(--font-hero)] text-5xl font-bold leading-[1.08] tracking-tight text-orange-500 text-balance sm:text-4xl lg:text-7xl">
                 {heroTitle}
               </h1>
 

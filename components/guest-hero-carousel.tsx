@@ -187,8 +187,8 @@ export function GuestHeroSection({
           />
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent " />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/30 to-slate-950/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/60 to-transparent " />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/85 to-slate-950/85" />
 
         <div className="relative mx-auto flex flex-col min-h-[100svh] w-full max-w-7xl items-start px-4 py-28 sm:px-6 lg:px-8 mt-8">
           <div className="grid w-full items-start gap-10 lg:grid-cols-2 grid-cols-1">
